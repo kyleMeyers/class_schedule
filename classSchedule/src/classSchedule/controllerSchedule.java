@@ -1,9 +1,11 @@
 package classSchedule;
 
+import java.util.Scanner;
+
 public class controllerSchedule {
-
-	int test3 = 5;
-	int var = 45;
-
+	Scanner keyboard = new Scanner(System.in);
+	
+	
+	
 	
 }
