@@ -1,6 +1,9 @@
 package classSchedule;
 
+import java.util.Scanner;
+
 public class viewSchedule {
-	int test = 5;
-	int test2 = 10;
+	Scanner keyboard = new Scanner(System.in);
+	
+	
 }
