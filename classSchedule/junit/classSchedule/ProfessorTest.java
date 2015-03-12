@@ -10,7 +10,7 @@ public class ProfessorTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		myProfessor = new Professor("David", "Hovemeyer", "desc");
+		myProfessor = new Professor("David", "Hovemeyer");
 	}
 	
 	@Test
@@ -18,15 +18,12 @@ public class ProfessorTest {
 		//test get methods
 		assertEquals("David", myProfessor.getFirstName());
 		assertEquals("Hovemeyer", myProfessor.getLastName());
-		assertEquals("desc", myProfessor.getDescription());
 		
 		//test set methods
 		myProfessor.setFirstName("James");
 		myProfessor.setLastName("Moscola");
-		myProfessor.setDescription("desc2");
 		assertEquals("James", myProfessor.getFirstName());
 		assertEquals("Moscola", myProfessor.getLastName());
-		assertEquals("desc2", myProfessor.getDescription());
 	}
 
 }
