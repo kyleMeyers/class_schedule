@@ -3,13 +3,13 @@ package classSchedule;
 import java.util.List;
 
 
-public class major {
+public class Major {
 	
 	private String name;
 	private boolean isMinor;
-	private List <Course> requirements;
+	private List<Course> requirements;
 	
-	public major (String name, boolean isMinor, List <Course> requirements)
+	public Major (String name, boolean isMinor, List<Course> requirements)
 	{
 		this.name = name;
 		this.isMinor = isMinor;
