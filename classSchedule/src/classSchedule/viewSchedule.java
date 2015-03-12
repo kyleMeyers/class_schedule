@@ -53,9 +53,6 @@ public class viewSchedule extends JFrame{
 		System.out.println("Please enter a major: ");
 		String result = keyboard.nextLine();
 
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
 				// Create model and controller objects
 				modelSchedule model = new modelSchedule();
 				controllerSchedule controller = new controllerSchedule();
@@ -72,13 +69,13 @@ public class viewSchedule extends JFrame{
 				List<Major> listOfMajors = new ArrayList<Major>();
 				boolean isMinor;
 				Major majorAddition;
-				String result;
+				String result2;
 				String response;
 
 				do
 				{
 					System.out.println("Please enter a major: ");
-					result = keyboard.nextLine();
+					result2 = keyboard.nextLine();
 
 					System.out.println("Is this a minor?");
 					response = keyboard.nextLine();
@@ -92,7 +89,7 @@ public class viewSchedule extends JFrame{
 						isMinor = false;
 					}
 
-					majorAddition = new Major(result, isMinor, null);
+					majorAddition = new Major(result2, isMinor, null);
 					listOfMajors.add(majorAddition);
 
 					System.out.println("Do you want to add another major?");
@@ -139,9 +136,6 @@ public class viewSchedule extends JFrame{
 =======
 
 				 */
-
-			}
-		});
 
 >>>>>>> refs/remotes/Kyle/master
 	}
