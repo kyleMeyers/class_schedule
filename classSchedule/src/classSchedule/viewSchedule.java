@@ -67,16 +67,8 @@ public class viewSchedule extends JFrame{
 				viewSchedule view = new viewSchedule();
 				view.setModel(model);
 				view.setController(controller);
-
-				// Create a frame to display the view
-				JFrame frame = new JFrame();
-				frame.setTitle("Class Schedule!");
-				frame.setContentPane(view);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.pack();
-				frame.setVisible(true);
 				
-				//asks the user for a mjor and determines if it is a minor and prints them out
+				//asks the user for a major and determines if it is a minor and prints them out
 				List<Major> listOfMajors = new ArrayList<Major>();
 				boolean isMinor;
 				Major majorAddition;
