@@ -75,6 +75,21 @@ public class viewSchedule {
 		}while(response.equalsIgnoreCase("YES"));
 		
 		System.out.println("Here is a list of all majors");
+		int numberofmajors = listOfMajors.size();
+		
+		Major currentMajor;
+		System.out.println("Major Name \t is a Minor");
+		for(int i = 0; i < numberofmajors; i++)
+		{
+			currentMajor = listOfMajors.get(i);
+			System.out.print(currentMajor.getName());
+			System.out.print("\t\t");
+			if(currentMajor.determineMinor())
+				System.out.print("Yes\n");
+			else
+				System.out.print("No\n");
+			
+		}
 		
 		/*
 		// Register mouse event handlers
