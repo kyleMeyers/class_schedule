@@ -49,7 +49,8 @@ public class viewSchedule extends JFrame{
 	public static void main(String[] args) {
 
 		Scanner keyboard = new Scanner(System.in);
-
+		
+		
 		// Create model and controller objects
 		modelSchedule model = new modelSchedule();
 		controllerSchedule controller = new controllerSchedule();
@@ -62,7 +63,7 @@ public class viewSchedule extends JFrame{
 		view.setModel(model);
 		view.setController(controller);
 
-				
+
 		//asks the user for a major and determines if it is a minor and prints them out
 		List<Major> listOfMajors = new ArrayList<Major>();
 		boolean isMinor;
@@ -78,9 +79,6 @@ public class viewSchedule extends JFrame{
 
 			System.out.println("Is this a minor?");
 			response = keyboard.nextLine();
-
-			System.out.println("Please enter a major: ");
-			result2 = keyboard.nextLine();
 
 			if(response.equalsIgnoreCase("yes"))
 			{
@@ -101,10 +99,6 @@ public class viewSchedule extends JFrame{
 		System.out.println("Here is a list of all majors");
 		int numberofmajors = listOfMajors.size();
 
-			System.out.println("Do you want to add another major?");
-			response = keyboard.nextLine();
-
-
 		Major currentMajor;
 		System.out.println("Major Name \t is a Minor");
 		for(int i = 0; i < numberofmajors; i++)
@@ -118,7 +112,7 @@ public class viewSchedule extends JFrame{
 				System.out.print("No\n");
 
 		}
-				
+
 
 		for(Course test: model.getSched())
 		{
