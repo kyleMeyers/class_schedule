@@ -49,9 +49,6 @@ public class viewSchedule extends JFrame{
 	public static void main(String[] args) {
 
 		Scanner keyboard = new Scanner(System.in);
-		//user input for the major
-		System.out.println("Please enter a major: ");
-		String result = keyboard.nextLine();
 
 		// Create model and controller objects
 		modelSchedule model = new modelSchedule();
