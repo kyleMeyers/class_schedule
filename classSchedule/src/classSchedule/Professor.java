@@ -3,7 +3,6 @@ package classSchedule;
 public class Professor {
 	private String firstName;
 	private String lastName;
-	private String description;
 	
 	public Professor(String firstName, String lastName, String description)
 	{
@@ -39,19 +38,6 @@ public class Professor {
 		this.lastName = lastName;
 	}
 	
-	/**
-	 * @return A professor's {@link description}
-	 */
-	public String getDescription() {
-		return description;
-	}
-	
-	/**
-	 * @param description Set professor's description
-	 */
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
+
 
 }

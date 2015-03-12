@@ -64,6 +64,7 @@ public class viewSchedule extends JFrame{
 		viewSchedule view = new viewSchedule();
 		view.setModel(model);
 		view.setController(controller);
+
 				
 		//asks the user for a major and determines if it is a minor and prints them out
 		List<Major> listOfMajors = new ArrayList<Major>();
@@ -72,13 +73,19 @@ public class viewSchedule extends JFrame{
 		String result2;
 		String response;
 
+
 		do
 		{
 			System.out.println("Please enter a major: ");
 			result2 = keyboard.nextLine();
 
+
+
 			System.out.println("Is this a minor?");
 			response = keyboard.nextLine();
+
+			System.out.println("Please enter a major: ");
+			result2 = keyboard.nextLine();
 
 			if(response.equalsIgnoreCase("yes"))
 			{
@@ -89,8 +96,12 @@ public class viewSchedule extends JFrame{
 				isMinor = false;
 			}
 
+
+
 			majorAddition = new Major(result2, isMinor, null);
 			listOfMajors.add(majorAddition);
+
+
 
 			System.out.println("Do you want to add another major?");
 			response = keyboard.nextLine();
@@ -98,6 +109,10 @@ public class viewSchedule extends JFrame{
 
 		System.out.println("Here is a list of all majors");
 		int numberofmajors = listOfMajors.size();
+
+			System.out.println("Do you want to add another major?");
+			response = keyboard.nextLine();
+
 
 		Major currentMajor;
 		System.out.println("Major Name \t is a Minor");
@@ -113,24 +128,12 @@ public class viewSchedule extends JFrame{
 
 		}
 				
+
 		for(Course test: model.getSched())
 		{
-			System.out.println(test);
+			System.out.println(""+test.getPrefix()+ " "+test.getSection().getCRN()+" "+ test.getSection().getDate()+" "+ test.getDescription());
 		}
-			/*
-		// Register mouse event handlers
-				 * this will be used for the search button when they type
-				 * in their major, minor, or course
-		MouseAdapter listener = new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				handleMousePressed(e);
-			}
-<<<<<<< HEAD
-		*/
-		
-		keyboard.close();
-		
+
 	}
 
 }
