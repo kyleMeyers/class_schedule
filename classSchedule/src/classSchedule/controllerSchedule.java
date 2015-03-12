@@ -7,7 +7,10 @@ package classSchedule;
  */
 public class controllerSchedule {
 
-	
+	public void initModel(modelSchedule model)
+	{
+		
+	}
 
 	
 }
