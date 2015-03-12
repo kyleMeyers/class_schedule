@@ -4,11 +4,10 @@ public class Professor {
 	private String firstName;
 	private String lastName;
 	
-	public Professor(String firstName, String lastName, String description)
+	public Professor(String firstName, String lastName)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.description = description;
 	}
 	
 	/**
