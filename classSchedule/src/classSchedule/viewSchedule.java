@@ -79,8 +79,6 @@ public class viewSchedule extends JFrame{
 			System.out.println("Please enter a major: ");
 			result2 = keyboard.nextLine();
 
-
-
 			System.out.println("Is this a minor?");
 			response = keyboard.nextLine();
 
@@ -96,12 +94,8 @@ public class viewSchedule extends JFrame{
 				isMinor = false;
 			}
 
-
-
 			majorAddition = new Major(result2, isMinor, null);
 			listOfMajors.add(majorAddition);
-
-
 
 			System.out.println("Do you want to add another major?");
 			response = keyboard.nextLine();
