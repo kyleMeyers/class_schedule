@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class major {
+public class Major {
 	
 	private String name;
 	private boolean isMinor;
-	private List <Course> requirements;
+	private List<Course> requirements;
+	private String description;
 	
-	public major (String name, boolean isMinor)
+	public Major (String name, boolean isMinor, String description)
 	{
 		this.name = name;
 		this.isMinor = isMinor;
 		this.requirements = new ArrayList<Course>();
-		
+		this.description = description;
 	}
 	
 	//Return the name of the string
@@ -53,20 +54,16 @@ public class major {
 		requirements.add(newClass);
 	}
 	
-	public void removeRequirement (Course classToRemove)
+	//Return the name of the string
+	public String getDescription()
 	{
-		while(requirements.contains(classToRemove))
-		{
-			requirements.remove(classToRemove);
-		}
+		return description;
 	}
 	
-	public boolean hasRequirement(Course specificClass)
+	//Set the name of the major
+	public void setDescription(String description)
 	{
-		if(requirements.contains(specificClass))
-			return true;
-		else
-			return false;
+		this.description = description;
 	}
 
 }
