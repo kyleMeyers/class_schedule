@@ -1,7 +1,5 @@
 package classSchedule;
 
-
-
 public class Course {
 	private String Description;
 	private String Prefix;
@@ -19,6 +17,7 @@ public class Course {
 		this.setSection(section);
 	}
 	
+
 	/**
 	 * Getters and Setters for course fields
 	 */
