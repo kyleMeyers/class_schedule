@@ -7,9 +7,9 @@ public class major {
 	
 	private String name;
 	private boolean isMinor;
-	private List <course> requirements;
+	private List <Course> requirements;
 	
-	public major (String name, boolean isMinor, List <course> requirements)
+	public major (String name, boolean isMinor, List <Course> requirements)
 	{
 		this.name = name;
 		this.isMinor = isMinor;
@@ -40,9 +40,15 @@ public class major {
 		this.isMinor = isMinor;
 	}
 	
-	public List <course> getRequirements ()
+	//Get all of the requirements for the Major/Minor
+	public List <Course> getRequirements ()
 	{
 		return requirements;
+	}
+	
+	public void addRequirement (Course newClass)
+	{
+		requirements.add(newClass);
 	}
 
 }
