@@ -1,5 +1,6 @@
 package classSchedule;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,12 +9,14 @@ public class Major {
 	private String name;
 	private boolean isMinor;
 	private List<Course> requirements;
+	private String description;
 	
-	public Major (String name, boolean isMinor, List<Course> requirements)
+	public Major (String name, boolean isMinor, String description)
 	{
 		this.name = name;
 		this.isMinor = isMinor;
-		this.requirements = requirements;
+		this.requirements = new ArrayList<Course>();
+		this.description = description;
 	}
 	
 	//Return the name of the string
@@ -49,6 +52,18 @@ public class Major {
 	public void addRequirement (Course newClass)
 	{
 		requirements.add(newClass);
+	}
+	
+	//Return the name of the string
+	public String getDescription()
+	{
+		return description;
+	}
+	
+	//Set the name of the major
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 
 }
