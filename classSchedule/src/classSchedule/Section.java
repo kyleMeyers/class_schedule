@@ -10,6 +10,7 @@ public class Section {
 	 * @param instructor Professor for the section
 	 * @param date Meeting time (Include day(s) of week AND time of day?)
 	 * @param CRN Section number
+	 * @param TBD a course number
 	 */
 	public Section(Professor instructor, String date, int crn) {
 		this.setInstructor(instructor);

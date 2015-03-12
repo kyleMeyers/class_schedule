@@ -112,10 +112,10 @@ public class viewSchedule extends JFrame{
 				System.out.print("No\n");
 
 		}
-
+		//prints out all the courses added for the major
 		for(Course test: model.getSched())
 		{
-			System.out.println(""+test.getPrefix()+ test.getSection()+ test.getDescription());
+			System.out.println(""+test.getPrefix()+ " "+test.getSection().getCRN()+" "+ test.getSection().getDate()+" "+ test.getDescription());
 		}
 		/*
 		// Register mouse event handlers
