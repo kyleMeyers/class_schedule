@@ -15,7 +15,7 @@ public class modelSchedule {
 		sched = new ArrayList<Course>();
 	}
 	
-	public ArrayList<Course> getCourse()
+	public ArrayList<Course> getSched()
 	{
 		return sched;
 	}

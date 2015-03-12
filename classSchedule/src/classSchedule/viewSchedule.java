@@ -132,11 +132,6 @@ public class viewSchedule extends JFrame{
 		keyboard.close();
 		
 		}
-		
-=======
 
-				 */
-
->>>>>>> refs/remotes/Kyle/master
 	}
-}
+
