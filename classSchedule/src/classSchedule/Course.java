@@ -1,25 +1,33 @@
 package classSchedule;
 
+import java.util.List;
+
 public class Course {
-	private String Description;
+	private List<String> Description;
 	private String Prefix;
-	private int Section;
+	private Section section;
 	
-	public void course(String Description, String Prefix, int Section) {
-		this.setDescription(Description);
-		this.setPrefix(Prefix);
-		this.setSection(Section);
+	/**
+	 * Constructor
+	 * @param description TBD
+	 * @param prefix Course category (i.e., CHM for Chemistry)
+	 * @param section Section description
+	 */
+	public Course(List<String> description, String prefix, Section section) {
+		this.setDescription(description);
+		this.setPrefix(prefix);
+		this.setSection(section);
 	}
 	
 	/**
 	 * Getters and Setters for course fields
 	 */
-	public String getDescription() {
+	public List<String> getDescription() {
 		return Description;
 	}
 
-	public void setDescription(String description) {
-		Description = description;
+	public void setDescription(List<String> description) {
+		this.Description = description;
 	}
 
 	public String getPrefix() {
@@ -27,14 +35,14 @@ public class Course {
 	}
 
 	public void setPrefix(String prefix) {
-		Prefix = prefix;
+		this.Prefix = prefix;
 	}
 
-	public int getSection() {
-		return Section;
+	public Section getSection() {
+		return section;
 	}
 
-	public void setSection(int section) {
-		Section = section;
+	public void setSection(Section section) {
+		this.section = section;
 	}
 }

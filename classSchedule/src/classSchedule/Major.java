@@ -1,21 +1,19 @@
 package classSchedule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class major {
+public class Major {
 	
 	private String name;
 	private boolean isMinor;
-	private List <Course> requirements;
+	private List<Course> requirements;
 	
-	public major (String name, boolean isMinor)
+	public Major (String name, boolean isMinor, List<Course> requirements)
 	{
 		this.name = name;
 		this.isMinor = isMinor;
-		this.requirements = new ArrayList<Course>();
-		
+		this.requirements = requirements;
 	}
 	
 	//Return the name of the string
@@ -51,22 +49,6 @@ public class major {
 	public void addRequirement (Course newClass)
 	{
 		requirements.add(newClass);
-	}
-	
-	public void removeRequirement (Course classToRemove)
-	{
-		while(requirements.contains(classToRemove))
-		{
-			requirements.remove(classToRemove);
-		}
-	}
-	
-	public boolean hasRequirement(Course specificClass)
-	{
-		if(requirements.contains(specificClass))
-			return true;
-		else
-			return false;
 	}
 
 }
