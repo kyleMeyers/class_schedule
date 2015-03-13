@@ -4,7 +4,7 @@ public class Section {
 	private Professor instructor;
 	private String date;
 	private int CRN;
-	
+	private int classNum;
 	/**
 	 * Constructor
 	 * @param instructor Professor for the section
@@ -12,10 +12,12 @@ public class Section {
 	 * @param CRN Section number
 	 * @param TBD a course number
 	 */
-	public Section(Professor instructor, String date, int crn) {
+	public Section(Professor instructor, String date, int crn, int classNum) {
 		this.setInstructor(instructor);
 		this.setDate(date);
 		this.setCRN(crn);
+		this.setClassNum(classNum);
+		
 	}
 	
 	/**
@@ -43,5 +45,13 @@ public class Section {
 	
 	public void setCRN(int crn) {
 		this.CRN = crn;
+	}
+	public int getClassNum()
+	{
+	return classNum;
+	}
+	public void setClassNum(int classNum)
+	{
+		this.classNum = classNum;
 	}
 }

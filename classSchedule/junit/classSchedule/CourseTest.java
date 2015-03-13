@@ -14,8 +14,8 @@ public class CourseTest {
 	@Before
 	public void setUp() throws Exception {
 		myProfessor = new Professor("David", "Hovemeyer");
-		mySection = new Section(myProfessor, "TR", 10135);
-		newSection = new Section(myProfessor, "WF", 10130);
+		mySection = new Section(myProfessor, "TR", 10135, 101);
+		newSection = new Section(myProfessor, "WF", 10130, 320);
 		myCourse = new Course("Programming Language Design", "CS340", mySection);
 	}
 	

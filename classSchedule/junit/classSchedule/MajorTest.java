@@ -24,9 +24,9 @@ public class MajorTest {
 	@Before
 	public void setUp() throws Exception {
 		prof1 = new Professor("David", "Hovemeyer");
-		section1 = new Section(prof1, "TR", 10135);
-		section2 = new Section(prof1, "WF", 10130);
-		section3 = new Section(prof1, "M", 10142);
+		section1 = new Section(prof1, "TR", 10135, 101);
+		section2 = new Section(prof1, "WF", 10130, 320);
+		section3 = new Section(prof1, "M", 10142, 420);
 		course1 = new Course("Programming Language Design", "CS340", section1);
 		course2 = new Course("Fundamentals of Computer Science II", "CS201", section2);
 		course3 = new Course("Senior Software Project I", "CS481", section3);

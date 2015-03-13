@@ -15,7 +15,7 @@ public class SectionTest {
 	public void setUp() throws Exception {
 		myProfessor = new Professor("David", "Hovemeyer");
 		changedProfessor = new Professor("James", "Moscola");
-		mySection = new Section(myProfessor, "TR", 10135);
+		mySection = new Section(myProfessor, "TR", 10135, 320);
 	}
 	
 	@Test
