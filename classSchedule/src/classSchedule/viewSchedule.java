@@ -1,17 +1,7 @@
 package classSchedule;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-
-
-
-
-
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 
 public class viewSchedule extends JFrame{
@@ -34,9 +24,9 @@ public class viewSchedule extends JFrame{
 		this.controller = controller;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 
-		Scanner keyboard = new Scanner(System.in);
+		/*Scanner keyboard = new Scanner(System.in);
 		
 		
 		// Create model and controller objects
@@ -107,8 +97,7 @@ public class viewSchedule extends JFrame{
 			System.out.println(""+test.getPrefix()+ ":" + test.getSection().getClassNum()+ " "+ test.getSection().getDate()+"\n"
 		+ test.getDescription() + ".\n"+ test.getSection().getInstructor().getLastName() +"," +test.getSection().getInstructor().getFirstName()
 		+ " CRN:" +test.getSection().getCRN());
-		}
-
+		}*/
 	}
 
 }
