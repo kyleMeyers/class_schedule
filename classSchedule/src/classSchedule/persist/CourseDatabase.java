@@ -67,7 +67,8 @@ public class CourseDatabase {
 					DBUtil.closeQuietly(stmt);
 				}
 			}
-		}
+		});
+	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
