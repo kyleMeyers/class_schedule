@@ -1,4 +1,4 @@
-package classSchedule;
+package classSchedule.model;
 
 public class Section {
 	private Professor instructor;
@@ -17,6 +17,7 @@ public class Section {
 		this.setDate(date);
 		this.setCRN(crn);
 		this.setClassNum(classNum);
+		
 	}
 	
 	/**

@@ -5,6 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import classSchedule.model.Course;
+import classSchedule.model.Professor;
+import classSchedule.model.Section;
+
 public class CourseTest {
 	private Course myCourse;
 	private Professor myProfessor;
