@@ -46,12 +46,12 @@ public class Section {
 	public void setCRN(int crn) {
 		this.CRN = crn;
 	}
-	public int getClassNum()
-	{
-	return classNum;
+	
+	public int getClassNum() {
+		return classNum;
 	}
-	public void setClassNum(int classNum)
-	{
+	
+	public void setClassNum(int classNum) {
 		this.classNum = classNum;
 	}
 }
