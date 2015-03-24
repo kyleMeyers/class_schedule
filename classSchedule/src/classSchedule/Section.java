@@ -16,7 +16,7 @@ public class Section {
 		this.setInstructor(instructor);
 		this.setDate(date);
 		this.setCRN(crn);
-		this.setClassNum(classNum);		
+		this.setClassNum(classNum);
 	}
 	
 	/**

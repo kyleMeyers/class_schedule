@@ -9,11 +9,11 @@ public class Major {
 	private boolean isMinor;
 	private List<Course> requirements;
 	
-	public Major (String name, boolean isMinor, List<Course> requirements)
+	public Major (String name, boolean isMinor)	// List<Course> requirements
 	{
 		this.name = name;
 		this.isMinor = isMinor;
-		this.requirements = requirements;
+		//this.requirements = requirements;
 	}
 	
 	//Return the name of the string
