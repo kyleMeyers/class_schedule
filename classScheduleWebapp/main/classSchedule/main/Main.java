@@ -37,5 +37,7 @@ public class Main {
 		server.stop();
 		server.join();
 		System.out.println("Server has shut down, exiting");
+		
+		keyboard.close();
 	}
 }
