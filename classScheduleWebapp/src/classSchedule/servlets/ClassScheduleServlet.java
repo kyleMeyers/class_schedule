@@ -31,6 +31,7 @@ public class ClassScheduleServlet extends HttpServlet {
 			controller.startApp();
 		} else {
 			// Reconstruct current modelSchedule model object
+			Major curMaj = getMajor(req, "major");
 			Integer curMin = getInteger(req, "min");
 			Integer curMax = getInteger(req, "max");
 			
@@ -53,7 +54,7 @@ public class ClassScheduleServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
 
-	private int getInteger(HttpServletRequest req, String name) {
+	private int getMajor(HttpServletRequest req, String name) {
 		return Integer.parseInt(req.getParameter(name));
 	}
 }

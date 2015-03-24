@@ -9,29 +9,29 @@
 
 	<body>
 		<form action="${pageContext.servletContext.contextPath}/schedule" method="post">
-			<c:if test="${empty game}">
+			<c:if test="${empty app}">
 				<input name="startApp" type="submit" value="Start App" />
 			</c:if>
-			<c:if test="${! empty game}">
-				<c:if test="${game.done}">
+			<c:if test="${! empty app}">
+				<c:if test="${app.done}">
 					<div>
-						The number you are thinking of is ${game.guess}
+						The number you are thinking of is ${app.guess}
 					</div>
 					<div>
 						<input name="startApp" type="submit" value="Play again" />
 					</div>
 				</c:if>
-				<c:if test="${!game.done}">
+				<c:if test="${!app.done}">
 					<div>
-						Are you thinking of ${game.guess}?
+						Are you thinking of ${app.guess}?
 					</div>
 					<div>
 						<input name="gotIt" type="submit" value="Yes, that's it!" />
 						<input name="less" type="submit" value="No, that's too big" />
 						<input name="more" type="submit" value="No, that's too small" />
 						
-						<input name="min" type="hidden" value="${game.min}" />
-						<input name="max" type="hidden" value="${game.max}" />
+						<input name="min" type="hidden" value="${app.min}" />
+						<input name="max" type="hidden" value="${app.max}" />
 					</div>
 				</c:if>
 			</c:if>
