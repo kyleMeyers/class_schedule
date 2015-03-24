@@ -1,4 +1,4 @@
-package classSchedule;
+package classSchedule.model;
 
 public class Course {
 	private String Description;

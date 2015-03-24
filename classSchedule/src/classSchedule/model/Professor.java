@@ -1,4 +1,4 @@
-package classSchedule;
+package classSchedule.model;
 
 public class Professor {
 	private String firstName;
