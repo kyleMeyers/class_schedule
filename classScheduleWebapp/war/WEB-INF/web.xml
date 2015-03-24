@@ -10,10 +10,18 @@
     <servlet-name>IndexServlet</servlet-name>
     <servlet-class>classSchedule.servlets.IndexServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ClassScheduleServlet</servlet-name>
+  	<servlet-class>classSchedule.servlets.ClassScheduleServlet</servlet-class>
+  </servlet>
 
   <!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ClassScheduleServlet</servlet-name>
+    <url-pattern>/schedule</url-pattern>
   </servlet-mapping>
 </web-app>
