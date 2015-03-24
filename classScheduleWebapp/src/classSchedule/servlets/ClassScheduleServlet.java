@@ -31,9 +31,9 @@ public class ClassScheduleServlet extends HttpServlet {
 			controller.startApp();
 		} else {
 			// Reconstruct current modelSchedule model object
-			Major curMaj = getMajor(req, "major");
-			Integer curMin = getInteger(req, "min");
-			Integer curMax = getInteger(req, "max");
+			//Major curMaj = getMajor(req, "major");
+			//Integer curMin = getInteger(req, "min");
+			//Integer curMax = getInteger(req, "max");
 			
 			//model.setMin(curMin);
 			//model.setMax(curMax);
