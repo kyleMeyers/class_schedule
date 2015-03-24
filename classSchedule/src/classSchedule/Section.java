@@ -17,6 +17,7 @@ public class Section {
 		this.setDate(date);
 		this.setCRN(crn);
 		this.setClassNum(classNum);
+		//Changes!!!
 		
 	}
 	
