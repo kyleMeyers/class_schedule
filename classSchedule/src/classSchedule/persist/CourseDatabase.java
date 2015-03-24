@@ -33,10 +33,10 @@ public class CourseDatabase {
 	private static final int MAX_ATTEMPTS = 10;
 
 	@Override
-	public List<Course>> findCourseByTitle(final String title) {
-		return executeTransaction(new Transaction<List<Course>>>() {
+	public List<Course> findCourseByTitle(final String title) {
+		return executeTransaction(new Transaction<List<Course>>() {
 			@Override
-			public List<Pair<Author, Book>> execute(Connection conn) throws SQLException {
+			public List<Course> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
 				
@@ -49,7 +49,7 @@ public class CourseDatabase {
 					);
 					stmt.setString(1, title);
 					
-					List<Pair<Author, Book>> result = new ArrayList<Pair<Author,Book>>();
+					List<Course> result = new ArrayList<Course>();
 					
 					resultSet = stmt.executeQuery();
 					while (resultSet.next()) {
@@ -58,7 +58,7 @@ public class CourseDatabase {
 						Book book = new Book();
 						loadBook(book, resultSet, 4);
 						
-						result.add(new Pair<Author, Book>(author, book));
+						result.add(new Course(author, book));
 					}
 					
 					return result;

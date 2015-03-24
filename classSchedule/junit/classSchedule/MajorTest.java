@@ -39,12 +39,12 @@ public class MajorTest {
 		majorCourses = new ArrayList<Course>();
 		majorCourses.add(course1);
 		majorCourses.add(course2);
-		Major1 = new Major("Computer Science", false, majorCourses);
+		Major1 = new Major("Computer Science", false);	//, majorCourses
 		
 		minorCourses = new ArrayList<Course>();
 		minorCourses.add(course1);
 		minorCourses.add(course2);
-		Minor1 = new Major("Computer Science", true, minorCourses);
+		Minor1 = new Major("Computer Science", true);	//, minorCourses
 	}
 	
 	@Test

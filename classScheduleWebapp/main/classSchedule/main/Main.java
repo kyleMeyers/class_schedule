@@ -12,7 +12,7 @@ public class Main {
 
 		// Create and register a webapp context
 		WebAppContext handler = new WebAppContext();
-		handler.setContextPath("/schedule");
+		handler.setContextPath("/classschedule");
 		handler.setWar("./war"); // web app is in the war directory of the project
 		server.setHandler(handler);
 		
@@ -36,5 +36,7 @@ public class Main {
 		server.stop();
 		server.join();
 		System.out.println("Server has shut down, exiting");
+		
+		keyboard.close();
 	}
 }
