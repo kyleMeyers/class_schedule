@@ -33,8 +33,8 @@ public class CourseDatabase {
 	private static final int MAX_ATTEMPTS = 10;
 
 	@Override
-	public List<Course>> findCourseByTitle(final String title) {
-		return executeTransaction(new Transaction<List<Course>>>() {
+	public List<Course> findCourseByTitle(final String title) {
+		return executeTransaction(new Transaction<List<Course>>() {
 			@Override
 			public List<Pair<Author, Book>> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
@@ -67,8 +67,7 @@ public class CourseDatabase {
 					DBUtil.closeQuietly(stmt);
 				}
 			}
-		});
-	}
+		}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
