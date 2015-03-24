@@ -8,6 +8,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+		// Great jumping jehosaphat
 		Server server = new Server(8081);
 
 		// Create and register a webapp context
@@ -31,7 +32,7 @@ public class Main {
 				break;
 			}
 		}
-		// This one works?
+		
 		System.out.println("Shutting down...");
 		server.stop();
 		server.join();
