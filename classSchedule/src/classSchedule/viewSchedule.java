@@ -1,10 +1,10 @@
 package classSchedule;
 
 
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 
 
-public class viewSchedule extends JFrame{
+/*public class viewSchedule extends JFrame{
 	//private major majorFirst;
 	private modelSchedule model;
 	private controllerSchedule controller;
@@ -24,7 +24,7 @@ public class viewSchedule extends JFrame{
 		this.controller = controller;
 	}
 
-
+	public static void main(String[] args) throws Exception{
 
 		/*Scanner keyboard = new Scanner(System.in);
 		
@@ -97,7 +97,8 @@ public class viewSchedule extends JFrame{
 			System.out.println(""+test.getPrefix()+ ":" + test.getSection().getClassNum()+ " "+ test.getSection().getDate()+"\n"
 		+ test.getDescription() + ".\n"+ test.getSection().getInstructor().getLastName() +"," +test.getSection().getInstructor().getFirstName()
 		+ " CRN:" +test.getSection().getCRN());
-		}*/
+		}
+	}
 
-}
+}*/
 
