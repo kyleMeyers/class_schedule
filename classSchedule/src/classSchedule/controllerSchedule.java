@@ -1,5 +1,9 @@
 package classSchedule;
 
+import classSchedule.model.Course;
+import classSchedule.model.Professor;
+import classSchedule.model.Section;
+
 public class controllerSchedule {
 
 

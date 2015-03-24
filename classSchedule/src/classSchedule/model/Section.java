@@ -1,4 +1,4 @@
-package classSchedule;
+package classSchedule.model;
 
 public class Section {
 	private Professor instructor;

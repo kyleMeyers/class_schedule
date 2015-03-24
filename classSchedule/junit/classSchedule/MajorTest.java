@@ -8,6 +8,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import classSchedule.model.Course;
+import classSchedule.model.Major;
+import classSchedule.model.Professor;
+import classSchedule.model.Section;
+
 public class MajorTest {
 	private Major Major1;
 	private Major Minor1;

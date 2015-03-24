@@ -1,4 +1,4 @@
-package classSchedule;
+package classSchedule.model;
 
 import java.util.List;
 
