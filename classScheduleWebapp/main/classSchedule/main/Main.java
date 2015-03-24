@@ -31,7 +31,7 @@ public class Main {
 				break;
 			}
 		}
-		
+		// This one works?
 		System.out.println("Shutting down...");
 		server.stop();
 		server.join();
