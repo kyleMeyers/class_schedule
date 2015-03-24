@@ -15,7 +15,7 @@ public class Main {
 		handler.setContextPath("/classschedule");
 		handler.setWar("./war"); // web app is in the war directory of the project
 		server.setHandler(handler);
-		
+		//
 		// Use 20 threads to handle requests
 		server.setThreadPool(new QueuedThreadPool(20));
 		
