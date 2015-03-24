@@ -24,7 +24,7 @@ public class viewSchedule extends JFrame{
 		this.controller = controller;
 	}
 
-	public static void main(String[] args) throws Exception{
+
 
 		/*Scanner keyboard = new Scanner(System.in);
 		
@@ -98,7 +98,6 @@ public class viewSchedule extends JFrame{
 		+ test.getDescription() + ".\n"+ test.getSection().getInstructor().getLastName() +"," +test.getSection().getInstructor().getFirstName()
 		+ " CRN:" +test.getSection().getCRN());
 		}*/
-	}
 
 }
 
