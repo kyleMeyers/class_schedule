@@ -18,7 +18,7 @@ public class controllerSchedule {
 	
 	public void startApp()
 	{
-		model.setMajor(new Major("Computer Science", false));
+//		model.setMajor(new Major("Computer Science", false));
 	}
 
 	
