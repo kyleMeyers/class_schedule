@@ -1,15 +1,14 @@
 package classSchedule.persist;
 
-import classSchedule.persist.Database;
 
 public class DatabaseProvider {
-	private static Database theInstance;
+	private static IDatabase theInstance;
 	
-	public static void setInstance(Database db) {
+	public static void setInstance(IDatabase db) {
 		theInstance = db;
 	}
 	
-	public static Database getInstance() {
+	public static IDatabase getInstance() {
 		if (theInstance == null) {
 			throw new IllegalStateException("IDatabase instance has not been set!");
 		}

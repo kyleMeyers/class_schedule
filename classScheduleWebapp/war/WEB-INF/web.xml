@@ -24,4 +24,9 @@
     <servlet-name>ClassScheduleServlet</servlet-name>
     <url-pattern>/schedule</url-pattern>
   </servlet-mapping>
+  
+  <!-- Listeners -->
+  <listener>
+    <listener-class>classSchedule.servlets.DatabaseInitListener</listener-class>
+  </listener>
 </web-app>
