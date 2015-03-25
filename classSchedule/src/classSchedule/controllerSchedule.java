@@ -7,9 +7,9 @@ import classSchedule.model.Section;
 public class controllerSchedule {
 
 	private modelSchedule model;
-	
+	// Star date:Mar 25
 	public void setModel(modelSchedule model)
-	{//fucking raisins
+	{
 		this.model = model;
 		/*Course course1 = new Course("Yay this is the course", "CS", new Section(
 				new Professor("Dave", "Hovemeyer"), "MWF", 345763, 320));
