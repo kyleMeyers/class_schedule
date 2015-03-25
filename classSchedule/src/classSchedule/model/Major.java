@@ -1,4 +1,4 @@
-package classSchedule;
+package classSchedule.model;
 
 import java.util.List;
 
@@ -7,13 +7,13 @@ public class Major {
 	
 	private String name;
 	private boolean isMinor;
-	//private List<Course> requirements;
+	private List<Course> requirements;
 	
-	public Major (String name, boolean isMinor)	// List<Course> requirements
+	public Major (String name, boolean isMinor, List<Course> requirements)
 	{
 		this.name = name;
 		this.isMinor = isMinor;
-		//this.requirements = requirements;
+		this.requirements = requirements;
 	}
 	
 	//Return the name of the string
@@ -41,7 +41,7 @@ public class Major {
 	}
 	
 	//Get all of the requirements for the Major/Minor
-	/*public List <Course> getRequirements ()
+	public List <Course> getRequirements ()
 	{
 		return requirements;
 	}
@@ -49,6 +49,6 @@ public class Major {
 	public void addRequirement (Course newClass)
 	{
 		requirements.add(newClass);
-	}*/
+	}
 
 }

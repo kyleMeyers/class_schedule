@@ -2,6 +2,9 @@ package classSchedule;
 
 import java.util.ArrayList;
 
+import classSchedule.model.Course;
+import classSchedule.model.Major;
+
 public class modelSchedule {
 
 	private ArrayList<Course> sched;

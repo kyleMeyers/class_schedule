@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import classSchedule.model.Professor;
+import classSchedule.model.Section;
+
 public class SectionTest {
 	private Professor myProfessor;
 	private Professor changedProfessor;

@@ -24,6 +24,7 @@ package classSchedule;
 		this.controller = controller;
 	}
 
+
 	public static void main(String[] args) throws Exception{
 
 		/*Scanner keyboard = new Scanner(System.in);
@@ -99,6 +100,7 @@ package classSchedule;
 		+ " CRN:" +test.getSection().getCRN());
 		}
 	}
+
 
 }*/
 
