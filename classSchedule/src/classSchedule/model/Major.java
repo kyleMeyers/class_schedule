@@ -6,14 +6,12 @@ import java.util.List;
 public class Major {
 	
 	private String name;
-	private boolean isMinor;
-	private List<Course> requirements;
+	private int id;
+	//private List<Course> requirements;
 	
-	public Major (String name, boolean isMinor, List<Course> requirements)
+	public Major ()
 	{
-		this.name = name;
-		this.isMinor = isMinor;
-		this.requirements = requirements;
+		
 	}
 	
 	//Return the name of the string
@@ -28,27 +26,15 @@ public class Major {
 		this.name = name;
 	}
 	
-	//determine if this is a minor
-	public boolean determineMinor()
+	
+	public int getId()
 	{
-		return isMinor;
+		return id;
 	}
 	
-	//Set if this is a minor
-	public void setMinor (boolean isMinor)
+	public void setId(int id)
 	{
-		this.isMinor = isMinor;
-	}
-	
-	//Get all of the requirements for the Major/Minor
-	public List <Course> getRequirements ()
-	{
-		return requirements;
-	}
-	
-	public void addRequirement (Course newClass)
-	{
-		requirements.add(newClass);
+		this.id = id;
 	}
 
 }

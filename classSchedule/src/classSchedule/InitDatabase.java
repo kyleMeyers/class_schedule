@@ -3,7 +3,6 @@ package classSchedule;
 import java.util.Scanner;
 
 import classSchedule.persist.DatabaseProvider;
-import classSchedule.persist.Database;
 
 public class InitDatabase {
 //	public static void init(Scanner keyboard) {
