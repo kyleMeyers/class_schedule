@@ -53,12 +53,12 @@ public class CourseDatabase {
 					
 					resultSet = stmt.executeQuery();
 					while (resultSet.next()) {
-						Author author = new Author();
-						loadAuthor(author, resultSet, 1);
-						Book book = new Book();
-						loadBook(book, resultSet, 4);
+						Course course = new Course();
+						loadCourse(course, resultSet, 1);
+						//Book book = new Book();
+						//loadBook(book, resultSet, 4);
 						
-						result.add(new Course(author, book));
+						result.add(new Course(course));
 					}
 					
 					return result;
@@ -123,17 +123,10 @@ public class CourseDatabase {
 		return conn;
 	}
 	
-	private void loadAuthor(Author author, ResultSet resultSet, int index) throws SQLException {
-		author.setId(resultSet.getInt(index++));
-		author.setLastname(resultSet.getString(index++));
-		author.setFirstname(resultSet.getString(index++));
-	}
-	
-	private void loadBook(Book book, ResultSet resultSet, int index) throws SQLException {
-		book.setId(resultSet.getInt(index++));
-		book.setAuthorId(resultSet.getInt(index++));
-		book.setTitle(resultSet.getString(index++));
-		book.setIsbn(resultSet.getString(index++));
+	private void loadAuthor(Course course, ResultSet resultSet, int index) throws SQLException {
+		course.setId(resultSet.getInt(index++));
+		course.setLastname(resultSet.getString(index++));
+		course.setFirstname(resultSet.getString(index++));
 	}
 	
 	public void createTables() {
