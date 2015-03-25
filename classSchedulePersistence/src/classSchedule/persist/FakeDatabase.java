@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import classSchedule.model.Major;
 import classSchedule.model.User;
 
@@ -29,16 +28,30 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public User findUser(String username, String password, int id) {
-			if((userList.contains(username) && userList.contains(password)) || (userList.contains(id) && userList.contains(password)))
+			User result = new User();
+			for(User use: userList)
 			{
-				return new User(username, password, id);
+				if(use.getPassword().equals(password) && use.getUsername().equals(username))
+				{
+					User userResult = findUserById(use.getId());
+					result = userResult;
+					
+				}
 			}
-			else
-			{
-				return new User("Invalid Username", "Invalid Password", 0000);
-			}
+			
+			return result;
 	}
 
+	private User findUserById(int id) {
+		for(User use: userList)
+		{
+			if(use.getId() == id)
+			{
+				return use;
+			}
+		}
+		return null;
+	}
 	@Override
 	public Major findMajor(String major, boolean isMinor) {
 		// TODO Auto-generated method stub
