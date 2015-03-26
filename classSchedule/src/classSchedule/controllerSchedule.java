@@ -26,6 +26,10 @@ public class controllerSchedule {
 	public void setUser() {
 		//User username = new User(userName.getUsername(), userName.getPassword());
 	}
+
+	public String concat(String name) {
+		return "Your username is " + name;
+	}
 	
 
 	
