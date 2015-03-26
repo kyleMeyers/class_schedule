@@ -26,9 +26,7 @@ public class FakeDatabase implements IDatabase {
 
 		courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
-		// TODO: add some  test users and test courses
 		majorList = new ArrayList<>();
-		// TODO: add some  test users
 		
 		readInitialData();
 

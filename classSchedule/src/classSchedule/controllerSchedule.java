@@ -7,7 +7,8 @@ import classSchedule.model.User;
 public class controllerSchedule {
 
 	private modelSchedule model;
-	// Star date:Mar 25
+	private User userName;
+	
 	public void setModel(modelSchedule model)
 	{
 		this.model = model;
@@ -23,7 +24,7 @@ public class controllerSchedule {
 	}
 	
 	public void setUser() {
-		User username = model.getUser();
+		//User username = new User(userName.getUsername(), userName.getPassword());
 	}
 
 	
