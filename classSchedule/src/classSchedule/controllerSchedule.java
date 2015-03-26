@@ -26,7 +26,7 @@ public class controllerSchedule {
 	public void setUser() {
 		//User username = new User(userName.getUsername(), userName.getPassword());
 	}
-	//
+	
 
 	
 }

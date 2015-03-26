@@ -86,8 +86,6 @@ public class FakeDatabase implements IDatabase {
 		invalidMajor.setName("Not Found");
 		return invalidMajor;
 
-//kjh
-		//ughhhhhhhhhhhhhhhhhh
 	}
 
 	@Override
