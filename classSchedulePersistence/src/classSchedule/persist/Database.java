@@ -10,13 +10,82 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+import classSchedule.model.Course;
+import classSchedule.model.Major;
+import classSchedule.model.Professor;
+import classSchedule.model.User;
 import classSchedule.persist.DBUtil;
 //import classSchedule.persist.InitialData;
 //import classSchedule.persist.PersistenceException;
 //import classSchedule.persist.SqliteDatabase;
 //import classSchedule.persist.SqliteDatabase.Transaction;
 
-public class Database {
+public class Database implements IDatabase{
+
+	@Override
+	public User findUser(String username, String password) {
+		// TODO Auto-generated method stub
+//		PreparedStatement stmt = null;
+//		ResultSet resultSet = null;
+//		
+//		try {
+//			stmt = conn.prepareStatement(
+//					"select users.* " +
+//					"  from users " +
+//					" where users.username = ? "
+//			);
+//			stmt.setString(1, username);
+//			
+//			List<User> result = new ArrayList<User>();
+//			
+//			resultSet = stmt.executeQuery();
+//			while (resultSet.next()) {
+//				User user = new User();
+//				user.setId(resultSet.getInt(1));
+//				author.setUsername(resultSet.getString(2));
+//				author.setPassword(resultSet.getString(3));
+//				
+//				result.add(user);
+//			}
+//			
+//			return result;
+//		} finally {
+//			DBUtil.closeQuietly(resultSet);
+//			DBUtil.closeQuietly(stmt);
+//		}		
+		return null;
+	}
+
+	@Override
+	public Course findCoursebyTitle(String courseName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Course findCoursebyCRN(int CRN) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Professor findProfessor(String firstname, String lastname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findUser(String username, String password, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Major findMajor(String major, boolean isMinor, int ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 //	static {
 //		try {
 //			Class.forName("org.sqlite.JDBC");
