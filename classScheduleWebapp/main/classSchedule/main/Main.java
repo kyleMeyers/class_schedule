@@ -1,4 +1,4 @@
-package classSchedule.main;
+package main.classSchedule.main;
 
 import java.util.Scanner;
 
