@@ -87,7 +87,7 @@ public class FakeDatabase implements IDatabase {
 		return invalidMajor;
 
 	}
-
+	//
 	@Override
 	public Course findCoursebyTitle(String courseName) {		
 		for(Course cour: courseList)
