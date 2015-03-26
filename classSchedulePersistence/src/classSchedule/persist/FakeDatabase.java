@@ -33,6 +33,7 @@ public class FakeDatabase implements IDatabase {
 		readInitialData();
 
 	}
+	//reads the data from the files for each list
 	public void readInitialData() {
 		try {
 			userList.addAll(InitialData.getUsers());
@@ -42,6 +43,9 @@ public class FakeDatabase implements IDatabase {
 		}
 	}
 	@Override
+	//finds the user with the username and password and returns the id
+	//TODO:? may want to return the username if given the id
+	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password, int id) {
 			User result = new User();
 			for(User use: userList)
@@ -53,7 +57,7 @@ public class FakeDatabase implements IDatabase {
 					
 				}
 			}
-			//
+			
 			return result;
 	}
 
@@ -68,6 +72,8 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
+	//find major will find a major from input(?)
+	//Michaels rendition of the implementation of the findMajor. Unsure which one works or does not work at this time
 	public Major findMajor(String major, boolean isMinor, int ID) {
 		for(Major majorindex:majorList)
 		{

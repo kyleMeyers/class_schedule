@@ -15,20 +15,19 @@
 			<c:if test="${! empty app}">
 				<c:if test="${app.done}">
 					<div>
-						The number you are thinking of is ${app.guess}
+						Your ID is ${app.id}
 					</div>
 					<div>
-						<input name="startApp" type="submit" value="Play again" />
+						<input name="startApp" type="submit" value="Start Again?" />
 					</div>
 				</c:if>
 				<c:if test="${!app.done}">
 					<div>
-						Are you thinking of ${app.guess}?
+						What is your user name ${app.username}?
 					</div>
 					<div>
-						<input name="gotIt" type="submit" value="Yes, that's it!" />
-						<input name="less" type="submit" value="No, that's too big" />
-						<input name="more" type="submit" value="No, that's too small" />
+						<input name="gotIt" type="submit" value="Valid Username" />
+						<input name="not" type="submit" value="Invalid Username" />
 						
 						<input name="min" type="hidden" value="${app.min}" />
 						<input name="max" type="hidden" value="${app.max}" />
