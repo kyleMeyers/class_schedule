@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import classSchedule.controllerSchedule;
 import classSchedule.modelSchedule;
+import classSchedule.model.User;
 
 public class ClassScheduleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class ClassScheduleServlet extends HttpServlet {
 			controller.startApp();
 		} else {
 			// Reconstruct current modelSchedule model object
-			//Major curMaj = getMajor(req, "major");
+			User curUser = getUse(req, "userNa");
 			//Integer curMin = getInteger(req, "min");
 			//Integer curMax = getInteger(req, "max");
 			
@@ -52,6 +53,11 @@ public class ClassScheduleServlet extends HttpServlet {
 		req.setAttribute("app", model);
 		
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
+	}
+
+	private User getUse(HttpServletRequest req, String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private int getMajor(HttpServletRequest req, String name) {

@@ -29,7 +29,7 @@
 						<input name="gotIt" type="submit" value="Valid Username" />
 						<input name="not" type="submit" value="Invalid Username" />
 						
-						<input name="min" type="hidden" value="${app.min}" />
+						<input name="useNa" type="hidden" value="${app.}" />
 						<input name="max" type="hidden" value="${app.max}" />
 					</div>
 				</c:if>

@@ -7,6 +7,7 @@ import classSchedule.model.User;
 public class controllerSchedule {
 
 	private modelSchedule model;
+	private User userName;
 	
 	public void setModel(modelSchedule model)
 	{
@@ -23,7 +24,7 @@ public class controllerSchedule {
 	}
 	
 	public void setUser() {
-		User username = model.getUser();
+		//User username = new User(userName.getUsername(), userName.getPassword());
 	}
 
 	

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import classSchedule.model.Course;
 import classSchedule.model.Major;
-import classSchedule.model.User;
 
 public class modelSchedule {
 
@@ -20,7 +19,7 @@ public class modelSchedule {
 	{
 		return sched;
 	}
-	
+
 	public Major getMajor()
 	{
 		return this.major;
@@ -31,8 +30,5 @@ public class modelSchedule {
 		this.major = major;
 	}
 
-	public User getUser() {
-		return null;	//TODO: Actually get the user 
-	}
 
 }
