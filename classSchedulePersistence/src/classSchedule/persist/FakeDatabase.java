@@ -20,14 +20,15 @@ public class FakeDatabase implements IDatabase {
 	private List<Professor> professorList;
 	private List<Major> majorList;
 
-	
+
 	public FakeDatabase() {
 		userList = new ArrayList<>();
 
 		courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
 		majorList = new ArrayList<>();
-		
+
+
 		readInitialData();
 
 	}
@@ -36,6 +37,7 @@ public class FakeDatabase implements IDatabase {
 		try {
 			userList.addAll(InitialData.getUsers());
 			majorList.addAll(InitialData.getMajors());
+			//TODO: add course and professor lists
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -45,18 +47,18 @@ public class FakeDatabase implements IDatabase {
 	//TODO:? may want to return the username if given the id
 	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password, int id) {
-			User result = new User();
-			for(User use: userList)
+		User result = new User();
+		for(User use: userList)
+		{
+			if(use.getPassword().equals(password) && use.getUsername().equals(username))
 			{
-				if(use.getPassword().equals(password) && use.getUsername().equals(username))
-				{
-					User userResult = findUserById(use.getId());
-					result = userResult;
-					
-				}
+				User userResult = findUserById(use.getId());
+				result = userResult;
+
 			}
-			
-			return result;
+		}
+
+		return result;
 	}
 
 	private User findUserById(int id) {
@@ -78,18 +80,24 @@ public class FakeDatabase implements IDatabase {
 			if(majorindex.getName().equals(major) || majorindex.getId() == ID)
 				return majorindex;
 		}
-		
+
 		Major invalidMajor = new Major();
 		invalidMajor.setId(999);
 		invalidMajor.setName("Not Found");
 		return invalidMajor;
-		
-		
+
 	}
-	
+
 	@Override
-	public Course findCoursebyTitle(String courseName) {
-		// TODO Auto-generated method stub
+	public Course findCoursebyTitle(String courseName) {		
+		for(Course cour: courseList)
+		{
+			if(cour.getDescription().equals(courseName))
+			{
+				return cour;				
+			}
+		}
+
 		return null;
 	}
 
