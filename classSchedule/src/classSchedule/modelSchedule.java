@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import classSchedule.model.Course;
 import classSchedule.model.Major;
+import classSchedule.model.User;
 
 public class modelSchedule {
 
@@ -28,6 +29,10 @@ public class modelSchedule {
 	public void setMajor(Major major)
 	{
 		this.major = major;
+	}
+
+	public User getUser() {
+		return null;	//TODO: Actually get the user 
 	}
 
 }

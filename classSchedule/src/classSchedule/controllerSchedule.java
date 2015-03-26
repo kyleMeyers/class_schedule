@@ -1,5 +1,7 @@
 package classSchedule;
 
+import classSchedule.model.User;
+
 
 
 public class controllerSchedule {
@@ -16,7 +18,12 @@ public class controllerSchedule {
 	
 	public void startApp()
 	{
+		System.out.println("Enter a username: ");
 //		model.setMajor(new Major("Computer Science", false));
+	}
+	
+	public void setUser() {
+		User username = model.getUser();
 	}
 
 	
