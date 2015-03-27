@@ -19,7 +19,8 @@ public class LoginServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 	}
 	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException ,IOException {
 		String username = req.getParameter("username");			//get the username from the user who enters it
 		String password = req.getParameter("password");			//get the password from the user who enters it
 		

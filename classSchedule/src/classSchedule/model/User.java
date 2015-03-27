@@ -6,10 +6,8 @@ public class User {
 	private String password;
 	
 	// Constructor
-	public User(String username, String password, int id) {
-		this.username = username;
-		this.password = password;
-		this.id = id;
+	public User() {
+		
 	}
 	
 	public void setId(int id) {
