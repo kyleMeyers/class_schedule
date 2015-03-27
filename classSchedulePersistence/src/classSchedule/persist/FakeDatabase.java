@@ -23,11 +23,9 @@ public class FakeDatabase implements IDatabase {
 
 	public FakeDatabase() {
 		userList = new ArrayList<>();
-
 		courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
 		majorList = new ArrayList<>();
-
 
 		readInitialData();
 
@@ -48,9 +46,9 @@ public class FakeDatabase implements IDatabase {
 	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password) {
 		User result = new User();
-		for(User use: userList)
+		for(User use : userList)
 		{
-			if(use.getPassword().equals(password) && use.getUsername().equals(username))
+			if (use.getPassword().equals(password) && use.getUsername().equals(username))
 			{
 				User userResult = findUserById(use.getId());
 				result = userResult;
@@ -64,7 +62,7 @@ public class FakeDatabase implements IDatabase {
 	private User findUserById(int id) {
 		for(User use: userList)
 		{
-			if(use.getId() == id)
+			if (use.getId() == id)
 			{
 				return use;
 			}
@@ -75,10 +73,12 @@ public class FakeDatabase implements IDatabase {
 	//find major will find a major from input(?)
 	//Michaels rendition of the implementation of the findMajor. Unsure which one works or does not work at this time
 	public Major findMajor(String major, boolean isMinor, int ID) {
-		for(Major majorindex:majorList)
+		for(Major majorindex : majorList)
 		{
-			if(majorindex.getName().equals(major) || majorindex.getId() == ID)
+			if (majorindex.getName().equals(major) || majorindex.getId() == ID)
+			{
 				return majorindex;
+			}
 		}
 
 		Major invalidMajor = new Major();
@@ -87,12 +87,12 @@ public class FakeDatabase implements IDatabase {
 		return invalidMajor;
 
 	}
-	//
+	
 	@Override
 	public Course findCoursebyTitle(String courseName) {		
-		for(Course cour: courseList)
+		for(Course cour : courseList)
 		{
-			if(cour.getDescription().equals(courseName))
+			if (cour.getDescription().equals(courseName))
 			{
 				return cour;				
 			}
@@ -109,7 +109,13 @@ public class FakeDatabase implements IDatabase {
 
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
-		// TODO Auto-generated method stub
+		for (Professor p : professorList)
+		{
+			if (p.getFirstName().equals(firstname) && p.getLastName().equals(lastname))
+			{
+				return p;
+			}
+		}
 		return null;
 	}
 }
