@@ -92,13 +92,6 @@ package classSchedule;
 
 		}
 
-
-		for(Course test: model.getSched())
-		{
-			System.out.println(""+test.getPrefix()+ ":" + test.getSection().getClassNum()+ " "+ test.getSection().getDate()+"\n"
-		+ test.getDescription() + ".\n"+ test.getSection().getInstructor().getLastName() +"," +test.getSection().getInstructor().getFirstName()
-		+ " CRN:" +test.getSection().getCRN());
-		}
 	}
 
 
