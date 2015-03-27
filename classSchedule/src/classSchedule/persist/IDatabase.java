@@ -22,8 +22,6 @@ public interface IDatabase {
 	public Course findCoursebyCRN(int CRN);
 	
 	public Professor findProfessor(String firstname, String lastname);
-
-	public User findUser(String username, String password, int id);
 	
 	public Major findMajor(String major, boolean isMinor, int ID);
 

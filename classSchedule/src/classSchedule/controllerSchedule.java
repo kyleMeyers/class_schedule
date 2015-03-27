@@ -7,7 +7,7 @@ import classSchedule.model.User;
 public class controllerSchedule {
 
 	private modelSchedule model;
-	private User userName;
+	//private User userName;
 	
 	public void setModel(modelSchedule model)
 	{
@@ -20,11 +20,19 @@ public class controllerSchedule {
 	public void startApp()
 	{
 		System.out.println("Enter a username: ");
-//		model.setMajor(new Major("Computer Science", false));
+		//User username = new User(userName.getUsername(), userName.getPassword());
 	}
 	
-	public void setUser() {
-		//User username = new User(userName.getUsername(), userName.getPassword());
+
+	public void setUserFound() {
+		User enter = model.getUser();
+		model.setUser(enter);
+		
+	}
+
+	public void setEnterUsernameAgain() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public String concat(String name) {

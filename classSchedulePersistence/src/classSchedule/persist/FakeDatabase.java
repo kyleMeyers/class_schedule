@@ -46,7 +46,7 @@ public class FakeDatabase implements IDatabase {
 	//finds the user with the username and password and returns the id
 	//TODO:? may want to return the username if given the id
 	//Kyle's rendition of the findUser implementation
-	public User findUser(String username, String password, int id) {
+	public User findUser(String username, String password) {
 		User result = new User();
 		for(User use: userList)
 		{
@@ -109,13 +109,6 @@ public class FakeDatabase implements IDatabase {
 
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public User findUser(String username, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}

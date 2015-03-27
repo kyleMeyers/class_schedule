@@ -1,24 +1,26 @@
 package classSchedule;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
-import classSchedule.model.Course;
+//import classSchedule.model.Course;
 import classSchedule.model.Major;
+import classSchedule.model.User;
 
 public class modelSchedule {
 
-	private ArrayList<Course> sched;
+	//private ArrayList<Course> sched;
 	private Major major;
+	private User user;
 	
 	public modelSchedule()
 	{
-		sched = new ArrayList<Course>();
+		//sched = new ArrayList<Course>();
 	}
 	
-	public ArrayList<Course> getSched()
+	/*public ArrayList<Course> getSched()
 	{
 		return sched;
-	}
+	}*/
 
 	public Major getMajor()
 	{
@@ -29,6 +31,24 @@ public class modelSchedule {
 	{
 		this.major = major;
 	}
+
+	public void setUser(User curUser) {
+		this.user = curUser;
+		
+	}
+
+	public User getUser() {
+		
+		return this.user;
+	}
+	
+	public boolean isDone() {
+		return user == user;	//What user to make it equal to?
+	}
+	
+	
+	
+	
 
 
 }
