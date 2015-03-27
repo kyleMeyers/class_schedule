@@ -8,7 +8,6 @@ import classSchedule.model.Professor;
 import java.util.List;
 
 import classSchedule.model.Major;
-
 import classSchedule.model.User;
 
 public interface IDatabase {

@@ -34,7 +34,8 @@ public class controllerSchedule {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	// Used mostly for figuring out how jsp works
 	public String concat(String name) {
 		return "Your username is " + name;
 	}
