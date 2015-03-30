@@ -44,7 +44,6 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	//finds the user with the username and password and returns the id
-	//TODO:? may want to return the username if given the id
 	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password) {
 		User result = new User();
@@ -73,7 +72,7 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	//find major will find a major from input(?)
-	//Michaels rendition of the implementation of the findMajor. Unsure which one works or does not work at this time
+	//Michael's rendition of the implementation of the findMajor. Unsure which one works or does not work at this time
 	public Major findMajor(String major, boolean isMinor, int ID) {
 		for(Major majorindex:majorList)
 		{

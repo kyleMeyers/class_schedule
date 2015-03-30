@@ -76,12 +76,6 @@ public class Database implements IDatabase{
 	}
 
 	@Override
-	public User findUser(String username, String password, int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Major findMajor(String major, boolean isMinor, int ID) {
 		// TODO Auto-generated method stub
 		return null;
