@@ -74,18 +74,29 @@ public class FakeDatabase implements IDatabase {
 	@Override
 	//find major will find a major from input(?)
 	//Michaels rendition of the implementation of the findMajor. Unsure which one works or does not work at this time
-	public Major findMajor(String major, boolean isMinor, int ID) {
-		for(Major majorindex:majorList)
+	public Major findMajor(String major) {
+		Major result = new Major();
+		for(Major maj: majorList)
 		{
-			if(majorindex.getName().equals(major) || majorindex.getId() == ID)
-				return majorindex;
+			if(maj.getName().equals(major))
+			{
+				Major majResult = findMajorById(maj.getId());
+				result = majResult;
+			}
 		}
+		
+		return result;
 
-		Major invalidMajor = new Major();
-		invalidMajor.setId(999);
-		invalidMajor.setName("Not Found");
-		return invalidMajor;
-
+	}
+	private Major findMajorById(int id) {
+		for(Major maj: majorList)
+		{
+			if(maj.getId() == id)
+			{
+				return maj;
+			}
+		}
+		return null;
 	}
 	//
 	@Override

@@ -36,8 +36,8 @@ public class LoginServlet extends HttpServlet {
 				req.getSession().setAttribute("user", user);		//makes sure the user is logged in and the attribute 
 																	//can be accessed by any servlet now
 				
-				// Redirect to schedule page
-				resp.sendRedirect(req.getContextPath() + "/schedule");	//after a successful session on a servlet you should
+				// Redirect to major page
+				resp.sendRedirect(req.getContextPath() + "/major");		//after a successful session on a servlet you should
 																		//redirect the page to another servlet. This case is schedule
 				return;
 			} else {
