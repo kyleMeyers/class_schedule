@@ -18,6 +18,10 @@
   	<servlet-name>LoginServlet</servlet-name>
   	<servlet-class>classSchedule.servlets.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>MajorServlet</servlet-name>
+    <servlet-class>classSchedule.servlets.MajorServlet</servlet-class>
+  </servlet>
 
   <!-- Servlet mappings -->
   <servlet-mapping>
@@ -31,6 +35,10 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MajorServlet</servlet-name>
+    <url-pattern>/major</url-pattern>
   </servlet-mapping>
   
   <!-- Listeners -->
