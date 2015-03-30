@@ -1,8 +1,5 @@
 package classSchedule.model;
 
-import java.util.List;
-
-
 public class Major {
 	
 	private String name;
