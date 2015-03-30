@@ -40,6 +40,10 @@ public class controllerSchedule {
 		return "Your username is " + name;
 	}
 	
+	public User getUser() {
+		return model.getUser();
+	}
+	
 
 	
 }

@@ -10,6 +10,12 @@ public class User {
 		
 	}
 	
+	public User(int id, String uname, String pw) {
+		this.setId(id);
+		this.setUsername(uname);
+		this.setPassword(pw);
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}

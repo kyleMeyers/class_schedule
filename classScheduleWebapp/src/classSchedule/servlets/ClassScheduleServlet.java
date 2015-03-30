@@ -33,8 +33,10 @@ public class ClassScheduleServlet extends HttpServlet {
 		} else {
 			// Reconstruct current modelSchedule model object
 			User curUser = getUse(req, "userNa");
+			//User tempUser = new User(902, "Bob", "horse");
 			
 			model.setUser(curUser);
+			//model.setUser(tempUser);
 			
 			if (req.getParameter("gotIt") != null) {
 				controller.setUserFound();

@@ -15,7 +15,7 @@
 			<c:if test="${! empty app}">
 				<c:if test="${app.done}">
 					<div>
-						Your ID is ${app.id}
+						Your ID is ${user}
 					</div>
 					<div>
 						<input name="startApp" type="submit" value="Start Again?" />
