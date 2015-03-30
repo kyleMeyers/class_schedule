@@ -33,21 +33,16 @@ public class ClassScheduleServlet extends HttpServlet {
 		} else {
 			// Reconstruct current modelSchedule model object
 			User curUser = getUse(req, "userNa");
-			//Integer curMin = getInteger(req, "min");
-			//Integer curMax = getInteger(req, "max");
 			
-			//model.setMin(curMin);
-			//model.setMax(curMax);
-			/*
+			model.setUser(curUser);
+			
 			if (req.getParameter("gotIt") != null) {
-				controller.setNumberFound();
-			} else if (req.getParameter("less") != null) {
-				controller.setNumberIsLessThanGuess();
-			} else if (req.getParameter("more") != null) {
-				controller.setNumberIsGreaterThanGuess();
+				controller.setUserFound();
+			} else if (req.getParameter("not") != null) {
+				controller.setEnterUsernameAgain();
 			} else {
 				throw new ServletException("Unknown command");
-			}*/
+			}
 		}
 		
 		req.setAttribute("app", model);
@@ -55,12 +50,12 @@ public class ClassScheduleServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
 
-	private User getUse(HttpServletRequest req, String string) {
-		// TODO Auto-generated method stub
+	private User getUse(HttpServletRequest req, String name) {
 		return null;
+		//return String.parseString(req.getParameter(name));
 	}
 
-	private int getMajor(HttpServletRequest req, String name) {
+	/*private int getMajor(HttpServletRequest req, String name) {
 		return Integer.parseInt(req.getParameter(name));
-	}
+	}*/
 }
