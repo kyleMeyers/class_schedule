@@ -4,9 +4,18 @@
 <html>
 	<head>
 		<title>Login page</title>
+		<style>
+			body {background-color:lightgray}
+		</style>
+		
 	</head>
 	
 	<body>
+		
+		<h1>Welcome to the YCP schedule planner prototype</h1>
+		
+		
+		<div id = "section">
 		<p>Please log in.</p>
 		<form action="${pageContext.servletContext.contextPath}/login" method="post">
 			<table>
@@ -25,7 +34,11 @@
 			</table>
 			<input type="submit" name="submit" value="Log in"></input>
 		</form>
+		</div>
 		
+		<div id = "footer">
+			<p>Legal notices go here</p>
+		</div>
 		<c:if test="${! empty error}">
 			<p class="error">${error}</p>
 		</c:if>
