@@ -45,14 +45,14 @@ public class FakeDatabase implements IDatabase {
 	//TODO:? may want to return the username if given the id
 	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password) {
-		User result = new User();
 		for(User use : userList)
 		{
+			// Iterates through list of users; When current one matches given credentials (if it does),
+			// create user object from current user's ID, return that user
 			if (use.getPassword().equals(password) && use.getUsername().equals(username))
 			{
-				User userResult = findUserById(use.getId());
-				result = userResult;
-				return result;
+				User userResult = findUserById(use.getId());	// Gets current matching user from this user's ID
+				return userResult;
 			}
 		}
 
