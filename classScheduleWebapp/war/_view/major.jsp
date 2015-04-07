@@ -23,7 +23,7 @@
     		align:center;
     		min-width:750px;
     		background-color:#FF33CC;
-    		text-color:#00FF00;
+    		color:#00FF00;
 			}
 			
 			#nav {
@@ -65,7 +65,9 @@
 <!-- 					</td> -->
 <!-- 			</table> -->
 <!-- 			<input type="submit" name="submit" value="Enter Major"></input> -->
-				<p> Major <input name="submit" value="Enter Major"></input></p>
+				<p> Major <input name="major" type = "text" value="${major}"></input></p>
+				<input type="submit" name="submit" value="Enter Major"></input>
+				
 		</form>
 		
 		<c:if test="${! empty error}">
@@ -77,5 +79,6 @@
 	<div id = "footer">
 	<p> No one reads the legal notice </p>
 	</div>
+	
 	</body>
 </html>
