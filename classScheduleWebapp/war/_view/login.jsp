@@ -75,7 +75,7 @@
 				</tr>
 			</table> --%>
 			<p> Username: <input name = "username" type=text value = "${username}"></input></p>
-			<p> Password: <input name = "password" type=text value = "${password}"></input></p>
+			<p> Password: <input name = "password" type=password value = "${password}"></input></p>
 			<input type="submit" name="submit" value="Log in"></input>
 		</form>
 		

@@ -1,5 +1,7 @@
 package classSchedule.servlets;
 
+import java.util.Scanner;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -10,9 +12,14 @@ public class DatabaseInitListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent e) {
+		
+		Scanner keyboard = new Scanner(System.in);
+		// Create the default IDatabase instance
+		InitDatabase.init(keyboard);
+		
 		// Create a database provider object
 		System.out.println("Initializing database!");
-		DatabaseProvider.setInstance(new FakeDatabase()); // TDOO: eventually use a real database
+		DatabaseProvider.setInstance(new FakeDatabase()); // TODO: eventually use a real database
 	}
 
 	@Override
