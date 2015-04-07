@@ -45,14 +45,12 @@ public class FakeDatabase implements IDatabase {
 	//TODO:? may want to return the username if given the id
 	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password) {
-		User result = new User();
 		for(User use : userList)
 		{
 			if (use.getPassword().equals(password) && use.getUsername().equals(username))
 			{
 				User userResult = findUserById(use.getId());
-				result = userResult;
-				return result;
+				return userResult;
 			}
 		}
 
@@ -70,22 +68,22 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	//find major will find a major from input(?)
-	//Michaels rendition of the implementation of the findMajor. Unsure which one works or does not work at this time
+	//find major will find a major from input in the database
 	public Major findMajor(String major) {
-		Major result = new Major();
+		//iterates through the major list until the entered major is equal to the major in the database
 		for(Major maj: majorList)
 		{
 			if(maj.getName().equals(major))
 			{
 				Major majResult = findMajorById(maj.getId());
-				result = majResult;
+				return majResult;
 			}
 		}
 		
-		return result;
+		return null;
 
 	}
+	//finds the id of the major in the database
 	private Major findMajorById(int id) {
 		for(Major maj: majorList)
 		{
