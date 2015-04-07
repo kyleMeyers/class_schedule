@@ -11,10 +11,6 @@
     <servlet-class>classSchedule.servlets.IndexServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>ClassScheduleServlet</servlet-name>
-  	<servlet-class>classSchedule.servlets.ClassScheduleServlet</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<servlet-class>classSchedule.servlets.LoginServlet</servlet-class>
   </servlet>
@@ -22,15 +18,15 @@
     <servlet-name>MajorServlet</servlet-name>
     <servlet-class>classSchedule.servlets.MajorServlet</servlet-class>
   </servlet>
-
+  <servlet>
+    <servlet-name>ClassServlet</servlet-name>
+    <servlet-class>classSchedule.servlets.ClassServlet</servlet-class>
+  </servlet>
+  
   <!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/index</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ClassScheduleServlet</servlet-name>
-    <url-pattern>/schedule</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
@@ -39,6 +35,10 @@
   <servlet-mapping>
     <servlet-name>MajorServlet</servlet-name>
     <url-pattern>/major</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ClassServlet</servlet-name>
+    <url-pattern>/class</url-pattern>
   </servlet-mapping>
   
   <!-- Listeners -->
