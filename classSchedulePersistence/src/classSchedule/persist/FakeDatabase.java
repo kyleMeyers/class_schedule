@@ -42,6 +42,7 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	//finds the user with the username and password and returns the id
+	//TODO:? may want to return the username if given the id
 	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password) {
 		for(User use : userList)
@@ -69,7 +70,6 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-
 	//find major will find a major from input in the database
 	public Major findMajor(String major) {
 		//iterates through the major list until the entered major is equal to the major in the database

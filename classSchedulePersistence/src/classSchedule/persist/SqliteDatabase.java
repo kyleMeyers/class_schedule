@@ -26,6 +26,16 @@ public class SqliteDatabase implements IDatabase {
 
 	private static final int MAX_ATTEMPTS = 10;
 
+	//TODO: Add an sql database entry for finding the user from the login information
 	
 	
+	private Connection connect() throws SQLException {
+		Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+		
+		// Set autocommit to false to allow multiple the execution of
+		// multiple queries/statements as part of the same transaction.
+		conn.setAutoCommit(false);
+		
+		return conn;
+	}
 }
