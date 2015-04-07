@@ -79,6 +79,11 @@
 			<input type="submit" name="submit" value="Log in"></input>
 		</form>
 		
+		<div id = "footer" align = "center">
+			<p>Legal notices go here</p>
+			<p>Sponsered by Dr. Pepper</p>
+		</div>
+
 		<c:if test="${! empty error}">
 			<p class="error">${error}</p>
 		</c:if>
