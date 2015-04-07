@@ -35,6 +35,15 @@ public class controllerSchedule {
 		
 	}
 	
+	// Used mostly for figuring out how jsp works
+	public String concat(String name) {
+		return "Your username is " + name;
+	}
+	
+	public User getUser() {
+		return model.getUser();
+	}
+	
 
 	
 }

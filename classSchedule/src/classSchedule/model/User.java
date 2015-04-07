@@ -5,8 +5,15 @@ public class User {
 	private String username;
 	private String password;
 	
-	public User(){
+	// Constructor
+	public User() {
 		
+	}
+	
+	public User(int id, String uname, String pw) {
+		this.setId(id);
+		this.setUsername(uname);
+		this.setPassword(pw);
 	}
 	
 	public void setId(int id) {
