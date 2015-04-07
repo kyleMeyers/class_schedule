@@ -5,18 +5,62 @@
 <html>
 	<head>
 		<title>Major page</title>
+		<style>
+			#header {
+			background-color:green;
+			color:white;
+			text-align:center;
+			padding: 5px;
+			align:center;
+			min-width:650px;
+			max-width:750px;
+			}
+			
+			#section {
+    		float:left;
+    		padding:10px;
+    		text-align:center; 
+    		align:center;
+    		min-width:700px;
+			}
+			
+			#nav {
+    		line-height:30px;
+   		 	background-color:#eeeeee;
+   			height:300px;
+    		width:100px;
+    		float:left;
+    		padding:5px; 
+			}
+			
+			#footer {
+    		background-color:green;
+    		color:white;
+    		clear:both;
+    		text-align:center;
+    		padding:5px; 
+    		min-width:650px;    		
+			max-width:750px;
+			}
+			
+
+		</style>
 	</head>
 	<body>
+	
+	<div id = "header">
+		<h1> YCP Schedule Planner Prototype</h1>
+	</div>
 		<p>Please enter a Major</p>
 		<form action="${pageContext.servletContext.contextPath}/major" method="post">
-			<table>
-				<tr>
-					<td>Major:</td>
-					<td>
-						<input name = "major" type = "text" value = "${major}"></input>
-					</td>
-			</table>
-			<input type="submit" name="submit" value="Enter Major"></input>
+<!-- 			<table> -->
+<!-- 				<tr> -->
+<!-- 					<td>Major:</td> -->
+<!-- 					<td> -->
+<%-- 						<input name = "major" type = "text" value = "${major}"></input> --%>
+<!-- 					</td> -->
+<!-- 			</table> -->
+<!-- 			<input type="submit" name="submit" value="Enter Major"></input> -->
 		</form>
 		
 		<c:if test="${! empty error}">
