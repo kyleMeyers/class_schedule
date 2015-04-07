@@ -39,7 +39,7 @@ public class MajorServlet extends HttpServlet {
 				req.getSession().setAttribute("maj", maj);
 				
 				// Redirect to schedule page
-				resp.sendRedirect(req.getContextPath() + "/schedule");
+				//resp.sendRedirect(req.getContextPath() + "/schedule");
 				
 				return;
 			}

@@ -23,11 +23,9 @@ public class FakeDatabase implements IDatabase {
 
 	public FakeDatabase() {
 		userList = new ArrayList<>();
-
 		courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
 		majorList = new ArrayList<>();
-
 
 		readInitialData();
 
@@ -46,24 +44,24 @@ public class FakeDatabase implements IDatabase {
 	//finds the user with the username and password and returns the id
 	//Kyle's rendition of the findUser implementation
 	public User findUser(String username, String password) {
-		User result = new User();
-		for(User use: userList)
+		for(User use : userList)
 		{
-			if(use.getPassword().equals(password) && use.getUsername().equals(username))
+			// Iterates through list of users; When current one matches given credentials (if it does),
+			// create user object from current user's ID, return that user
+			if (use.getPassword().equals(password) && use.getUsername().equals(username))
 			{
-				User userResult = findUserById(use.getId());
-				result = userResult;
-
+				User userResult = findUserById(use.getId());	// Gets current matching user from this user's ID
+				return userResult;
 			}
 		}
 
-		return result;
+		return null;
 	}
 
 	private User findUserById(int id) {
 		for(User use: userList)
 		{
-			if(use.getId() == id)
+			if (use.getId() == id)
 			{
 				return use;
 			}
@@ -71,22 +69,23 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	//find major will find a major from input(?)
-	//Michael's rendition of the implementation of the findMajor. Unsure which one works or does not work at this time
+
+	//find major will find a major from input in the database
 	public Major findMajor(String major) {
-		Major result = new Major();
+		//iterates through the major list until the entered major is equal to the major in the database
 		for(Major maj: majorList)
 		{
 			if(maj.getName().equals(major))
 			{
 				Major majResult = findMajorById(maj.getId());
-				result = majResult;
+				return majResult;
 			}
 		}
 		
-		return result;
+		return null;
 
 	}
+	//finds the id of the major in the database
 	private Major findMajorById(int id) {
 		for(Major maj: majorList)
 		{
@@ -97,12 +96,12 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
-	//
+	
 	@Override
 	public Course findCoursebyTitle(String courseName) {		
-		for(Course cour: courseList)
+		for(Course cour : courseList)
 		{
-			if(cour.getDescription().equals(courseName))
+			if (cour.getDescription().equals(courseName))
 			{
 				return cour;				
 			}
@@ -119,7 +118,13 @@ public class FakeDatabase implements IDatabase {
 
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
-		// TODO Auto-generated method stub
+		for (Professor p : professorList)
+		{
+			if (p.getFirstName().equals(firstname) && p.getLastName().equals(lastname))
+			{
+				return p;
+			}
+		}
 		return null;
 	}
 }

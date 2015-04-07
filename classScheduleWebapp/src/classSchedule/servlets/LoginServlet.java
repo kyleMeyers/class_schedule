@@ -19,7 +19,8 @@ public class LoginServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 	}
 	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException ,IOException {
 		String username = req.getParameter("username");			//get the username from the user who enters it
 		String password = req.getParameter("password");			//get the password from the user who enters it
 		
@@ -28,12 +29,13 @@ public class LoginServlet extends HttpServlet {
 			error = "Please enter a username and password.";
 		} else {
 			LoginController controller = new LoginController();		//make a new controller for each servlet
+			User bob = new User(902, "Bob", "horse");
 			User user = controller.findUser(username, password);	//find the user from the input
 			if (user != null) {										//checks to make sure it is a valid user
 				// Successful login!
 				
 				// Add user to session
-				req.getSession().setAttribute("user", user);		//makes sure the user is logged in and the attribute 
+				req.getSession().setAttribute("user", bob);		//makes sure the user is logged in and the attribute 
 																	//can be accessed by any servlet now
 				
 				// Redirect to major page

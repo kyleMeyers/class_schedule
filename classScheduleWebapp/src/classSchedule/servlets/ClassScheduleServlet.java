@@ -33,8 +33,10 @@ public class ClassScheduleServlet extends HttpServlet {
 		} else {
 			// Reconstruct current modelSchedule model object
 			User curUser = getUse(req, "userNa");
+			//User tempUser = new User(902, "Bob", "horse");
 			
 			model.setUser(curUser);
+			//model.setUser(tempUser);
 			
 			if (req.getParameter("gotIt") != null) {
 				controller.setUserFound();
@@ -45,9 +47,9 @@ public class ClassScheduleServlet extends HttpServlet {
 			}
 		}
 		
-		req.setAttribute("app", model);
+		req.setAttribute("app", model);		// Throws PropertyNotFound Exception; model is missing ID property
 		
-		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
+		//req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
 
 	private User getUse(HttpServletRequest req, String name) {

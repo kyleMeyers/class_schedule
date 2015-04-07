@@ -25,7 +25,9 @@ import javax.swing.JFrame;
 		this.controller = controller;
 	}
 
-
+<<<<<<< HEAD
+	
+=======
 	public static void main(String[] args) throws Exception{
 
 		/*Scanner keyboard = new Scanner(System.in);
@@ -94,7 +96,7 @@ import javax.swing.JFrame;
 		}
 
 	}
-
+>>>>>>> refs/remotes/kyle/master
 
 }*/
 
