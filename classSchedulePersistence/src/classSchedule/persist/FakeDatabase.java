@@ -52,11 +52,11 @@ public class FakeDatabase implements IDatabase {
 			{
 				User userResult = findUserById(use.getId());
 				result = userResult;
-
+				return result;
 			}
 		}
 
-		return result;
+		return null;
 	}
 
 	private User findUserById(int id) {
