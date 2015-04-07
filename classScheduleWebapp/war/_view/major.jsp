@@ -69,7 +69,6 @@
 				<input type="submit" name="submit" value="Enter Major"></input>
 				
 		</form>
-		
 		<c:if test="${! empty error}">
 			<p class="error">${error}</p>
 		</c:if>
