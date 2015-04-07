@@ -18,10 +18,12 @@
 			
 			#section {
     		float:left;
-    		padding:10px;
+    		padding:5px;
     		text-align:center; 
     		align:center;
-    		min-width:700px;
+    		min-width:750px;
+    		background-color:#FF33CC;
+    		text-color:#00FF00;
 			}
 			
 			#nav {
@@ -51,6 +53,8 @@
 	<div id = "header">
 		<h1> YCP Schedule Planner Prototype</h1>
 	</div>
+	
+	<div id = "section">
 		<p>Please enter a Major</p>
 		<form action="${pageContext.servletContext.contextPath}/major" method="post">
 <!-- 			<table> -->
@@ -61,10 +65,17 @@
 <!-- 					</td> -->
 <!-- 			</table> -->
 <!-- 			<input type="submit" name="submit" value="Enter Major"></input> -->
+				<p> Major <input name="submit" value="Enter Major"></input></p>
 		</form>
 		
 		<c:if test="${! empty error}">
 			<p class="error">${error}</p>
 		</c:if>
+		
+	</div>
+	
+	<div id = "footer">
+	<p> No one reads the legal notice </p>
+	</div>
 	</body>
 </html>
