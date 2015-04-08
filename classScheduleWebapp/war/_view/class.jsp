@@ -27,7 +27,6 @@
 		
 		<div id = "section">
 			<p> List of classes goes here </p>
-		
 		</div>
 	
 	</div>

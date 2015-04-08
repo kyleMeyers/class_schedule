@@ -4,6 +4,14 @@ public class Course {
 	private String Description;
 	private String Prefix;
 	private Section section;
+	private int ID;
+	
+	/**
+	 * Primary constructor (added 4/8/2015)
+	 */
+	public Course() {
+		
+	}
 	
 	/**
 	 * Constructor
@@ -43,5 +51,13 @@ public class Course {
 
 	public void setSection(Section section) {
 		this.section = section;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		this.ID = iD;
 	}
 }

@@ -31,7 +31,8 @@ public class FakeDatabase implements IDatabase {
 		try {
 			userList.addAll(InitialData.getUsers());
 			majorList.addAll(InitialData.getMajors());
-			//TODO: add course and professor lists
+			courseList.addAll(InitialData.getCourses());
+			//TODO: add professor list
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -113,6 +114,18 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
+	public List<Course> findCoursesbyMajor(int ID) {
+		List<Course> results = new ArrayList<Course>();
+		for (Course c : courseList)
+		{
+			if (c.getID() == ID) {
+				results.add(c);
+			}
+		}
+		return results;
+	}
+
+	@Override
 	public Professor findProfessor(String firstname, String lastname) {
 		for (Professor p : professorList)
 		{
@@ -123,5 +136,4 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
-
 }
