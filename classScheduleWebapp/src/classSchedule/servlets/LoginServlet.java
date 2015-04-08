@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 			error = "Please enter a username and password.";
 		} else {
 			LoginController controller = new LoginController();		//make a new controller for each servlet
-			//User bob = new User(902, "Bob", "horse");
+
 			User user = controller.findUser(username, password);	//find the user from the input
 			if (user != null) {										//checks to make sure it is a valid user
 				// Successful login!
