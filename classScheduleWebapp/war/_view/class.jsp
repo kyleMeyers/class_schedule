@@ -5,51 +5,40 @@
 <html>
 
 	<head>
-		<title>Major page</title>
-		<style>
-			#header {
-			background-color:green;
-			color:white;
-			text-align:center;
-			padding: 5px;
-			align:center;
-			min-width:650px;
-			max-width:750px;
-			}
-			
-			#section {
-    		float:left;
-    		padding:5px;
-    		text-align:center; 
-    		align:center;
-    		min-width:750px;
-    		background-color:#FF33CC;
-    		color:#00FF00;
-			}
-			
-			#nav {
-    		line-height:30px;
-   		 	background-color:#eeeeee;
-   			height:300px;
-    		width:100px;
-    		float:left;
-    		padding:5px; 
-			}
-			
-			#footer {
-    		background-color:green;
-    		color:white;
-    		clear:both;
-    		text-align:center;
-    		padding:5px; 
-    		min-width:650px;    		
-			max-width:750px;
-			}
-			
-
-		</style>
+		<title>Major Course List</title>
+		<link rel="stylesheet" type = "text/css" href = "${pageContext.servletContext.contextPath}/CSS/Layout.css">
 	
 	</head>
+	
+	<body>
+	
+	<div id = "header">
+		<h1>YCP Schedule Planner Prototype</h1>
+		<h2>${major} Course List</h2>
+	
+	
+	</div>
+	
+	<div>
+		<div id = "nav">
+		
+		
+		</div>
+		
+		<div id = "section">
+			<p> List of classes goes here </p>
+		
+		</div>
+	
+	</div>
+	
+	<div id = "footer">
+		<h6> I'm writing code</h6>
+	
+	</div>
+	
+	
+	</body>
 
 
 
