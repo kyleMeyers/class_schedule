@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import classSchedule.LoginController;
 import classSchedule.ClassController;
+import classSchedule.MajorController;
 import classSchedule.model.Course;
+import classSchedule.model.Major;
 import classSchedule.model.User;
 
 public class ClassServlet extends HttpServlet {
@@ -22,7 +24,10 @@ public class ClassServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
+		//Object maj = req.getSession().getAttribute("maj");
+		String error = "";
 		
+		ClassController controller = new ClassController();		//make a new controller for each servlet
 		
 	}
 }
