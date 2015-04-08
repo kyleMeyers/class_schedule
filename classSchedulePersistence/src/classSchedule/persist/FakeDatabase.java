@@ -4,13 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
-
-
-
 
 import classSchedule.model.User;
 
@@ -127,4 +123,5 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
+
 }
