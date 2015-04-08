@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
@@ -110,7 +109,9 @@ public class SqliteDatabase implements IDatabase {
 	}
 	
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+		String home = System.getProperty("user.home");		//creates the database file in the home directory of whoever uses it
+		//connects to the database from the home directory for the WebApp folder
+		Connection conn = DriverManager.getConnection("jdbc:sqlite:" + home + "/classSchedule.db");	
 		
 		// Set autocommit to false to allow multiple the execution of
 		// multiple queries/statements as part of the same transaction.
@@ -136,8 +137,8 @@ public class SqliteDatabase implements IDatabase {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
 							"    id integer primary key," +
-							"    user varchar(25)," +
-							"    password varchar(50)," +
+							"    username varchar(25)," +
+							"    password varchar(50)" +
 							")");
 					stmt1.executeUpdate();
 					
