@@ -5,57 +5,21 @@
 <html>
 	<head>
 		<title>Major page</title>
-		<style>
-			#header {
-			background-color:green;
-			color:white;
-			text-align:center;
-			padding: 5px;
-			align:center;
-			min-width:650px;
-			max-width:750px;
-			}
-			
-			#section {
-    		float:left;
-    		padding:5px;
-    		text-align:center; 
-    		align:center;
-    		min-width:750px;
-    		background-color:#FF33CC;
-    		color:#00FF00;
-			}
-			
-			#nav {
-    		line-height:30px;
-   		 	background-color:#eeeeee;
-   			height:300px;
-    		width:100px;
-    		float:left;
-    		padding:5px; 
-			}
-			
-			#footer {
-    		background-color:green;
-    		color:white;
-    		clear:both;
-    		text-align:center;
-    		padding:5px; 
-    		min-width:650px;    		
-			max-width:750px;
-			}
+		<link rel="stylesheet" type = "text/css" href = "${pageContext.servletContext.contextPath}/CSS/Layout.css">
 			
 
-		</style>
+
 	</head>
 	<body>
+	
+	<div id = "container">
 	
 	<div id = "header">
 		<h1> YCP Schedule Planner Prototype</h1>
 	</div>
 	
 	<div id = "section">
-		<p>Please enter a Major</p>
+		<p>Hello ${user.username} please enter a Major</p>
 		<form action="${pageContext.servletContext.contextPath}/major" method="post">
 <!-- 			<table> -->
 <!-- 				<tr> -->
@@ -79,5 +43,6 @@
 	<p> No one reads the legal notice </p>
 	</div>
 	
+	</div>
 	</body>
 </html>
