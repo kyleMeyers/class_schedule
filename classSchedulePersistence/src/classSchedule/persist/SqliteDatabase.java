@@ -146,7 +146,7 @@ public class SqliteDatabase implements IDatabase {
 		//connects to the database from the home directory for the WebApp folder
 		Connection conn = DriverManager.getConnection("jdbc:sqlite:" + home + "/classSchedule.db");	
 		
-		// Set autocommit to false to allow multiple the execution of
+		// Set autocommit to false to allow the execution of
 		// multiple queries/statements as part of the same transaction.
 		conn.setAutoCommit(false);
 		
