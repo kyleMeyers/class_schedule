@@ -65,6 +65,39 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+	@Override
+	public Major findMajor(String major) {
+		return executeTransaction(new Transaction<Major>() {
+			@Override
+			public Major execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select majors.* " +			//the entire user tuple
+							"  from majors " +
+							" where majors.major = ?"
+					);
+					stmt.setString(1, major);
+					
+					Major result = null;
+					
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) { // query will produce at most 1 user or null if it does not exist
+						result = new Major();
+						loadMajor(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual user or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
@@ -127,12 +160,17 @@ public class SqliteDatabase implements IDatabase {
 		user.setPassword(resultSet.getString(i++));	
 	}
 	
+	private void loadMajor(Major result, ResultSet resultSet, int i) throws SQLException{
+		result.setId(resultSet.getInt(i++));
+		result.setName(resultSet.getString(i++));
+		
+	}
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
-				
+				PreparedStatement stmt2 = null;
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
@@ -142,9 +180,17 @@ public class SqliteDatabase implements IDatabase {
 							")");
 					stmt1.executeUpdate();
 					
+					stmt2 = conn.prepareStatement(
+							"create table majors (" +
+							"	id integer primary key," +
+							"	major varchar(40)" +
+							")");
+					stmt2.executeUpdate();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);
 				}
 			}
 		});
@@ -154,15 +200,18 @@ public class SqliteDatabase implements IDatabase {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> userList;
+				List<Major> majorList;
 				
 				try {
 					userList = InitialData.getUsers();
+					majorList = InitialData.getMajors();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
 				PreparedStatement insertUser = null;
-
+				PreparedStatement insertMajor = null;
+				
 				try {
 					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
 					for (User use : userList) {
@@ -173,9 +222,18 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertUser.executeBatch();
 					
+					insertMajor = conn.prepareStatement("Insert into majors values (?, ?)");
+					for(Major maj : majorList)
+					{
+						insertMajor.setInt(1, maj.getId());
+						insertMajor.setString(2, maj.getName());
+					}
+					insertMajor.executeBatch();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
+					DBUtil.closeQuietly(insertMajor);
 				}
 			}
 		});
@@ -213,9 +271,5 @@ public class SqliteDatabase implements IDatabase {
 		return null;
 	}
 
-	@Override
-	public Major findMajor(String major) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
