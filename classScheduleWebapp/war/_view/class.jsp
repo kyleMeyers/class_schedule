@@ -30,7 +30,7 @@
 		<div id = "section">
 			<ul >
 				<c:forEach var="courselist" items="${allCourses}">
-					<li>${courselist.prefix}</li>
+					<li>${courselist.name}</li>
 				</c:forEach>
 
 			</ul>

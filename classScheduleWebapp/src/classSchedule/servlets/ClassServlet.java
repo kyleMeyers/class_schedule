@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 import classSchedule.LoginController;
 import classSchedule.ClassController;
@@ -13,6 +15,7 @@ import classSchedule.MajorController;
 import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.User;
+import classSchedule.persist.InitialData;
 
 public class ClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +30,7 @@ public class ClassServlet extends HttpServlet {
 		String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
+		List <Course> allCourses = InitialData.getCourses();
 		
 		if(course == null)
 		{
@@ -44,6 +48,7 @@ public class ClassServlet extends HttpServlet {
 			{
 				//Real course
 				req.getSession().setAttribute("course", courseTitle);
+				req.getSession().setAttribute("allCourses", allCourses);
 				
 				// Redirect to ?? page
 				//resp.sendRedirect(req.getContextPath() + "/class");
@@ -52,7 +57,7 @@ public class ClassServlet extends HttpServlet {
 			}
 			else if(courseId != null)
 			{
-				req.getSession().setAttribute(crn, courseId);
+				req.getSession().setAttribute("crn", courseId);
 			}
 			else
 			{
