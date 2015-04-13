@@ -23,13 +23,13 @@ public interface IDatabase {
 	 */
 	public User findUser(String username, String password);
 	
-	public Course findCoursebyTitle(String courseName);
-	
-	public Course findCoursebyCRN(int CRN);
-	
 	public Professor findProfessor(String firstname, String lastname);
 
 	public Major findMajor(String major);
+
+	public Course findCoursebyTitle(String courseName);
+
+	public Course findCoursebyCRN(int cRN);
 
 
 }

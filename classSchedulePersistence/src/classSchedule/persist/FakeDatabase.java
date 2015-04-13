@@ -7,19 +7,18 @@ import java.util.List;
 import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
-
 import classSchedule.model.User;
 
 public class FakeDatabase implements IDatabase {
 	private List<User> userList;
-	private List<Course> courseList;
+	//private List<Course> courseList;
 	private List<Professor> professorList;
 	private List<Major> majorList;
 
 
 	public FakeDatabase() {
 		userList = new ArrayList<>();
-		courseList = new ArrayList<>();
+		//courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
 		majorList = new ArrayList<>();
 
@@ -93,24 +92,7 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	
-	@Override
-	public Course findCoursebyTitle(String courseName) {		
-		for(Course cour : courseList)
-		{
-			if (cour.getDescription().equals(courseName))
-			{
-				return cour;				
-			}
-		}
 
-		return null;
-	}
-
-	@Override
-	public Course findCoursebyCRN(int CRN) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
@@ -121,6 +103,16 @@ public class FakeDatabase implements IDatabase {
 				return p;
 			}
 		}
+		return null;
+	}
+	@Override
+	public Course findCoursebyTitle(String courseName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Course findCoursebyCRN(int cRN) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

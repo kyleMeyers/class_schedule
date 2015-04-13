@@ -32,9 +32,6 @@ public class MajorTest {
 		section1 = new Section(prof1, "TR", 10135, 101);
 		section2 = new Section(prof1, "WF", 10130, 320);
 		section3 = new Section(prof1, "M", 10142, 420);
-		course1 = new Course("Programming Language Design", "CS340", section1);
-		course2 = new Course("Fundamentals of Computer Science II", "CS201", section2);
-		course3 = new Course("Senior Software Project I", "CS481", section3);
 		
 		majorCourses = new ArrayList<Course>();
 		majorCourses.add(course1);

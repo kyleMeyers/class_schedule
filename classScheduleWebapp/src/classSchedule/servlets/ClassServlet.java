@@ -24,12 +24,41 @@ public class ClassServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		//Object maj = req.getSession().getAttribute("maj");
+		String course = req.getParameter("course");
 		String error = "";
 		
-		ClassController controller = new ClassController();		//make a new controller for each servlet
+		if(course == null)
+		{
+			error = "Please click a course";
+		}
 		
-		resp.sendRedirect(req.getContextPath() + "/major");
+
+		else
+		{
+			ClassController controller = new ClassController();
+			Course courseTitle = controller.findCoursebyTitle(course);
+			//Course courseId = controller.findCoursebyCRN(CRN);
+			
+			if(courseTitle != null)
+			{
+				//Real course
+				req.getSession().setAttribute("course", courseTitle);
+				
+				// Redirect to ?? page
+				//resp.sendRedirect(req.getContextPath() + "/class");
+				
+				return;
+			}
+			else
+			{
+				error = "Unknown course";
+			}
+		}
 		
+		req.setAttribute("course", course);
+		req.setAttribute("error", error);
+		
+		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
+
 	}
 }
