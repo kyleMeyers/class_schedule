@@ -25,6 +25,7 @@ public class ClassServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		String course = req.getParameter("course");
+		String crn = req.getParameter("crn");
 		String error = "";
 		
 		if(course == null)
@@ -36,7 +37,7 @@ public class ClassServlet extends HttpServlet {
 		{
 			ClassController controller = new ClassController();
 			Course courseTitle = controller.findCoursebyTitle(course);
-			//Course courseId = controller.findCoursebyCRN(CRN);
+			Course courseId = controller.findCoursebyCRN(crn);
 			
 			if(courseTitle != null)
 			{
@@ -48,6 +49,10 @@ public class ClassServlet extends HttpServlet {
 				
 				return;
 			}
+			else if(courseId != null)
+			{
+				req.getSession().setAttribute(crn, courseId);
+			}
 			else
 			{
 				error = "Unknown course";
@@ -55,6 +60,7 @@ public class ClassServlet extends HttpServlet {
 		}
 		
 		req.setAttribute("course", course);
+		req.setAttribute("crn", crn);
 		req.setAttribute("error", error);
 		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
