@@ -5,15 +5,10 @@ import classSchedule.persist.DatabaseProvider;
 import classSchedule.persist.IDatabase;
 
 public class ClassController {
-	public Course findCoursebyTitle(String courseName) {
+	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
 		IDatabase db = DatabaseProvider.getInstance();		//base courseName information and getting it from the database
 
-		return db.findCoursebyTitle(courseName);			//returns the database information
+		return db.findCoursebyTitleOrCrn(courseName, crn);			//returns the database information
 	}
-	
-	public Course findCoursebyCRN(String CRN) {
-		IDatabase db = DatabaseProvider.getInstance();		//base crn information and getting it from the database
 
-		return db.findCoursebyCRN(CRN);			//returns the database information
-	}
 }

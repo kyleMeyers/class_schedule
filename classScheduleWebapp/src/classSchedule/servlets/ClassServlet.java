@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-import classSchedule.LoginController;
 import classSchedule.ClassController;
-import classSchedule.MajorController;
 import classSchedule.model.Course;
+
 import classSchedule.model.Major;
 import classSchedule.model.User;
 import classSchedule.persist.InitialData;
+
 
 public class ClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +23,8 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		List <Course> allCourses = InitialData.getCourses();
+		req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 	
@@ -30,7 +32,7 @@ public class ClassServlet extends HttpServlet {
 		String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
-		List <Course> allCourses = InitialData.getCourses();
+		
 		
 		if(course == null)
 		{
@@ -41,23 +43,19 @@ public class ClassServlet extends HttpServlet {
 		else
 		{
 			ClassController controller = new ClassController();
-			Course courseTitle = controller.findCoursebyTitle(course);
-			Course courseId = controller.findCoursebyCRN(crn);
+			Course courseTitle = controller.findCoursebyTitleOrCrn(course, crn);
 			
 			if(courseTitle != null)
 			{
 				//Real course
 				req.getSession().setAttribute("course", courseTitle);
-				req.getSession().setAttribute("allCourses", allCourses);
+				
 				
 				// Redirect to ?? page
 				//resp.sendRedirect(req.getContextPath() + "/class");
 				
 				return;
-			}
-			else if(courseId != null)
-			{
-				req.getSession().setAttribute("crn", courseId);
+
 			}
 			else
 			{
