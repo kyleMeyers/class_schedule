@@ -254,17 +254,20 @@ public class SqliteDatabase implements IDatabase {
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> userList;
 				List<Major> majorList;
+				List<Course> courseList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
+					courseList = InitialData.getCourses();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
 				PreparedStatement insertUser = null;
 				PreparedStatement insertMajor = null;
+				PreparedStatement insertCourse = null;
 				
 				try {
 					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
@@ -285,10 +288,21 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertMajor.executeBatch();
 					
+					insertCourse = conn.prepareStatement("Insert into courses values (?, ?, ?)");
+					for(Course cour: courseList)
+					{
+						insertCourse.setInt(1, cour.getId());
+						insertCourse.setString(2, cour.getCRN());
+						insertCourse.setString(3, cour.getName());
+						insertCourse.addBatch();
+					}
+					insertCourse.executeBatch();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
 					DBUtil.closeQuietly(insertMajor);
+					DBUtil.closeQuietly(insertCourse);
 				}
 			}
 		});
