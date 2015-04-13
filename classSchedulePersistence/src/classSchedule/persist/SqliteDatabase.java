@@ -262,16 +262,11 @@ public class SqliteDatabase implements IDatabase {
 	}
 
 	@Override
-	public Course findCoursebyTitle(String courseName) {
+	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Course findCoursebyCRN(String crn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }

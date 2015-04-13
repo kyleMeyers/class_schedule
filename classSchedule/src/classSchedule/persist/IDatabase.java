@@ -4,10 +4,6 @@ package classSchedule.persist;
 import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
-
-import java.util.List;
-
-import classSchedule.model.Major;
 import classSchedule.model.User;
 
 public interface IDatabase {
@@ -29,9 +25,7 @@ public interface IDatabase {
 	
 	public Major findMajor(String major);
 
-	public Course findCoursebyTitle(String courseName);
-
-	public Course findCoursebyCRN(String crn);
+	public Course findCoursebyTitleOrCrn(String courseName, String crn);
 
 
 }
