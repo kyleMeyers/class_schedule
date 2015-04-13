@@ -268,7 +268,7 @@ public class SqliteDatabase implements IDatabase {
 	}
 
 	@Override
-	public Course findCoursebyCRN(int cRN) {
+	public Course findCoursebyCRN(String crn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

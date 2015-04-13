@@ -11,7 +11,7 @@ public class ClassController {
 		return db.findCoursebyTitle(courseName);			//returns the database information
 	}
 	
-	public Course findCoursebyCRN(int CRN) {
+	public Course findCoursebyCRN(String CRN) {
 		IDatabase db = DatabaseProvider.getInstance();		//base crn information and getting it from the database
 
 		return db.findCoursebyCRN(CRN);			//returns the database information

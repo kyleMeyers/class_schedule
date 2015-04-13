@@ -11,14 +11,14 @@ import classSchedule.model.User;
 
 public class FakeDatabase implements IDatabase {
 	private List<User> userList;
-	//private List<Course> courseList;
+	private List<Course> courseList;
 	private List<Professor> professorList;
 	private List<Major> majorList;
 
 
 	public FakeDatabase() {
 		userList = new ArrayList<>();
-		//courseList = new ArrayList<>();
+		courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
 		majorList = new ArrayList<>();
 
@@ -30,6 +30,7 @@ public class FakeDatabase implements IDatabase {
 		try {
 			userList.addAll(InitialData.getUsers());
 			majorList.addAll(InitialData.getMajors());
+			courseList.addAll(InitialData.getCourses());
 			//TODO: add course and professor lists
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
@@ -111,7 +112,7 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	public Course findCoursebyCRN(int cRN) {
+	public Course findCoursebyCRN(String crn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

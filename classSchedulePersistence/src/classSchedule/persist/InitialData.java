@@ -72,6 +72,7 @@ public class InitialData {
 					Iterator<String> i = tuple.iterator();
 					Course course = new Course();
 					course.setId(Integer.parseInt(i.next()));
+					course.setCRN(i.next());
 					course.setName(i.next());
 					courseList.add(course);
 				}

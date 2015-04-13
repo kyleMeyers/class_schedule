@@ -24,12 +24,14 @@ public interface IDatabase {
 	public User findUser(String username, String password);
 	
 	public Professor findProfessor(String firstname, String lastname);
-
+	
+	//TODO: make a new User login function and then have it insert that new user into the database
+	
 	public Major findMajor(String major);
 
 	public Course findCoursebyTitle(String courseName);
 
-	public Course findCoursebyCRN(int cRN);
+	public Course findCoursebyCRN(String crn);
 
 
 }
