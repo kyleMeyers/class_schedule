@@ -25,13 +25,15 @@ public interface IDatabase {
 	
 	public Course findCoursebyTitle(String courseName);
 	
-	public Course findCoursebyCRN(int CRN);
-	
 	public List<Course> findCoursesbyMajor(int ID);
-	
-	public Professor findProfessor(String firstname, String lastname);
 
+	public Professor findProfessor(String firstname, String lastname);
+	
+	//TODO: make a new User login function and then have it insert that new user into the database
+	
 	public Major findMajor(String major);
+
+	public Course findCoursebyCRN(String crn);
 
 
 }

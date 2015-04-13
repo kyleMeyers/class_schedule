@@ -75,7 +75,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select majors.* " +			//the entire user tuple
+							"select majors.* " +			//the entire major tuple
 							"  from majors " +
 							" where majors.major = ?"
 					);
@@ -84,12 +84,12 @@ public class SqliteDatabase implements IDatabase {
 					Major result = null;
 					
 					resultSet = stmt.executeQuery();
-					if (resultSet.next()) { // query will produce at most 1 user or null if it does not exist
+					if (resultSet.next()) { // query will produce at most 1 major or null if it does not exist
 						result = new Major();
 						loadMajor(result, resultSet, 1);
 					}
 					
-					return result;			//returns an actual user or null if there is not one
+					return result;			//returns an actual major or null if there is not one
 				} finally {
 					DBUtil.closeQuietly(resultSet);
 					DBUtil.closeQuietly(stmt);
@@ -203,6 +203,7 @@ public class SqliteDatabase implements IDatabase {
 				List<Major> majorList;
 				
 				try {
+					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 				} catch (IOException e) {
@@ -227,6 +228,7 @@ public class SqliteDatabase implements IDatabase {
 					{
 						insertMajor.setInt(1, maj.getId());
 						insertMajor.setString(2, maj.getName());
+						insertMajor.addBatch();
 					}
 					insertMajor.executeBatch();
 					
@@ -254,19 +256,19 @@ public class SqliteDatabase implements IDatabase {
 	
 
 	@Override
+	public Professor findProfessor(String firstname, String lastname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Course findCoursebyTitle(String courseName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Course findCoursebyCRN(int CRN) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Professor findProfessor(String firstname, String lastname) {
+	public Course findCoursebyCRN(String crn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

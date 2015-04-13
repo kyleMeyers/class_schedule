@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.User;
 import classSchedule.model.Course;
@@ -58,11 +59,11 @@ public class InitialData {
 		}
 	}
 	
-	//reads in courses from csv for fakeDatabase
+	//reads in the courses in the csv spreadsheet for the fakeDatabase
 	public static List<Course> getCourses() throws IOException{
 		List<Course> courseList = new ArrayList<Course>();
-		ReadCSV readCourses = new ReadCSV("Courses.csv");
-		
+		ReadCSV readCourses = new ReadCSV("classes.csv");
+
 		try {
 			while (true) {
 				List<String> tuple = readCourses.next();
@@ -71,8 +72,9 @@ public class InitialData {
 				}
 				Iterator<String> i = tuple.iterator();
 				Course course = new Course();
-				course.setID(Integer.parseInt(i.next()));
-				course.setDescription(i.next());
+				course.setId(Integer.parseInt(i.next()));
+				course.setCRN(i.next());
+				course.setName(i.next());
 				courseList.add(course);
 			}
 			return courseList;

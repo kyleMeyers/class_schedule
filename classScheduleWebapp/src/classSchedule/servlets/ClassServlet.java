@@ -25,11 +25,14 @@ public class ClassServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		//Object maj = req.getSession().getAttribute("maj");
+		String course = req.getParameter("course");
+		String crn = req.getParameter("crn");
 		String error = "";
 		
-		ClassController controller = new ClassController();		//make a new controller for each servlet
-		
+		if(course == null)
+		{
+			error = "Please click a course";
+		}
 		/**
 		 * Use "findCoursesbyMajor()" here to obtain list of Major required Courses.
 		 * Need:
@@ -40,6 +43,36 @@ public class ClassServlet extends HttpServlet {
 		 * Should "findCoursesbyMajor()" be part of the CourseController or MajorController?
 		 * Once list of Courses obtained, should be trivial to display.
 		 */
+		else
+		{
+			ClassController controller = new ClassController();
+			Course courseTitle = controller.findCoursebyTitle(course);
+			Course courseId = controller.findCoursebyCRN(crn);
+			
+			if(courseTitle != null)
+			{
+				//Real course
+				req.getSession().setAttribute("course", courseTitle);
+				
+				// Redirect to ?? page
+				//resp.sendRedirect(req.getContextPath() + "/class");
+				
+				return;
+			}
+			else if(courseId != null)
+			{
+				req.getSession().setAttribute(crn, courseId);
+			}
+			else
+			{
+				error = "Unknown course";
+			}
+		}
 		
+		req.setAttribute("course", course);
+		req.setAttribute("crn", crn);
+		req.setAttribute("error", error);
+		
+		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 }
