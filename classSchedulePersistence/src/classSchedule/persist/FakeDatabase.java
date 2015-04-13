@@ -65,22 +65,22 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
+	
 	@Override
 	//find major will find a major from input in the database
 	public Major findMajor(String major) {
 		//iterates through the major list until the entered major is equal to the major in the database
 		for(Major maj: majorList)
 		{
-			if(maj.getName().equals(major))
+			if(maj.getName().equalsIgnoreCase(major))
 			{
 				Major majResult = findMajorById(maj.getId());
 				return majResult;
 			}
 		}
-		
 		return null;
-
 	}
+	
 	//finds the id of the major in the database
 	private Major findMajorById(int id) {
 		for(Major maj: majorList)
@@ -93,8 +93,6 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	
-
-
 	@Override
 	public List<Course> findCoursesbyMajor(int ID) {
 		List<Course> results = new ArrayList<Course>();
@@ -118,15 +116,26 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
+	
+	// Returns the single course specified (by Name)
 	@Override
 	public Course findCoursebyTitle(String courseName) {
-		// TODO Auto-generated method stub
+		for (Course c : courseList) {
+			if (c.getName().equalsIgnoreCase(courseName)) {
+				return c;
+			}
+		}
 		return null;
 	}
 	
+	// Returns the single course specified (by CRN)
 	@Override
 	public Course findCoursebyCRN(String crn) {
-		// TODO Auto-generated method stub
+		for (Course c : courseList) {
+			if (c.getCRN().equalsIgnoreCase(crn)) {
+				return c;
+			}
+		}
 		return null;
 	}
 }
