@@ -7,12 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import classSchedule.LoginController;
 import classSchedule.ClassController;
-import classSchedule.MajorController;
 import classSchedule.model.Course;
-import classSchedule.model.Major;
-import classSchedule.model.User;
 
 public class ClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,8 +32,7 @@ public class ClassServlet extends HttpServlet {
 		else
 		{
 			ClassController controller = new ClassController();
-			Course courseTitle = controller.findCoursebyTitle(course);
-			Course courseId = controller.findCoursebyCRN(crn);
+			Course courseTitle = controller.findCoursebyTitleOrCrn(course, crn);
 			
 			if(courseTitle != null)
 			{
@@ -48,10 +43,6 @@ public class ClassServlet extends HttpServlet {
 				//resp.sendRedirect(req.getContextPath() + "/class");
 				
 				return;
-			}
-			else if(courseId != null)
-			{
-				req.getSession().setAttribute(crn, courseId);
 			}
 			else
 			{

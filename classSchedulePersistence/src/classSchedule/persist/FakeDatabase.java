@@ -107,14 +107,28 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	public Course findCoursebyTitle(String courseName) {
-		// TODO Auto-generated method stub
+	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
+		for(Course cour : courseList)
+		{
+			if (cour.getName() == courseName || cour.getCRN() == crn)
+			{
+				Course courseResult = findCourseById(cour.getId());	// Gets current matching course from id in csv
+				return courseResult;
+			}
+		}
+
 		return null;
 	}
-	@Override
-	public Course findCoursebyCRN(String crn) {
-		// TODO Auto-generated method stub
+	private Course findCourseById(int id) {
+		for(Course core: courseList)
+		{
+			if(core.getId() == id)
+			{
+				return core;
+			}
+		}
 		return null;
 	}
+
 
 }
