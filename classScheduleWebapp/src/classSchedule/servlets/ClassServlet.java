@@ -25,6 +25,7 @@ public class ClassServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
+		//Major major = (Major) req.getSession().getAttribute("maj");
 		String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
@@ -33,21 +34,17 @@ public class ClassServlet extends HttpServlet {
 		{
 			error = "Please click a course";
 		}
-		/**
-		 * Use "findCoursesbyMajor()" here to obtain list of Major required Courses.
-		 * Need:
-		 * 		-Current User
-		 * 		-User's Major
-		 * - How are these obtained?
-		 * 
-		 * Should "findCoursesbyMajor()" be part of the CourseController or MajorController?
-		 * Once list of Courses obtained, should be trivial to display.
-		 */
 		else
 		{
 			ClassController controller = new ClassController();
+			//MajorController mControl = new MajorController();
 			Course courseTitle = controller.findCoursebyTitle(course);
 			Course courseId = controller.findCoursebyCRN(crn);
+			//List<Course> courseList = controller.findCoursesbyMajor(major.getId());
+
+			/*for (Course c : courseList) {
+				req.getSession().setAttribute("c", c);
+			}*/
 			
 			if(courseTitle != null)
 			{

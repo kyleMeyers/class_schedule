@@ -14,7 +14,7 @@
 	
 	<div id = "header">
 		<h1>YCP Schedule Planner Prototype</h1>
-		<h2>${major} Course List</h2>
+		<h2>${maj.name} Course List</h2>
 	
 	
 	</div>
@@ -27,6 +27,11 @@
 		
 		<div id = "section">
 			<p> List of classes goes here </p>
+			<c:forEach items = "${courseList}" var = "course">
+				<tr>
+					<td>${c.Name}</td>
+				</tr>
+			</c:forEach>
 		</div>
 	
 	</div>
