@@ -29,5 +29,7 @@ public class ClassServlet extends HttpServlet {
 		
 		ClassController controller = new ClassController();		//make a new controller for each servlet
 		
+		resp.sendRedirect(req.getContextPath() + "/major");
+		
 	}
 }

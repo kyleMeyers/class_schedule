@@ -22,18 +22,29 @@
 	
 	<div>
 		<div id = "nav">
-		
+		<p>Username: <br> ${user.username}</p>
+		<p>Major: <br> ${maj.name}</p>
 		
 		</div>
 		
 		<div id = "section">
-			<ul>
+			<ul >
 				<c:forEach var="courselist" items="${allCourses}">
 					<li>${courselist.prefix}</li>
 				</c:forEach>
+
 			</ul>
 		
 		</div>
+	
+	</div>
+	
+	
+	
+	<div id = "section">
+		<input type="submit" name="submit" value="Click to add a new major"></input>
+		<br>
+		<a href="./major">Add a new major</a>
 	
 	</div>
 	
@@ -43,6 +54,8 @@
 	</div>
 	
 	</div>
+	
+	
 	
 	</body>
 
