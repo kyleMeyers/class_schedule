@@ -1,47 +1,32 @@
 package classSchedule.model;
 
 public class Course {
-	private String Description;
-	private String Prefix;
-	private Section section;
+
+	private int id;
+	private String name;
 	
-	/**
-	 * Constructor
-	 * @param description TBD
-	 * @param prefix Course category (i.e., CHM for Chemistry)
-	 * @param section Section description
-	 */
-	public Course(String description, String prefix, Section section) {
-		this.setDescription(description);
-		this.setPrefix(prefix);
-		this.setSection(section);
+	public Course()
+	{
+		
 	}
 	
-
-	/**
-	 * Getters and Setters for course fields
-	 */
-	public String getDescription() {
-		return Description;
+	public int getId()
+	{
+		return id;
 	}
-
-	public void setDescription(String description) {
-		this.Description = description;
+	
+	public void setId(int id)
+	{
+		this.id = id;
 	}
-
-	public String getPrefix() {
-		return Prefix;
+	
+	public String getName()
+	{
+		return name;
 	}
-
-	public void setPrefix(String prefix) {
-		this.Prefix = prefix;
-	}
-
-	public Section getSection() {
-		return section;
-	}
-
-	public void setSection(Section section) {
-		this.section = section;
+	
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 }

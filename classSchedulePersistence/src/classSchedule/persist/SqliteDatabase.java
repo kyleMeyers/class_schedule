@@ -203,7 +203,7 @@ public class SqliteDatabase implements IDatabase {
 				List<Major> majorList;
 				
 				try {
-					//this gets the csvs from the fakeDatabase, shouldnt be doing that right?
+					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 				} catch (IOException e) {
@@ -256,19 +256,19 @@ public class SqliteDatabase implements IDatabase {
 	
 
 	@Override
+	public Professor findProfessor(String firstname, String lastname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Course findCoursebyTitle(String courseName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Course findCoursebyCRN(int CRN) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Professor findProfessor(String firstname, String lastname) {
+	public Course findCoursebyCRN(int cRN) {
 		// TODO Auto-generated method stub
 		return null;
 	}
