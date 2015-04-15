@@ -33,6 +33,13 @@ public class ClassServlet extends HttpServlet {
 		String crn = req.getParameter("crn");
 		String error = "";
 		
+		// distinguishing between different forms
+		if (req.getParameter("action1") != null) {
+			// action1 was submitted
+			System.out.println("action1 seems to be set");
+			resp.sendRedirect(req.getContextPath() + "/class");
+			return;
+		}
 		
 		if(course == null)
 		{
@@ -51,9 +58,6 @@ public class ClassServlet extends HttpServlet {
 				req.getSession().setAttribute("course", courseTitle);
 				
 				
-				// Redirect to ?? page
-				//resp.sendRedirect(req.getContextPath() + "/class");
-				
 				return;
 
 			}
@@ -70,4 +74,6 @@ public class ClassServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 
 	}
+	
+
 }

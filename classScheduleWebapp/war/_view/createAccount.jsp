@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 	<head>
-		<title>Login page</title>
+		<title>New Account</title>
 		<link rel="stylesheet" type = "text/css" href = "${pageContext.servletContext.contextPath}/CSS/Layout.css">
 		
 	</head>
@@ -20,20 +20,20 @@
 		
 		
 		<div id = "section">
-		<p>Please log in.</p>
+		<p>Please lEnter your login information.</p>
 		<form action="${pageContext.servletContext.contextPath}/login" method="post">
 
 			<p> Username: <input name = "username" type=text value = "${username}"></input></p>
 			<p> Password: <input name = "password" type=password value = "${password}"></input></p>
-			<input type="submit" name="submit" value="Log in"></input>
+			<input type="submit" name="submit" value="Create Account"></input>
 		</form>
 		
-			<a href="${pageContext.servletContext.contextPath}/createAccount">Create new Account</a>
+			
 		</div>
 		
 		<div id = "footer" align = "center">
 			<p>Legal notices go here</p>
-			<p>Sponsored by Dr. Pepper</p>
+			<p>Sponsored by Mr. Pibb</p>
 		</div>
 
 		<c:if test="${! empty error}">

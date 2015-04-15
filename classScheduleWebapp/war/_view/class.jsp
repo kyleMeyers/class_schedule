@@ -32,8 +32,6 @@
 				<c:forEach var="courselist" items="${allCourses}">
 					<li>${courselist.name}</li>
 				</c:forEach>
-				
-
 			</ul>
 		
 		</div>
@@ -43,11 +41,22 @@
 	
 	
 	<div id = "section">
-		<input type="submit" name="submit" value="Click to add a new major"></input>
-		<br>
-		<a href="./major">Add a new major</a>
+	  <a href="${pageContext.servletContext.contextPath}/major">Add a new major</a> <br>
+	  <a href="${pageContext.servletContext.contextPath}/somethingelse">Some other kind of action</a>
 	
 	</div>
+	
+	<form action="${pageContext.servletContext.contextPath}/class" method="Post">
+		<input type="submit" name="action1" value="Click to add a new major"></input>
+		
+		
+	</form>
+	
+	<form action="${pageContext.servletContext.contextPath}/class" method="Post">
+		<input type="submit" name="action2" value="Click to add a new major"></input>
+		
+		
+	</form>
 	
 	<div id = "footer">
 		<h6> I'm writing code</h6>
