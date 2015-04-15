@@ -129,6 +129,11 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
+	@Override
+	public User newUser(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

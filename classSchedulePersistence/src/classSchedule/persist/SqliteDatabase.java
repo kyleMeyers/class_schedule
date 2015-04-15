@@ -134,6 +134,13 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+
+	@Override
+	public User newUser(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
@@ -284,7 +291,7 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertUser.executeBatch();
 					
-					insertMajor = conn.prepareStatement("Insert into majors values (?, ?)");
+					insertMajor = conn.prepareStatement("insert into majors values (?, ?)");
 					for(Major maj : majorList)
 					{
 						insertMajor.setInt(1, maj.getId());
@@ -293,7 +300,7 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertMajor.executeBatch();
 					
-					insertCourse = conn.prepareStatement("Insert into courses values (?, ?, ?)");
+					insertCourse = conn.prepareStatement("insert into courses values (?, ?, ?)");
 					for(Course cour: courseList)
 					{
 						insertCourse.setInt(1, cour.getId());
@@ -360,6 +367,7 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
+
 
 
 
