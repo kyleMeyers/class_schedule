@@ -2,8 +2,8 @@ package classSchedule.model;
 
 public class Major {
 	
-	private String name;
 	private int id;
+	private String name;
 	//private List<Course> requirements;
 	
 	public Major ()

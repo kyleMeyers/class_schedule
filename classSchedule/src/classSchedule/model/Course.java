@@ -1,8 +1,13 @@
 package classSchedule.model;
 
 public class Course {
-
+	
+	/**
+	 * Need a way to designate Course as belonging to
+	 * a Major (possibly more than 1 Major).
+	 */
 	private int id;
+	//private String courseID;
 	private String crn;
 	private String name;
 	
@@ -48,4 +53,12 @@ public class Course {
 	public void setID(int iD) {
 		this.id = iD;
 	}
+
+	/*public String getCourseID() {
+		return courseID;
+	}
+
+	public void setCourseID(String courseID) {
+		this.courseID = courseID;
+	}*/
 }

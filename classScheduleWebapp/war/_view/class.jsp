@@ -15,7 +15,7 @@
 	<div id = "container">
 	<div id = "header">
 		<h1>YCP Schedule Planner Prototype2</h1>
-		<h2>${major} Course List</h2>	
+		<h2>${maj.name} Course List</h2>	
 	
 	</div>
 	
