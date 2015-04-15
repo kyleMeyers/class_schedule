@@ -20,8 +20,8 @@
 		
 		
 		<div id = "section">
-		<p>Please lEnter your login information.</p>
-		<form action="${pageContext.servletContext.contextPath}/login" method="post">
+		<p>Please enter your login information.</p>
+		<form action="${pageContext.servletContext.contextPath}/createAccount" method="post">
 
 			<p> Username: <input name = "username" type=text value = "${username}"></input></p>
 			<p> Password: <input name = "password" type=password value = "${password}"></input></p>
