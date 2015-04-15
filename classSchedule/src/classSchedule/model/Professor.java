@@ -3,6 +3,7 @@ package classSchedule.model;
 public class Professor {
 	private String firstName;
 	private String lastName;
+	private int id;
 	
 	public Professor()
 	{
@@ -36,6 +37,12 @@ public class Professor {
 		this.lastName = lastName;
 	}
 	
-
+	public int getID() {
+		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
 
 }

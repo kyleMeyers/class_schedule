@@ -293,6 +293,7 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
@@ -317,6 +318,13 @@ public class SqliteDatabase implements IDatabase {
 							")");
 					stmt3.executeUpdate();
 					
+					stmt4 = conn.prepareStatement(
+							"create table professors (" +
+							"   id integer primary key, " +
+							"   firstName varchar(20)," +
+							"   lastName varchar(20)" +
+							")");
+					stmt4.executeUpdate();
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
