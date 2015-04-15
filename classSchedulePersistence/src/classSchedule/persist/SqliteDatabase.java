@@ -190,12 +190,15 @@ public class SqliteDatabase implements IDatabase {
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
 					
+					//do update if inserting or deleting anything
+					//do executeQuery otherwise
 					stmt.executeUpdate();
 					
 					genKeys = stmt.getGeneratedKeys();
 					genKeys.next();
 					user.setId(genKeys.getInt(1));
 					
+					//should usually do a print statement for debugging
 					System.out.println("Successfully inserted user with id=" + user.getId());
 					
 					return user;
