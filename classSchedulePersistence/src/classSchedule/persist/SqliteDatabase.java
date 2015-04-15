@@ -137,8 +137,40 @@ public class SqliteDatabase implements IDatabase {
 
 	@Override
 	public User newUser(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				User user = new User();
+				
+				user.setUsername(username);
+				user.setPassword(password);
+				
+				PreparedStatement stmt = null;
+				ResultSet genKeys = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"insert into users (username, password) values (?, ?)",
+							PreparedStatement.RETURN_GENERATED_KEYS
+					);
+					stmt.setString(1, user.getUsername());
+					stmt.setString(2, user.getPassword());
+					
+					stmt.executeUpdate();
+					
+					genKeys = stmt.getGeneratedKeys();
+					genKeys.next();
+					user.setId(genKeys.getInt(1));
+					
+					System.out.println("Successfully inserted user with id=" + user.getId());
+					
+					return user;
+				} finally {
+					DBUtil.closeQuietly(genKeys);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
