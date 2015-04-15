@@ -169,6 +169,7 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+	//skeleton code for adding other things i.e. major
 	@Override
 	public User newUser(String username, String password) {
 		return executeTransaction(new Transaction<User>() {
@@ -187,6 +188,7 @@ public class SqliteDatabase implements IDatabase {
 							"insert into users (username, password) values (?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
+					//fields you want to change, NOT id
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
 					
