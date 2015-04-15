@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 																	//can be accessed by any servlet now
 				
 				// Redirect to major page
-				resp.sendRedirect(req.getContextPath() + "/class");		//after a successful session on a servlet you should
+				resp.sendRedirect(req.getContextPath() + "/major");		//after a successful session on a servlet you should
 																		//redirect the page to another servlet. This case is schedule
 				return;
 			} else {

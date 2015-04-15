@@ -40,7 +40,7 @@ public class createAccountServlet extends HttpServlet {
 
 			User user = controller.findUser(username, password);	//find the user from the input
 			if (user == null) {										//checks to make sure it is a valid user
-				// Successful login!
+				
 				
 				// Add user to session
 				user = new User();
