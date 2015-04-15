@@ -136,9 +136,75 @@ public class SqliteDatabase implements IDatabase {
 	
 
 	@Override
+	public Professor findProfessor(String firstname, String lastname) {
+		return executeTransaction(new Transaction<Professor>() {
+			@Override
+			public Professor execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select professors.* " +			//the entire user tuple
+							"  from professors " +
+							" where professors.firstname = ? and professors.lastname = ?"
+					);
+					stmt.setString(1, firstname);
+					stmt.setString(2, lastname);
+					
+					Professor result = null;
+					
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) { 
+						result = new Professor();
+						loadProfessor(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual professor or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
 	public User newUser(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				User user = new User();
+				
+				user.setUsername(username);
+				user.setPassword(password);
+				
+				PreparedStatement stmt = null;
+				ResultSet genKeys = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"insert into users (username, password) values (?, ?)",
+							PreparedStatement.RETURN_GENERATED_KEYS
+					);
+					stmt.setString(1, user.getUsername());
+					stmt.setString(2, user.getPassword());
+					
+					stmt.executeUpdate();
+					
+					genKeys = stmt.getGeneratedKeys();
+					genKeys.next();
+					user.setId(genKeys.getInt(1));
+					
+					System.out.println("Successfully inserted user with id=" + user.getId());
+					
+					return user;
+				} finally {
+					DBUtil.closeQuietly(genKeys);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -334,39 +400,6 @@ public class SqliteDatabase implements IDatabase {
 
 	
 
-	@Override
-	public Professor findProfessor(String firstname, String lastname) {
-		return executeTransaction(new Transaction<Professor>() {
-			@Override
-			public Professor execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
-				
-				try {
-					stmt = conn.prepareStatement(
-							"select professors.* " +			//the entire user tuple
-							"  from professors " +
-							" where professors.firstname = ? and professors.lastname = ?"
-					);
-					stmt.setString(1, firstname);
-					stmt.setString(2, lastname);
-					
-					Professor result = null;
-					
-					resultSet = stmt.executeQuery();
-					if (resultSet.next()) { 
-						result = new Professor();
-						loadProfessor(result, resultSet, 1);
-					}
-					
-					return result;			//returns an actual professor or null if there is not one
-				} finally {
-					DBUtil.closeQuietly(resultSet);
-					DBUtil.closeQuietly(stmt);
-				}
-			}
-		});
-	}
 
 
 
