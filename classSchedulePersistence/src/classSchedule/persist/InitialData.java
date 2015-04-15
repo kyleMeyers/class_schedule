@@ -7,6 +7,7 @@ import java.util.List;
 
 import classSchedule.model.Course;
 import classSchedule.model.Major;
+import classSchedule.model.Professor;
 import classSchedule.model.User;
 
 public class InitialData {
@@ -79,6 +80,28 @@ public class InitialData {
 				return courseList;
 			} finally {
 				readCourses.close();
+			}
+		}
+		public static List<Professor> getProfessors() throws IOException{
+			List<Professor> professorList = new ArrayList<Professor>();
+			ReadCSV readProfessors = new ReadCSV("professors.csv");
+			
+			try {
+				while (true) {
+					List<String> tuple = readProfessors.next();
+					if (tuple == null) {
+						break;
+					}
+					Iterator<String> i = tuple.iterator();
+					Professor professor = new Professor();
+					professor.setID(Integer.parseInt(i.next()));
+					professor.setFirstName(i.next());
+					professor.setLastName(i.next());
+					professorList.add(professor);
+				}
+				return professorList;		
+			} finally {
+				readProfessors.close();
 			}
 		}
 	}

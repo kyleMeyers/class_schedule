@@ -298,6 +298,7 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
@@ -322,11 +323,19 @@ public class SqliteDatabase implements IDatabase {
 							")");
 					stmt3.executeUpdate();
 					
+					stmt4 = conn.prepareStatement(
+							"create table professors (" +
+							"   id integer primary key, " +
+							"   firstName varchar(20)," +
+							"   lastName varchar(20)" +
+							")");
+					stmt4.executeUpdate();
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
 					DBUtil.closeQuietly(stmt3);
+					DBUtil.closeQuietly(stmt4);
 				}
 			}
 		});
@@ -338,12 +347,14 @@ public class SqliteDatabase implements IDatabase {
 				List<User> userList;
 				List<Major> majorList;
 				List<Course> courseList;
+				List<Professor> professorList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 					courseList = InitialData.getCourses();
+					professorList = InitialData.getProfessors();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -351,6 +362,7 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertUser = null;
 				PreparedStatement insertMajor = null;
 				PreparedStatement insertCourse = null;
+				PreparedStatement insertProfessor = null;
 				
 				try {
 					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
@@ -381,11 +393,22 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertCourse.executeBatch();
 					
+					insertProfessor = conn.prepareStatement("insert into professors values (?, ?, ?)");
+					for(Professor prof: professorList)
+					{
+						insertProfessor.setInt(1, prof.getID());
+						insertProfessor.setString(2,  prof.getFirstName());
+						insertProfessor.setString(3, prof.getLastName());
+						insertProfessor.addBatch();
+					}
+					insertProfessor.executeBatch();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
 					DBUtil.closeQuietly(insertMajor);
 					DBUtil.closeQuietly(insertCourse);
+					DBUtil.closeQuietly(insertProfessor);
 				}
 			}
 		});
