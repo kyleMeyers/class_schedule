@@ -134,6 +134,13 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+
+	@Override
+	public User newUser(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
@@ -327,6 +334,7 @@ public class SqliteDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 
