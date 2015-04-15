@@ -44,6 +44,7 @@ public class MajorServlet extends HttpServlet {
 				req.getSession().setAttribute("maj", maj);
 				//req.getSession().setAttribute("allMajors", allMajors);
 				
+				
 				// Redirect to schedule page
 				resp.sendRedirect(req.getContextPath() + "/class");
 				
