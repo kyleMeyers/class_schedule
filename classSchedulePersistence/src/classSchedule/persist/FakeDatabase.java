@@ -92,18 +92,6 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
-	
-	@Override
-	public List<Course> findCoursesbyMajor(int ID) {
-		List<Course> results = new ArrayList<Course>();
-		for (Course c : courseList)
-		{
-			if (c.getID() == ID) {
-				results.add(c);
-			}
-		}
-		return results;
-	}
 
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
@@ -119,10 +107,24 @@ public class FakeDatabase implements IDatabase {
 	
 	// Returns the single course specified (by Name)
 	@Override
-	public Course findCoursebyTitle(String courseName) {
-		for (Course c : courseList) {
-			if (c.getName().equalsIgnoreCase(courseName)) {
-				return c;
+	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
+		for(Course cour : courseList)
+		{
+			if (cour.getName() == courseName || cour.getCRN() == crn)
+			{
+				Course courseResult = findCourseById(cour.getId());	// Gets current matching course from id in csv
+				return courseResult;
+			}
+		}
+
+		return null;
+	}
+	private Course findCourseById(int id) {
+		for(Course core: courseList)
+		{
+			if(core.getId() == id)
+			{
+				return core;
 			}
 		}
 		return null;
@@ -130,12 +132,8 @@ public class FakeDatabase implements IDatabase {
 	
 	// Returns the single course specified (by CRN)
 	@Override
-	public Course findCoursebyCRN(String crn) {
-		for (Course c : courseList) {
-			if (c.getCRN().equalsIgnoreCase(crn)) {
-				return c;
-			}
-		}
+	public User newUser(String username, String password) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

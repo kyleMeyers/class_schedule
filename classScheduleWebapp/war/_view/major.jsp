@@ -17,6 +17,17 @@
 	<div id = "header">
 		<h1> YCP Schedule Planner Prototype</h1>
 	</div>
+	<div id = "nav">
+	
+	<p id = "majorlist"></p>
+	
+	<ul>
+	<c:forEach var="majorlist" items="${allMajors}">
+		<li>${majorlist.name}</li>
+	</c:forEach>
+	
+	</ul>
+	</div>
 	
 	<div id = "section">
 		<p>Hello ${user.username} please enter a Major</p>
@@ -44,5 +55,7 @@
 	</div>
 	
 	</div>
+	
+
 	</body>
 </html>

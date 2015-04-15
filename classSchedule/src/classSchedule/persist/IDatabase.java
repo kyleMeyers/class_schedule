@@ -4,10 +4,6 @@ package classSchedule.persist;
 import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
-
-import java.util.List;
-
-import classSchedule.model.Major;
 import classSchedule.model.User;
 
 public interface IDatabase {
@@ -22,18 +18,15 @@ public interface IDatabase {
 	 *         or null if there is no such user
 	 */
 	public User findUser(String username, String password);
-	
-	public Course findCoursebyTitle(String courseName);
-	
-	public List<Course> findCoursesbyMajor(int ID);
 
 	public Professor findProfessor(String firstname, String lastname);
 	
 	//TODO: make a new User login function and then have it insert that new user into the database
+	public User newUser(String username, String password);
 	
 	public Major findMajor(String major);
 
-	public Course findCoursebyCRN(String crn);
+	public Course findCoursebyTitleOrCrn(String courseName, String crn);
 
 
 }

@@ -22,20 +22,7 @@
 		<div id = "section">
 		<p>Please log in.</p>
 		<form action="${pageContext.servletContext.contextPath}/login" method="post">
-<%--			<table>
-				<tr>
-					<td>Username:</td>
-					<td>
-						<input name="username" type="text" value="${username}"></input>
-					</td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td>
-						<input name="password" type="password" value ="${password}"></input>
-					</td>
-				</tr>
-			</table> --%>
+
 			<p> Username: <input name = "username" type=text value = "${username}"></input></p>
 			<p> Password: <input name = "password" type=password value = "${password}"></input></p>
 			<input type="submit" name="submit" value="Log in"></input>

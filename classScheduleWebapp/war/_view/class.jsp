@@ -12,27 +12,36 @@
 	
 	<body>
 	
+	<div id = "container">
 	<div id = "header">
-		<h1>YCP Schedule Planner Prototype</h1>
-		<h2>${maj.name} Course List</h2>
-	
+		<h1>YCP Schedule Planner Prototype2</h1>
+		<h2>${major} Course List</h2>	
 	
 	</div>
 	
 	<div>
 		<div id = "nav">
-		
+		<p>Username: <br> ${user.username}</p>
+		<p>Major: <br> ${maj.name}</p>
 		
 		</div>
 		
 		<div id = "section">
-			<p> List of classes goes here </p>
-			<c:forEach items = "${courseList}" var = "course">
-				<tr>
-					<td>${c.Name}</td>
-				</tr>
-			</c:forEach>
+			<ul >
+				<c:forEach var="courselist" items="${allCourses}">
+					<li>${courselist.name}</li>
+				</c:forEach>
+			</ul>
 		</div>
+	
+	</div>
+	
+	
+	
+	<div id = "section">
+		<input type="submit" name="submit" value="Click to add a new major"></input>
+		<br>
+		<a href="./major">Add a new major</a>
 	
 	</div>
 	
@@ -40,6 +49,9 @@
 		<h6> I'm writing code</h6>
 	
 	</div>
+	
+	</div>
+	
 	
 	
 	</body>

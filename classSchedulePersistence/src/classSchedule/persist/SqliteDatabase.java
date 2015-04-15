@@ -98,6 +98,118 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+
+	@Override
+	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
+		
+		return executeTransaction(new Transaction<Course>() {
+			@Override
+			public Course execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select courses.* " +			//the entire major tuple
+							"  from courses " +
+							" where courses.name = ? or courses.crn = ?"
+					);
+					stmt.setString(1, courseName);
+					stmt.setString(2,crn);
+					
+					Course result = null;
+					
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) { // query will produce at most 1 course or null if it does not exist
+						result = new Course();
+						loadCourse(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual course or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+
+	@Override
+	public Professor findProfessor(String firstname, String lastname) {
+		return executeTransaction(new Transaction<Professor>() {
+			@Override
+			public Professor execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select professors.* " +			//the entire user tuple
+							"  from professors " +
+							" where professors.firstname = ? and professors.lastname = ?"
+					);
+					stmt.setString(1, firstname);
+					stmt.setString(2, lastname);
+					
+					Professor result = null;
+					
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) { 
+						result = new Professor();
+						loadProfessor(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual professor or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public User newUser(String username, String password) {
+		return executeTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				User user = new User();
+				
+				user.setUsername(username);
+				user.setPassword(password);
+				
+				PreparedStatement stmt = null;
+				ResultSet genKeys = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"insert into users (username, password) values (?, ?)",
+							PreparedStatement.RETURN_GENERATED_KEYS
+					);
+					stmt.setString(1, user.getUsername());
+					stmt.setString(2, user.getPassword());
+					
+					//do update if inserting or deleting anything
+					//do executeQuery otherwise
+					stmt.executeUpdate();
+					
+					genKeys = stmt.getGeneratedKeys();
+					genKeys.next();
+					user.setId(genKeys.getInt(1));
+					
+					//should usually do a print statement for debugging
+					System.out.println("Successfully inserted user with id=" + user.getId());
+					
+					return user;
+				} finally {
+					DBUtil.closeQuietly(genKeys);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
@@ -165,12 +277,25 @@ public class SqliteDatabase implements IDatabase {
 		result.setName(resultSet.getString(i++));
 		
 	}
+
+	private void loadProfessor(Professor result, ResultSet resultSet, int i) throws SQLException{
+		result.setFirstName(resultSet.getString(i++));
+		result.setLastName(resultSet.getString(i++));
+	}
+	
+	private void loadCourse(Course result, ResultSet resultSet, int i) throws SQLException{
+		result.setId(resultSet.getInt(i++));
+		result.setCRN(resultSet.getString(i++));
+		result.setName(resultSet.getString(i++));	
+	}
+	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
@@ -187,10 +312,19 @@ public class SqliteDatabase implements IDatabase {
 							")");
 					stmt2.executeUpdate();
 					
+					stmt3 = conn.prepareStatement(
+							"create table courses (" +
+							"	id integer primary key," +
+							"	crn varchar(10)," +
+							"	courseName varchar(40)" +
+							")");
+					stmt3.executeUpdate();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
+					DBUtil.closeQuietly(stmt3);
 				}
 			}
 		});
@@ -201,17 +335,20 @@ public class SqliteDatabase implements IDatabase {
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> userList;
 				List<Major> majorList;
+				List<Course> courseList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
+					courseList = InitialData.getCourses();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
 				PreparedStatement insertUser = null;
 				PreparedStatement insertMajor = null;
+				PreparedStatement insertCourse = null;
 				
 				try {
 					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
@@ -223,7 +360,7 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertUser.executeBatch();
 					
-					insertMajor = conn.prepareStatement("Insert into majors values (?, ?)");
+					insertMajor = conn.prepareStatement("insert into majors values (?, ?)");
 					for(Major maj : majorList)
 					{
 						insertMajor.setInt(1, maj.getId());
@@ -232,10 +369,21 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertMajor.executeBatch();
 					
+					insertCourse = conn.prepareStatement("insert into courses values (?, ?, ?)");
+					for(Course cour: courseList)
+					{
+						insertCourse.setInt(1, cour.getId());
+						insertCourse.setString(2, cour.getCRN());
+						insertCourse.setString(3, cour.getName());
+						insertCourse.addBatch();
+					}
+					insertCourse.executeBatch();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
 					DBUtil.closeQuietly(insertMajor);
+					DBUtil.closeQuietly(insertCourse);
 				}
 			}
 		});
@@ -255,23 +403,9 @@ public class SqliteDatabase implements IDatabase {
 
 	
 
-	@Override
-	public Professor findProfessor(String firstname, String lastname) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Course findCoursebyTitle(String courseName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Course findCoursebyCRN(String crn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 }
