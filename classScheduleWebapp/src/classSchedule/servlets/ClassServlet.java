@@ -6,9 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 import classSchedule.ClassController;
 import classSchedule.model.Course;
+
+import classSchedule.model.Major;
+import classSchedule.model.User;
+import classSchedule.persist.InitialData;
+
 
 public class ClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -16,6 +23,8 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		List <Course> allCourses = InitialData.getCourses();
+		req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 	
@@ -24,11 +33,13 @@ public class ClassServlet extends HttpServlet {
 		String crn = req.getParameter("crn");
 		String error = "";
 		
+		
 		if(course == null)
 		{
 			error = "Please click a course";
 		}
 		
+
 		else
 		{
 			ClassController controller = new ClassController();
@@ -39,10 +50,12 @@ public class ClassServlet extends HttpServlet {
 				//Real course
 				req.getSession().setAttribute("course", courseTitle);
 				
+				
 				// Redirect to ?? page
 				//resp.sendRedirect(req.getContextPath() + "/class");
 				
 				return;
+
 			}
 			else
 			{
@@ -55,5 +68,6 @@ public class ClassServlet extends HttpServlet {
 		req.setAttribute("error", error);
 		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
+
 	}
 }
