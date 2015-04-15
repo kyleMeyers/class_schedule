@@ -347,6 +347,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
+					//still need to add professor list
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 					courseList = InitialData.getCourses();
