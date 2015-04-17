@@ -344,13 +344,14 @@ public class SqliteDatabase implements IDatabase {
 				List<User> userList;
 				List<Major> majorList;
 				List<Course> courseList;
+				List<Professor> profList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
-					//still need to add professor list
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 					courseList = InitialData.getCourses();
+					profList = InitialData.getProfessors();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -358,6 +359,7 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertUser = null;
 				PreparedStatement insertMajor = null;
 				PreparedStatement insertCourse = null;
+				PreparedStatement insertProfessor = null;
 				
 				try {
 					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
@@ -388,11 +390,22 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertCourse.executeBatch();
 					
+					insertProfessor = conn.prepareStatement("insert into professors values (?, ?, ?)");
+					for (Professor p : profList)
+					{
+						insertProfessor.setInt(1, p.getID());
+						insertProfessor.setString(2, p.getFirstName());
+						insertProfessor.setString(3, p.getLastName());
+						insertProfessor.addBatch();
+					}
+					insertProfessor.executeBatch();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
 					DBUtil.closeQuietly(insertMajor);
 					DBUtil.closeQuietly(insertCourse);
+					DBUtil.closeQuietly(insertProfessor);
 				}
 			}
 		});
