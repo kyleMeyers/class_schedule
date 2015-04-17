@@ -24,6 +24,7 @@ public class createAccountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.getRequestDispatcher("/_view/createAccount.jsp").forward(req, resp);
+		//Hello
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
