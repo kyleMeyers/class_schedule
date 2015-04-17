@@ -33,6 +33,7 @@ public class SqliteDatabase implements IDatabase {
 	//TODO: Add an sql database entry for finding the user from the login information
 	@Override
 	public User findUser(String username, String password) {
+		// Trying to log in fails here! User table never created
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -101,7 +102,6 @@ public class SqliteDatabase implements IDatabase {
 
 	@Override
 	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
-		
 		return executeTransaction(new Transaction<Course>() {
 			@Override
 			public Course execute(Connection conn) throws SQLException {
@@ -145,7 +145,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select professors.* " +			//the entire user tuple
+							"select professors.* " +			//the entire prof tuple
 							"  from professors " +
 							" where professors.firstname = ? and professors.lastname = ?"
 					);
