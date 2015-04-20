@@ -27,9 +27,7 @@
 			<p> Password: <input name = "password" type=password value = "${password}"></input></p>
 			<input type="submit" name="submit" value="Log in"></input>
 		</form>
-			<a href="${pageContext.servletContext.contextPath}/createAccount">Create new Account</a>
 		</div>
-
 		<div id = "footer" align = "center">
 			<p>Legal notices go here</p>
 			<p>Sponsored by Dr. Pepper</p>
