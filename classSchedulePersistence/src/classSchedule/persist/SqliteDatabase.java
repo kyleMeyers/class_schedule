@@ -326,8 +326,8 @@ public class SqliteDatabase implements IDatabase {
 					stmt4 = conn.prepareStatement(
 							"create table professors (" +
 							"   id integer primary key, " +
-							"   firstName varchar(20)," +
-							"   lastName varchar(20)" +
+							"   firstname varchar(20)," +
+							"   lastname varchar(20)" +
 							")");
 					stmt4.executeUpdate();
 					return true;
