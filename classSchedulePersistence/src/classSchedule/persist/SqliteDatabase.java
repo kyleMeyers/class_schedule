@@ -14,7 +14,7 @@ import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
 
-
+//hi i am a useless comment
 
 public class SqliteDatabase implements IDatabase {
 	static {
@@ -181,7 +181,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
-				
+				//
 				try {
 					stmt = conn.prepareStatement(
 							"insert into users (username, password) values (?, ?)",
