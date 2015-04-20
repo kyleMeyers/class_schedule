@@ -66,7 +66,7 @@ public class InitialData {
 	//reads in the courses in the csv spreadsheet for the fakeDatabase
 	public static List<Course> getCourses() throws IOException{
 		List<Course> courseList = new ArrayList<Course>();
-		ReadCSV readCourses = new ReadCSV("Courses.csv");
+		ReadCSV readCourses = new ReadCSV("classes.csv");
 
 		try {
 			while (true) {
@@ -77,7 +77,7 @@ public class InitialData {
 				Iterator<String> i = tuple.iterator();
 				Course course = new Course();
 				course.setId(Integer.parseInt(i.next()));
-				course.setCourseID(i.next());
+				//course.setCourseID(i.next());
 				course.setCRN(i.next());
 				course.setName(i.next());
 				courseList.add(course);
