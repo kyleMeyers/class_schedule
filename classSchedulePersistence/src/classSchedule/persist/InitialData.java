@@ -53,6 +53,7 @@ public class InitialData {
 				Major major = new Major();
 				major.setId(Integer.parseInt(i.next()));
 				major.setName(i.next());
+				major.setMajorID(i.next());;
 				majorList.add(major);
 			}
 			return majorList;
@@ -64,7 +65,7 @@ public class InitialData {
 	//reads in the courses in the csv spreadsheet for the fakeDatabase
 	public static List<Course> getCourses() throws IOException{
 		List<Course> courseList = new ArrayList<Course>();
-		ReadCSV readCourses = new ReadCSV("classes.csv");
+		ReadCSV readCourses = new ReadCSV("Courses.csv");
 
 		try {
 			while (true) {
@@ -75,6 +76,7 @@ public class InitialData {
 				Iterator<String> i = tuple.iterator();
 				Course course = new Course();
 				course.setId(Integer.parseInt(i.next()));
+				course.setCourseID(i.next());
 				course.setCRN(i.next());
 				course.setName(i.next());
 				courseList.add(course);
