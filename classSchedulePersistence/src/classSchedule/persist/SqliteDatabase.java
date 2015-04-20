@@ -14,7 +14,7 @@ import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
 
-
+//hi i am a useless comment
 
 public class SqliteDatabase implements IDatabase {
 	static {
