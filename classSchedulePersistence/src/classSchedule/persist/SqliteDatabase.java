@@ -181,7 +181,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
-				
+				//
 				try {
 					stmt = conn.prepareStatement(
 							"insert into users (username, password) values (?, ?)",
