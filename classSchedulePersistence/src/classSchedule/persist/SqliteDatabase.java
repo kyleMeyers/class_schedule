@@ -14,7 +14,7 @@ import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
 
-//hi i am a useless comment
+
 
 public class SqliteDatabase implements IDatabase {
 	static {
@@ -34,6 +34,7 @@ public class SqliteDatabase implements IDatabase {
 	//TODO: Add an sql database entry for finding the user from the login information
 	@Override
 	public User findUser(String username, String password) {
+		// Trying to log in fails here! User table never created
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -102,7 +103,6 @@ public class SqliteDatabase implements IDatabase {
 
 	@Override
 	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
-		
 		return executeTransaction(new Transaction<Course>() {
 			@Override
 			public Course execute(Connection conn) throws SQLException {
@@ -146,7 +146,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select professors.* " +			//the entire user tuple
+							"select professors.* " +			//the entire prof tuple
 							"  from professors " +
 							" where professors.firstname = ? and professors.lastname = ?"
 					);
@@ -169,10 +169,8 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
-	//skeleton code for adding other things i.e. major
 	@Override
-	public User newUser(String username, String password) {
+	public User newUser(String username, String password, String maj) {
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -180,18 +178,19 @@ public class SqliteDatabase implements IDatabase {
 				
 				user.setUsername(username);
 				user.setPassword(password);
+				user.setMajor(maj);
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into users (username, password) values (?, ?)",
+							"insert into users (username, password, major) values (?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
-					//fields you want to change, NOT id
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
+					stmt.setString(3, user.getMajor());
 					
 					//do update if inserting or deleting anything
 					//do executeQuery otherwise
@@ -261,7 +260,7 @@ public class SqliteDatabase implements IDatabase {
 		//connects to the database from the home directory for the WebApp folder
 		Connection conn = DriverManager.getConnection("jdbc:sqlite:" + home + "/classSchedule.db");	
 		
-		// Set autocommit to false to allow multiple the execution of
+		// Set autocommit to false to allow the execution of
 		// multiple queries/statements as part of the same transaction.
 		conn.setAutoCommit(false);
 		
@@ -319,7 +318,8 @@ public class SqliteDatabase implements IDatabase {
 							"create table users (" +
 							"    id integer primary key," +
 							"    username varchar(25)," +
-							"    password varchar(50)" +
+							"    password varchar(50)," +
+							"	 maj varchar(40)"	+
 							")");
 					stmt1.executeUpdate();
 					
@@ -334,15 +334,15 @@ public class SqliteDatabase implements IDatabase {
 							"create table courses (" +
 							"	id integer primary key," +
 							"	crn varchar(10)," +
-							"	courseName varchar(40)" +
+							"	name varchar(40)" +
 							")");
 					stmt3.executeUpdate();
 					
 					stmt4 = conn.prepareStatement(
 							"create table professors (" +
 							"   id integer primary key, " +
-							"   firstName varchar(20)," +
-							"   lastName varchar(20)" +
+							"   firstname varchar(20)," +
+							"   lastname varchar(20)" +
 							")");
 					stmt4.executeUpdate();
 					
@@ -383,7 +383,7 @@ public class SqliteDatabase implements IDatabase {
 				List<Course> courseList;
 				List<Professor> professorList;
 				List<IdRelation> majorCourseList;
-				List<IdRelation> userMajorList;	
+				List<IdRelation> userMajorList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
@@ -405,11 +405,12 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertUserMajor = null;
 				
 				try {
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
 					for (User use : userList) {
 						insertUser.setInt(1, use.getId());
 						insertUser.setString(2, use.getUsername());
 						insertUser.setString(3, use.getPassword());
+						insertUser.setString(4, use.getMajor());
 						insertUser.addBatch();
 					}
 					insertUser.executeBatch();
@@ -434,11 +435,11 @@ public class SqliteDatabase implements IDatabase {
 					insertCourse.executeBatch();
 					
 					insertProfessor = conn.prepareStatement("insert into professors values (?, ?, ?)");
-					for(Professor prof: professorList)
+					for (Professor p : professorList)
 					{
-						insertProfessor.setInt(1, prof.getID());
-						insertProfessor.setString(2,  prof.getFirstName());
-						insertProfessor.setString(3, prof.getLastName());
+						insertProfessor.setInt(1, p.getID());
+						insertProfessor.setString(2, p.getFirstName());
+						insertProfessor.setString(3, p.getLastName());
 						insertProfessor.addBatch();
 					}
 					insertProfessor.executeBatch();
