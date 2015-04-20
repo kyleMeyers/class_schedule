@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
@@ -102,6 +103,50 @@ public class InitialData {
 				return professorList;		
 			} finally {
 				readProfessors.close();
+			}
+		}
+		
+		public static List<IdRelation> getMajorCourses() throws IOException{
+			List<IdRelation> majorCourseList = new ArrayList<IdRelation>();
+			ReadCSV readMajorCourses = new ReadCSV("majorCourses.csv");
+			
+			try {
+				while (true) {
+					List<String> tuple = readMajorCourses.next();
+					if (tuple == null) {
+						break;
+					}
+					Iterator<String> i = tuple.iterator();
+					IdRelation majorCourse = new IdRelation();
+					majorCourse.setId1(Integer.parseInt(i.next()));
+					majorCourse.setId2(Integer.parseInt(i.next()));
+					majorCourseList.add(majorCourse);
+				}
+				return majorCourseList;		
+			} finally {
+				readMajorCourses.close();
+			}
+		}
+		
+		public static List<IdRelation> getUserMajors() throws IOException{
+			List<IdRelation> userMajorList = new ArrayList<IdRelation>();
+			ReadCSV readUserMajors = new ReadCSV("userMajors.csv");
+			
+			try {
+				while (true) {
+					List<String> tuple = readUserMajors.next();
+					if (tuple == null) {
+						break;
+					}
+					Iterator<String> i = tuple.iterator();
+					IdRelation userMajor = new IdRelation();
+					userMajor.setId1(Integer.parseInt(i.next()));
+					userMajor.setId2(Integer.parseInt(i.next()));
+					userMajorList.add(userMajor);
+				}
+				return userMajorList;		
+			} finally {
+				readUserMajors.close();
 			}
 		}
 	}
