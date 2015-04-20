@@ -7,7 +7,7 @@ public class Course {
 	 * a Major (possibly more than 1 Major).
 	 */
 	private int id;
-	//private String courseID;
+	private String courseID;
 	private String crn;
 	private String name;
 	
@@ -54,11 +54,11 @@ public class Course {
 		this.id = iD;
 	}
 
-	/*public String getCourseID() {
+	public String getCourseID() {
 		return courseID;
 	}
 
 	public void setCourseID(String courseID) {
 		this.courseID = courseID;
-	}*/
+	}
 }

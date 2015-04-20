@@ -14,7 +14,7 @@ import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
 
-//hi i am a useless comment
+
 
 public class SqliteDatabase implements IDatabase {
 	static {
@@ -170,7 +170,7 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	@Override
-	public User newUser(String username, String password) {
+	public User newUser(String username, String password, String maj) {
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -178,17 +178,19 @@ public class SqliteDatabase implements IDatabase {
 				
 				user.setUsername(username);
 				user.setPassword(password);
+				user.setMajor(maj);
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
-				//
+				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into users (username, password) values (?, ?)",
+							"insert into users (username, password, major) values (?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
+					stmt.setString(3, user.getMajor());
 					
 					//do update if inserting or deleting anything
 					//do executeQuery otherwise
@@ -316,7 +318,8 @@ public class SqliteDatabase implements IDatabase {
 							"create table users (" +
 							"    id integer primary key," +
 							"    username varchar(25)," +
-							"    password varchar(50)" +
+							"    password varchar(50)," +
+							"	 maj varchar(40)"	+
 							")");
 					stmt1.executeUpdate();
 					
@@ -380,19 +383,16 @@ public class SqliteDatabase implements IDatabase {
 				List<Course> courseList;
 				List<Professor> professorList;
 				List<IdRelation> majorCourseList;
-				List<IdRelation> userMajorList;	
-
+				List<IdRelation> userMajorList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 					courseList = InitialData.getCourses();
-
 					professorList = InitialData.getProfessors();
 					majorCourseList = InitialData.getMajorCourses();
 					userMajorList = InitialData.getUserMajors();
-
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -405,11 +405,12 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertUserMajor = null;
 				
 				try {
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
 					for (User use : userList) {
 						insertUser.setInt(1, use.getId());
 						insertUser.setString(2, use.getUsername());
 						insertUser.setString(3, use.getPassword());
+						insertUser.setString(4, use.getMajor());
 						insertUser.addBatch();
 					}
 					insertUser.executeBatch();
