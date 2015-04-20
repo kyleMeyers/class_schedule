@@ -169,7 +169,7 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	@Override
-	public User newUser(String username, String password, String major) {
+	public User newUser(String username, String password, String maj) {
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -177,7 +177,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				user.setUsername(username);
 				user.setPassword(password);
-				user.setMajor(major);
+				user.setMajor(maj);
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
@@ -303,7 +303,8 @@ public class SqliteDatabase implements IDatabase {
 							"create table users (" +
 							"    id integer primary key," +
 							"    username varchar(25)," +
-							"    password varchar(50)" +
+							"    password varchar(50)," +
+							"	 maj varchar(40)"	+
 							")");
 					stmt1.executeUpdate();
 					
