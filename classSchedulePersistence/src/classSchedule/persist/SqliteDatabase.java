@@ -168,9 +168,8 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
 	@Override
-	public User newUser(String username, String password) {
+	public User newUser(String username, String password, String major) {
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -178,17 +177,19 @@ public class SqliteDatabase implements IDatabase {
 				
 				user.setUsername(username);
 				user.setPassword(password);
+				user.setMajor(major);
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into users (username, password) values (?, ?)",
+							"insert into users (username, password, major) values (?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
+					stmt.setString(3, user.getMajor());
 					
 					//do update if inserting or deleting anything
 					//do executeQuery otherwise
@@ -317,7 +318,7 @@ public class SqliteDatabase implements IDatabase {
 							"create table courses (" +
 							"	id integer primary key," +
 							"	crn varchar(10)," +
-							"	courseName varchar(40)" +
+							"	name varchar(40)" +
 							")");
 					stmt3.executeUpdate();
 					
@@ -363,11 +364,12 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertProfessor = null;
 				
 				try {
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
 					for (User use : userList) {
 						insertUser.setInt(1, use.getId());
 						insertUser.setString(2, use.getUsername());
 						insertUser.setString(3, use.getPassword());
+						insertUser.setString(4, use.getMajor());
 						insertUser.addBatch();
 					}
 					insertUser.executeBatch();
