@@ -12,8 +12,6 @@
 	<div id = "container">		
 		<div  id = "header" align = "center">
 		<%--HI --%>
-
-			
 		
 		<h1>Welcome to the YCP schedule planner prototype</h1>
 		</div>
