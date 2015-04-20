@@ -24,7 +24,11 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		List <Course> allCourses = InitialData.getCourses();
+		/**
+		 * Create method within IDatabase to fetch courses instead of creating list here.
+		 * TODO: Method should return Courses based on current Major.
+		 */
+		//List <Course> allCourses = InitialData.getCourses();
 		req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
