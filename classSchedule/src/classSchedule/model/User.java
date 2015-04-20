@@ -4,7 +4,7 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
-	private String major;
+	private Major major;
 	
 	// Constructor
 	public User() {
@@ -35,11 +35,11 @@ public class User {
 		return password;
 	}
 
-	public String getMajor() {
+	public Major getMajor() {
 		return major;
 	}
 	
-	public void setMajor(String major) {
+	public void setMajor(Major major) {
 		this.major = major;		
 	}
 }

@@ -22,7 +22,7 @@ public interface IDatabase {
 	public Professor findProfessor(String firstname, String lastname);
 	
 	//TODO: make a new User login function and then have it insert that new user into the database
-	public User newUser(String username, String password, String major);
+	public User newUser(String username, String password);
 	
 	public Major findMajor(String major);
 

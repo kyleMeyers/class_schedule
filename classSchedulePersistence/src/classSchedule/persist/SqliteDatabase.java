@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
@@ -169,7 +170,7 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	@Override
-	public User newUser(String username, String password, String maj) {
+	public User newUser(String username, String password) {
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -177,19 +178,17 @@ public class SqliteDatabase implements IDatabase {
 				
 				user.setUsername(username);
 				user.setPassword(password);
-				user.setMajor(maj);
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into users (username, password, major) values (?, ?, ?)",
+							"insert into users (username, password) values (?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
-					stmt.setString(3, user.getMajor());
 					
 					//do update if inserting or deleting anything
 					//do executeQuery otherwise
@@ -290,6 +289,18 @@ public class SqliteDatabase implements IDatabase {
 		result.setName(resultSet.getString(i++));	
 	}
 	
+	private void loadMajorCourses(IdRelation result, ResultSet resultSet, int i) throws SQLException{
+		result.setId1(resultSet.getInt(i++));
+		result.setId2(resultSet.getInt(i++));
+		
+	}
+	
+	private void loadUserMajors(IdRelation result, ResultSet resultSet, int i) throws SQLException{
+		result.setId1(resultSet.getInt(i++));
+		result.setId2(resultSet.getInt(i++));
+		
+	}
+	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -298,13 +309,14 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
 				PreparedStatement stmt4 = null;
+				PreparedStatement stmt5 = null;
+				PreparedStatement stmt6 = null;
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
 							"    id integer primary key," +
 							"    username varchar(25)," +
-							"    password varchar(50)," +
-							"	 maj varchar(40)"	+
+							"    password varchar(50)" +
 							")");
 					stmt1.executeUpdate();
 					
@@ -330,12 +342,31 @@ public class SqliteDatabase implements IDatabase {
 							"   lastname varchar(20)" +
 							")");
 					stmt4.executeUpdate();
+					
+					stmt5 = conn.prepareStatement(
+							"create table majorCourses(" +
+							"   majorId integer, " +
+							"   courseId integer" +
+							")" +
+							"create unique index major_course_idx on majorCourses(majorId, courseId)");
+					stmt5.executeUpdate();
+					
+					stmt6 = conn.prepareStatement(
+							"create table userMajors(" +
+							"   userId integer, " +
+							"   majorId integer" +
+							")" +
+							"create unique index user_major_idx on userMajors(userId, majorId)");
+					stmt6.executeUpdate();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
 					DBUtil.closeQuietly(stmt3);
 					DBUtil.closeQuietly(stmt4);
+					DBUtil.closeQuietly(stmt5);
+					DBUtil.closeQuietly(stmt6);
 				}
 			}
 		});
@@ -347,14 +378,21 @@ public class SqliteDatabase implements IDatabase {
 				List<User> userList;
 				List<Major> majorList;
 				List<Course> courseList;
-				List<Professor> profList;
+				List<Professor> professorList;
+				List<IdRelation> majorCourseList;
+				List<IdRelation> userMajorList;	
+
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 					courseList = InitialData.getCourses();
-					profList = InitialData.getProfessors();
+
+					professorList = InitialData.getProfessors();
+					majorCourseList = InitialData.getMajorCourses();
+					userMajorList = InitialData.getUserMajors();
+
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -363,14 +401,15 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertMajor = null;
 				PreparedStatement insertCourse = null;
 				PreparedStatement insertProfessor = null;
+				PreparedStatement insertMajorCourse = null;
+				PreparedStatement insertUserMajor = null;
 				
 				try {
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
 					for (User use : userList) {
 						insertUser.setInt(1, use.getId());
 						insertUser.setString(2, use.getUsername());
 						insertUser.setString(3, use.getPassword());
-						insertUser.setString(4, use.getMajor());
 						insertUser.addBatch();
 					}
 					insertUser.executeBatch();
@@ -395,12 +434,30 @@ public class SqliteDatabase implements IDatabase {
 					insertCourse.executeBatch();
 					
 					insertProfessor = conn.prepareStatement("insert into professors values (?, ?, ?)");
-					for (Professor p : profList)
+					for (Professor p : professorList)
 					{
 						insertProfessor.setInt(1, p.getID());
 						insertProfessor.setString(2, p.getFirstName());
 						insertProfessor.setString(3, p.getLastName());
 						insertProfessor.addBatch();
+					}
+					insertProfessor.executeBatch();
+					
+					insertMajorCourse = conn.prepareStatement("insert into majorCourses values (?, ?)");
+					for(IdRelation majCourse: majorCourseList)
+					{
+						insertMajorCourse.setInt(1, majCourse.getId1());
+						insertMajorCourse.setInt(2, majCourse.getId2());
+						insertMajorCourse.addBatch();
+					}
+					insertMajorCourse.executeBatch();
+					
+					insertUserMajor = conn.prepareStatement("insert into userMajors values (?, ?)");
+					for(IdRelation userMaj: userMajorList)
+					{
+						insertUserMajor.setInt(1, userMaj.getId1());
+						insertUserMajor.setInt(2, userMaj.getId2());
+						insertUserMajor.addBatch();
 					}
 					insertProfessor.executeBatch();
 					
@@ -410,6 +467,8 @@ public class SqliteDatabase implements IDatabase {
 					DBUtil.closeQuietly(insertMajor);
 					DBUtil.closeQuietly(insertCourse);
 					DBUtil.closeQuietly(insertProfessor);
+					DBUtil.closeQuietly(insertMajorCourse);
+					DBUtil.closeQuietly(insertUserMajor);
 				}
 			}
 		});
