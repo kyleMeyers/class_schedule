@@ -3,21 +3,12 @@ package classSchedule.model;
 public class Section {
 	private Professor instructor;
 	private String date;
-	private int CRN;
-	private int classNum;
-	/**
-	 * Constructor
-	 * @param instructor Professor for the section
-	 * @param date Meeting time (Include day(s) of week AND time of day?)
-	 * @param CRN Section number
-	 * @param TBD a course number
-	 */
-	public Section(Professor instructor, String date, int crn, int classNum) {
-		this.setInstructor(instructor);
-		this.setDate(date);
-		this.setCRN(crn);
-		this.setClassNum(classNum);
-		
+	private String id;
+	private Course courseInfo;
+	
+	
+	public Section() {
+
 	}
 	
 	/**
@@ -39,19 +30,19 @@ public class Section {
 		this.date = date;
 	}
 	
-	public int getCRN() {
-		return CRN;
+	public String getID() {
+		return id;
 	}
 	
-	public void setCRN(int crn) {
-		this.CRN = crn;
+	public void setID(String id) {
+		this.id = id;
 	}
 	
-	public int getClassNum() {
-		return classNum;
+	public Course getCourse() {
+		return courseInfo;
 	}
 	
-	public void setClassNum(int classNum) {
-		this.classNum = classNum;
+	public void setCourse(Course courseInfo) {
+		this.courseInfo = courseInfo;
 	}
 }

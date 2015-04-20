@@ -18,7 +18,7 @@ public interface IDatabase {
 	 *         or null if there is no such user
 	 */
 	public User findUser(String username, String password);
-	
+
 	public Professor findProfessor(String firstname, String lastname);
 	
 	//TODO: make a new User login function and then have it insert that new user into the database

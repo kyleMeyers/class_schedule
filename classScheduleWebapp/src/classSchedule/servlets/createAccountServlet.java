@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.ClassController;
-import classSchedule.createAccountController;
+import classSchedule.LoginController;
 import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.User;
@@ -37,7 +37,7 @@ public class createAccountServlet extends HttpServlet {
 		if (username == null || password == null) {
 			error = "Please enter a username and password.";
 		} else {
-			createAccountController controller = new createAccountController();		//make a new controller for each servlet
+			LoginController controller = new LoginController();		//make a new controller for each servlet
 
 			User user = controller.findUser(username, password);	//find the user from the input
 			if (user == null) {										//checks to make sure it is a valid user

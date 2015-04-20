@@ -10,5 +10,4 @@ public class ClassController {
 
 		return db.findCoursebyTitleOrCrn(courseName, crn);			//returns the database information
 	}
-
 }

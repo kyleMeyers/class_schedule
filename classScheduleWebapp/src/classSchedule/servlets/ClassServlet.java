@@ -1,6 +1,7 @@
 package classSchedule.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,24 +30,17 @@ public class ClassServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
+		//Major major = (Major) req.getSession().getAttribute("maj");
 		String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
 		
-		// distinguishing between different forms
-		if (req.getParameter("action1") != null) {
-			// action1 was submitted
-			System.out.println("action1 seems to be set");
-			resp.sendRedirect(req.getContextPath() + "/class");
-			return;
-		}
 		
 		if(course == null)
 		{
 			error = "Please click a course";
 		}
 		
-
 		else
 		{
 			ClassController controller = new ClassController();
@@ -57,6 +51,9 @@ public class ClassServlet extends HttpServlet {
 				//Real course
 				req.getSession().setAttribute("course", courseTitle);
 				
+				
+				// Redirect to ?? page
+				//resp.sendRedirect(req.getContextPath() + "/class");
 				
 				return;
 
@@ -74,6 +71,4 @@ public class ClassServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 
 	}
-	
-
 }

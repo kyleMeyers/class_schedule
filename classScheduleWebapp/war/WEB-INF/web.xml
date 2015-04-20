@@ -22,10 +22,6 @@
     <servlet-name>ClassServlet</servlet-name>
     <servlet-class>classSchedule.servlets.ClassServlet</servlet-class>
   </servlet>
-  <servlet>
-  	<servlet-name>createAccountServlet</servlet-name>
-  	<servlet-class>classSchedule.servlets.createAccountServlet</servlet-class>
-  </servlet>
   
   <!-- Servlet mappings -->
   <servlet-mapping>
