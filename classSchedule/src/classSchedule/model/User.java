@@ -4,16 +4,11 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	private String major;
 	
 	// Constructor
 	public User() {
 		
-	}
-	
-	public User(int id, String uname, String pw) {
-		this.setId(id);
-		this.setUsername(uname);
-		this.setPassword(pw);
 	}
 	
 	public void setId(int id) {
@@ -38,5 +33,13 @@ public class User {
 	
 	public String getPassword() {
 		return password;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+	
+	public void setMajor(String major) {
+		this.major = major;		
 	}
 }

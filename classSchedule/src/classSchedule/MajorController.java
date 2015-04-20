@@ -11,13 +11,5 @@ public class MajorController {
 
 		return db.findMajor(major);			//returns the database information
 	}
-	
-	public void newUser(String username, String password)
-	{
-		IDatabase db = DatabaseProvider.getInstance();
-		
-		db.newUser(username, password);
-		return;
-	}
 
 }
