@@ -9,6 +9,7 @@ import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
+import classSchedule.model.Course;
 
 public class InitialData {
 	
@@ -60,49 +61,51 @@ public class InitialData {
 	}
 	
 	//reads in the courses in the csv spreadsheet for the fakeDatabase
-		public static List<Course> getCourses() throws IOException{
-			List<Course> courseList = new ArrayList<Course>();
-			ReadCSV readCourses = new ReadCSV("classes.csv");
-			
-			try {
-				while (true) {
-					List<String> tuple = readCourses.next();
-					if (tuple == null) {
-						break;
-					}
-					Iterator<String> i = tuple.iterator();
-					Course course = new Course();
-					course.setId(Integer.parseInt(i.next()));
-					course.setCRN(i.next());
-					course.setName(i.next());
-					courseList.add(course);
+	public static List<Course> getCourses() throws IOException{
+		List<Course> courseList = new ArrayList<Course>();
+		ReadCSV readCourses = new ReadCSV("classes.csv");
+
+		try {
+			while (true) {
+				List<String> tuple = readCourses.next();
+				if (tuple == null) {
+					break;
 				}
-				return courseList;
-			} finally {
-				readCourses.close();
+				Iterator<String> i = tuple.iterator();
+				Course course = new Course();
+				course.setId(Integer.parseInt(i.next()));
+				course.setCRN(i.next());
+				course.setName(i.next());
+				courseList.add(course);
 			}
-		}
-		public static List<Professor> getProfessors() throws IOException{
-			List<Professor> professorList = new ArrayList<Professor>();
-			ReadCSV readProfessors = new ReadCSV("professors.csv");
-			
-			try {
-				while (true) {
-					List<String> tuple = readProfessors.next();
-					if (tuple == null) {
-						break;
-					}
-					Iterator<String> i = tuple.iterator();
-					Professor professor = new Professor();
-					professor.setID(Integer.parseInt(i.next()));
-					professor.setFirstName(i.next());
-					professor.setLastName(i.next());
-					professorList.add(professor);
-				}
-				return professorList;		
-			} finally {
-				readProfessors.close();
-			}
+			return courseList;
+		} finally {
+			readCourses.close();
 		}
 	}
+	
+	//reads in the professors from the csv spreadsheet
+	public static List<Professor> getProfessors() throws IOException{
+		List<Professor> profList = new ArrayList<Professor>();
+		ReadCSV readProfs = new ReadCSV("professors.csv");
+		
+		try {
+			while (true) {
+				List<String> tuple = readProfs.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Professor prof = new Professor();
+				prof.setID(Integer.parseInt(i.next()));
+				prof.setFirstName(i.next());
+				prof.setLastName(i.next());
+				profList.add(prof);
+			}
+			return profList;
+		} finally {
+			readProfs.close();
+		}
+	}
+}
 

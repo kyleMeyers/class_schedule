@@ -15,8 +15,7 @@
 	<div id = "container">
 	<div id = "header">
 		<h1>YCP Schedule Planner Prototype2</h1>
-		<h2>${major} Course List</h2>
-	
+		<h2>${maj.name} Course List</h2>	
 	
 	</div>
 	
@@ -33,7 +32,6 @@
 					<li>${courselist.name}</li>
 				</c:forEach>
 			</ul>
-		
 		</div>
 	
 	</div>
@@ -41,22 +39,11 @@
 	
 	
 	<div id = "section">
-	  <a href="${pageContext.servletContext.contextPath}/major">Add a new major</a> <br>
-	  <a href="${pageContext.servletContext.contextPath}/somethingelse">Some other kind of action</a>
+		<input type="submit" name="submit" value="Click to add a new major"></input>
+		<br>
+		<a href="./major">Add a new major</a>
 	
 	</div>
-	
-	<form action="${pageContext.servletContext.contextPath}/class" method="Post">
-		<input type="submit" name="action1" value="Click to add a new major"></input>
-		
-		
-	</form>
-	
-	<form action="${pageContext.servletContext.contextPath}/class" method="Post">
-		<input type="submit" name="action2" value="Click to add a new major"></input>
-		
-		
-	</form>
 	
 	<div id = "footer">
 		<h6> I'm writing code</h6>

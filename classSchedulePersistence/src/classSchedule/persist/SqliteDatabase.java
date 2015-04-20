@@ -33,6 +33,7 @@ public class SqliteDatabase implements IDatabase {
 	//TODO: Add an sql database entry for finding the user from the login information
 	@Override
 	public User findUser(String username, String password) {
+		// Trying to log in fails here! User table never created
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -101,7 +102,6 @@ public class SqliteDatabase implements IDatabase {
 
 	@Override
 	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
-		
 		return executeTransaction(new Transaction<Course>() {
 			@Override
 			public Course execute(Connection conn) throws SQLException {
@@ -145,7 +145,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select professors.* " +			//the entire user tuple
+							"select professors.* " +			//the entire prof tuple
 							"  from professors " +
 							" where professors.firstname = ? and professors.lastname = ?"
 					);
@@ -169,7 +169,6 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
-	//skeleton code for adding other things i.e. major
 	@Override
 	public User newUser(String username, String password) {
 		return executeTransaction(new Transaction<User>() {
@@ -188,7 +187,6 @@ public class SqliteDatabase implements IDatabase {
 							"insert into users (username, password) values (?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
-					//fields you want to change, NOT id
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
 					
@@ -260,7 +258,7 @@ public class SqliteDatabase implements IDatabase {
 		//connects to the database from the home directory for the WebApp folder
 		Connection conn = DriverManager.getConnection("jdbc:sqlite:" + home + "/classSchedule.db");	
 		
-		// Set autocommit to false to allow multiple the execution of
+		// Set autocommit to false to allow the execution of
 		// multiple queries/statements as part of the same transaction.
 		conn.setAutoCommit(false);
 		
@@ -347,14 +345,14 @@ public class SqliteDatabase implements IDatabase {
 				List<User> userList;
 				List<Major> majorList;
 				List<Course> courseList;
-				List<Professor> professorList;
+				List<Professor> profList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 					courseList = InitialData.getCourses();
-					professorList = InitialData.getProfessors();
+					profList = InitialData.getProfessors();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -394,11 +392,11 @@ public class SqliteDatabase implements IDatabase {
 					insertCourse.executeBatch();
 					
 					insertProfessor = conn.prepareStatement("insert into professors values (?, ?, ?)");
-					for(Professor prof: professorList)
+					for (Professor p : profList)
 					{
-						insertProfessor.setInt(1, prof.getID());
-						insertProfessor.setString(2,  prof.getFirstName());
-						insertProfessor.setString(3, prof.getLastName());
+						insertProfessor.setInt(1, p.getID());
+						insertProfessor.setString(2, p.getFirstName());
+						insertProfessor.setString(3, p.getLastName());
 						insertProfessor.addBatch();
 					}
 					insertProfessor.executeBatch();

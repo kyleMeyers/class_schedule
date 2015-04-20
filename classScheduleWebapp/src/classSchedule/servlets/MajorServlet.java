@@ -6,12 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.LoginController;
 import classSchedule.MajorController;
 import classSchedule.model.Major;
 import classSchedule.model.User;
+import classSchedule.model.Course;
 import classSchedule.persist.InitialData;
 
 public class MajorServlet extends HttpServlet {
@@ -27,6 +29,9 @@ public class MajorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		String major = req.getParameter("major");
 		String error = "";
+		//List <Major> allMajors= InitialData.getMajors();
+		//List <Course> allCourses;
+		
 		
 		if(major == null)
 		{
@@ -43,7 +48,6 @@ public class MajorServlet extends HttpServlet {
 				//Real major
 				req.getSession().setAttribute("maj", maj);
 				//req.getSession().setAttribute("allMajors", allMajors);
-				
 				
 				// Redirect to schedule page
 				resp.sendRedirect(req.getContextPath() + "/class");
