@@ -14,7 +14,7 @@ import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
 
-//hi i am a useless comment
+
 
 public class SqliteDatabase implements IDatabase {
 	static {
@@ -181,7 +181,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
-				//
+				
 				try {
 					stmt = conn.prepareStatement(
 							"insert into users (username, password) values (?, ?)",
@@ -310,7 +310,9 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement stmt3 = null;
 				PreparedStatement stmt4 = null;
 				PreparedStatement stmt5 = null;
+				PreparedStatement stmt5a = null;
 				PreparedStatement stmt6 = null;
+				PreparedStatement stmt6a = null;
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
@@ -347,17 +349,23 @@ public class SqliteDatabase implements IDatabase {
 							"create table majorCourses(" +
 							"   majorId integer, " +
 							"   courseId integer" +
-							")" +
-							"create unique index major_course_idx on majorCourses(majorId, courseId)");
+							")");
 					stmt5.executeUpdate();
+					
+					//create a separate prepareStatement for a unique index 
+					stmt5a = conn.prepareStatement("create unique index major_course_idx on majorCourses(majorId, courseId)");
+					stmt5a.executeUpdate();
 					
 					stmt6 = conn.prepareStatement(
 							"create table userMajors(" +
 							"   userId integer, " +
 							"   majorId integer" +
-							")" +
-							"create unique index user_major_idx on userMajors(userId, majorId)");
+							")");
 					stmt6.executeUpdate();
+					
+					//create a separate prepareStatement for a unique index 
+					stmt6a = conn.prepareStatement("create unique index user_major_idx on userMajors(userId, majorId)");
+					stmt6a.executeUpdate();
 					
 					return true;
 				} finally {
@@ -366,7 +374,9 @@ public class SqliteDatabase implements IDatabase {
 					DBUtil.closeQuietly(stmt3);
 					DBUtil.closeQuietly(stmt4);
 					DBUtil.closeQuietly(stmt5);
+					DBUtil.closeQuietly(stmt5a);
 					DBUtil.closeQuietly(stmt6);
+					DBUtil.closeQuietly(stmt6a);
 				}
 			}
 		});
@@ -449,6 +459,8 @@ public class SqliteDatabase implements IDatabase {
 						insertMajorCourse.setInt(1, majCourse.getId1());
 						insertMajorCourse.setInt(2, majCourse.getId2());
 						insertMajorCourse.addBatch();
+						//used for debugging
+						//System.out.println("Inserting into majorCourses " + majCourse.getId1() + "," + majCourse.getId2());
 					}
 					insertMajorCourse.executeBatch();
 					
@@ -459,7 +471,7 @@ public class SqliteDatabase implements IDatabase {
 						insertUserMajor.setInt(2, userMaj.getId2());
 						insertUserMajor.addBatch();
 					}
-					insertProfessor.executeBatch();
+					insertUserMajor.executeBatch();
 					
 					return true;
 				} finally {
