@@ -34,7 +34,6 @@ public class SqliteDatabase implements IDatabase {
 	//TODO: Add an sql database entry for finding the user from the login information
 	@Override
 	public User findUser(String username, String password) {
-		// Trying to log in fails here! User table never created
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -66,7 +65,6 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
 	@Override
 	public Major findMajor(String major) {
 		return executeTransaction(new Transaction<Major>() {
@@ -99,8 +97,6 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
-
 	@Override
 	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
 		return executeTransaction(new Transaction<Course>() {
@@ -134,8 +130,6 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
-
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
 		return executeTransaction(new Transaction<Professor>() {
@@ -211,6 +205,29 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
+	//@Override
+	/*public List<Course> findMajorCourses(String m) throws SQLException{
+		return executeTransaction(new Transaction<List<Course>>() {
+			@Override
+			public List<Course> execute(Connection conn) throws SQLException {
+				Major major = new Major();
+				
+				major.setName(m);
+				
+				PreparedStatement stmt = null;
+				ResultSet result = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select courses.name " +
+							"  from courses, majors " +
+							"  where courses."
+				}
+				return null;
+			}
+			
+		});
+	}*/
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
