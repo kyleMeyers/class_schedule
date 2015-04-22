@@ -27,6 +27,6 @@ public class IdRelation {
 	
 	public void setId2(int id2)
 	{
-		this.id1 = id2;
+		this.id2 = id2;
 	}
 }
