@@ -34,29 +34,29 @@ public class ClassServlet extends HttpServlet {
 		//String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
-		
 
-			ClassController controller = new ClassController();
-			Course courseTitle = controller.findCourseByMajor(crn);
-			
-			User person = (User) req.getSession().getAttribute("user");
-			Major current = controller.findMajorByUser(person);
-			
-			List<Course> classes = controller.findCourseByMajor(current);
-			if(courseTitle != null)
-			{
-				//Real course
-				req.getSession().setAttribute("course", courseTitle);
-				
-				
-				// Redirect to ?? page
-				//resp.sendRedirect(req.getContextPath() + "/class");
-				
-				return;
 
-			}
+		ClassController controller = new ClassController();
+		Course courseTitle = controller.findCourseByMajor(crn);
 
-		
+		User person = (User) req.getSession().getAttribute("user");
+		Major current = controller.findMajorByUser(person);
+
+		List<Course> classes = controller.findCourseByMajor(current);
+		if(courseTitle != null)
+		{
+			//Real course
+			req.getSession().setAttribute("course", courseTitle);
+
+
+			// Redirect to ?? page
+			//resp.sendRedirect(req.getContextPath() + "/class");
+
+			return;
+
+		}
+
+
 		//req.setAttribute("course", course);
 		req.setAttribute("crn", crn);
 		req.setAttribute("error", error);
