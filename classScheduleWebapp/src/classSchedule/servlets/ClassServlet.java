@@ -34,7 +34,7 @@ public class ClassServlet extends HttpServlet {
 		//String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
-		
+
 
 			ClassController controller = new ClassController();
 
@@ -70,9 +70,6 @@ public class ClassServlet extends HttpServlet {
 				return;
 
 			}
-
-
-		
 		//req.setAttribute("course", course);
 		//req.setAttribute("crn", crn);
 		//req.setAttribute("error", error);

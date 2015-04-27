@@ -31,12 +31,10 @@ public interface IDatabase {
 	public Major findMajor(String major);
 
 	public Course findCoursebyTitleOrCrn(String courseName, String crn);
-
-
-	public List<Course> findCourseByMajor(Major major);
 	
 	public Major findMajorByUser(User use);
 
+	public List<Course> findCourseByMajor(Major major);
 
 
 }
