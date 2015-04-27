@@ -155,10 +155,6 @@ public class FakeDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public List<Course> findMajorCourses(Major major) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
 

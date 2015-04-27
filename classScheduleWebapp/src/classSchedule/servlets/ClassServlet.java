@@ -37,11 +37,12 @@ public class ClassServlet extends HttpServlet {
 		
 
 			ClassController controller = new ClassController();
-			Course courseTitle = controller.findCourseByMajor(crn);
+			//Course courseTitle = controller.findCourseByMajor(crn);
 			
 			User person = (User) req.getSession().getAttribute("user");
 			Major current = controller.findMajorByUser(person);
 			
+			List<Course> classes = controller.findCourseByMajor(current);
 			if(courseTitle != null)
 			{
 				//Real course

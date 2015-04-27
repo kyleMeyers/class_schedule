@@ -130,7 +130,7 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	@Override
+	/*@Override
 	public Course findCourseByMajor(String major)
 	{
 		return executeTransaction(new Transaction<Course>() {
@@ -164,7 +164,7 @@ public class SqliteDatabase implements IDatabase {
 				}
 			}
 		});
-	}
+	}*/
 	
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
@@ -604,6 +604,7 @@ public class SqliteDatabase implements IDatabase {
 		
 		System.out.println("Success!");
 	}
+
 
 
 
