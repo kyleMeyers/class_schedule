@@ -210,6 +210,41 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+	public Major findMajorByUser(User user) {
+		return executeTransaction(new Transaction<Major>() {
+			@Override
+			public Major execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select majors.* " +			//the entire major tuple
+							"  from majors, userMajors " +
+							" where userMajors.userId = ? " +
+							" and userMajors.majorId = majors.id "
+					);
+					stmt.setInt(1, user.getId());
+
+					
+					Major result = null;
+					
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) { 
+						result = new Major();
+						loadMajor(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual major or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
+	}
+	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
