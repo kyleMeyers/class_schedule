@@ -26,8 +26,8 @@
 		
 		</div>
 		
-		<!-- If a major exists, displays the courses -->
-		<!-- Currently displays all courses, instead of major specific -->
+		<%-- If a major exists, displays the courses
+			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
 			<ul>
 			<c:choose>
