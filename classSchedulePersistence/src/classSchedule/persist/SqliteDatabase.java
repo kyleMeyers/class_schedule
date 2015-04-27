@@ -305,13 +305,14 @@ public class SqliteDatabase implements IDatabase {
 					Course result = null;
 					
 					resultSet = stmt.executeQuery();
-					if (resultSet.next()) { 
+					
+					while (resultSet.next()) { 
 						result = new Course();
 						loadCourse(result, resultSet, 1);
 						courses.add(result);
 					}
 					
-					return courses;			//returns an actual major or null if there is not one
+					return courses;			//returns an actual courses or null if there is not one
 				} finally {
 					DBUtil.closeQuietly(resultSet);
 					DBUtil.closeQuietly(stmt);
@@ -430,8 +431,7 @@ public class SqliteDatabase implements IDatabase {
 							"create table users (" +
 							"    id integer primary key," +
 							"    username varchar(25)," +
-							"    password varchar(50)," +
-							"	 maj varchar(40)"	+
+							"    password varchar(50)" +
 							")");
 					stmt1.executeUpdate();
 					
@@ -525,12 +525,11 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertUserMajor = null;
 				
 				try {
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
 					for (User use : userList) {
 						insertUser.setInt(1, use.getId());
 						insertUser.setString(2, use.getUsername());
 						insertUser.setString(3, use.getPassword());
-						insertUser.setString(4, use.getMajor());
 						insertUser.addBatch();
 					}
 					insertUser.executeBatch();

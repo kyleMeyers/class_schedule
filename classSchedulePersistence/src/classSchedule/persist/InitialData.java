@@ -30,7 +30,6 @@ public class InitialData {
 				user.setId(Integer.parseInt(i.next()));
 				user.setUsername(i.next());
 				user.setPassword(i.next());
-				user.setMajor(i.next());
 				userList.add(user);
 			}
 			return userList;
@@ -54,7 +53,6 @@ public class InitialData {
 				Major major = new Major();
 				major.setId(Integer.parseInt(i.next()));
 				major.setName(i.next());
-				major.setMajorID(i.next());;
 				majorList.add(major);
 			}
 			return majorList;

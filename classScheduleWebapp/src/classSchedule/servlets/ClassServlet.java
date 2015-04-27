@@ -24,8 +24,8 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		List <Course> allCourses = InitialData.getCourses();
-		req.getSession().setAttribute("allCourses", allCourses);
+		//List <Course> allCourses = InitialData.getCourses();
+		//req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 	
@@ -42,17 +42,26 @@ public class ClassServlet extends HttpServlet {
 
 			
 
+			Course test = new Course();
+			test.setId(6);
+			test.setCRN("CS");
+			test.setName("Whoop di doo");
+			
+
 			User person = (User) req.getSession().getAttribute("user");
 			Major current = controller.findMajorByUser(person);
+			System.out.println("" + test.getName());
+			List<Course> classes = controller.findCourseByMajor(major);
 			
-			
-			
-			List<Course> classes = controller.findCourseByMajor(current);
+
+			classes.add(test);
 			if(classes != null)
 
 			{
 				//Real course
-				req.getSession().setAttribute("courseList", classes);
+
+				req.getSession().setAttribute("allCourses", classes);
+
 				
 				
 				// Redirect to ?? page
@@ -62,10 +71,11 @@ public class ClassServlet extends HttpServlet {
 
 			}
 
+
 		
 		//req.setAttribute("course", course);
-		req.setAttribute("crn", crn);
-		req.setAttribute("error", error);
+		//req.setAttribute("crn", crn);
+		//req.setAttribute("error", error);
 		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 
