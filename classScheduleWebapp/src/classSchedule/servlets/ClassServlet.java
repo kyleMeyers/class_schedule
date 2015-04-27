@@ -39,10 +39,17 @@ public class ClassServlet extends HttpServlet {
 			ClassController controller = new ClassController();
 			//Course courseTitle = controller.findCourseByMajor(crn);
 			
+			Course test = new Course();
+			test.setId(6);
+			test.setCRN("CS");
+			test.setName("Whoop di doo");
+			
 			User person = (User) req.getSession().getAttribute("user");
 			Major current = controller.findMajorByUser(person);
+			System.out.println("" + test.getName());
+			List<Course> classes = controller.findCourseByMajor(major);
 			
-			List<Course> classes = controller.findCourseByMajor(current);
+			classes.add(test);
 			if(classes != null)
 			{
 				//Real course
@@ -56,10 +63,11 @@ public class ClassServlet extends HttpServlet {
 
 			}
 
+
 		
 		//req.setAttribute("course", course);
-		req.setAttribute("crn", crn);
-		req.setAttribute("error", error);
+		//req.setAttribute("crn", crn);
+		//req.setAttribute("error", error);
 		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 
