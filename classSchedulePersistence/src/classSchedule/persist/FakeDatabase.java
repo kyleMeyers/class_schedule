@@ -149,4 +149,9 @@ public class FakeDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public Major findMajorByUser(User use) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

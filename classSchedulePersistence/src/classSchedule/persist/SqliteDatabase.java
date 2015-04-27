@@ -90,7 +90,6 @@ public class SqliteDatabase implements IDatabase {
 						result = new Major();
 						loadMajor(result, resultSet, 1);
 					}
-					
 					return result;			//returns an actual major or null if there is not one
 				} finally {
 					DBUtil.closeQuietly(resultSet);
@@ -253,15 +252,52 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select majors.* " +			//the entire major tuple
-							"  from majors, userMajors " +
-							" where userMajors.userId = ? " +
-							" and userMajors.majorId = majors.id "
+							"select users.* " +			//the entire major tuple
+							"  from users, userMajors, majors " +
+							" where user.id = userMajors.userId " +
+							" and userMajors.majorId = majors.id " +
+							" and users.id = ?"
 					);
 					stmt.setInt(1, user.getId());
 
 					
 					Major result = null;
+					
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) { 
+						result = new Major();
+						loadMajor(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual major or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
+	}
+	
+	public Course findCourseByMajor(Major major) {
+		return executeTransaction(new Transaction<Course>() {
+			@Override
+			public Course execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select majors.* " +			//the entire major tuple
+							"  from majors, majorCourses, courses " +
+							" where major.id = majorCourses.majorId " +
+							" and majorCourses.courseId = courses.id " +
+							" and majors.id = ?"
+					);
+					stmt.setInt(1, major.getId());
+
+					
+					Course result = null;
 					
 					resultSet = stmt.executeQuery();
 					if (resultSet.next()) { 

@@ -35,16 +35,12 @@ public class ClassServlet extends HttpServlet {
 		String crn = req.getParameter("crn");
 		String error = "";
 		
-		
-		if(crn == null)
-		{
-			error = "Please click a course";
-		}
-		
-		else
-		{
+
 			ClassController controller = new ClassController();
 			Course courseTitle = controller.findCourseByMajor(crn);
+			
+			User person = (User) req.getSession().getAttribute("user");
+			Major current = controller.findMajorByUser(person);
 			
 			if(courseTitle != null)
 			{
@@ -58,11 +54,7 @@ public class ClassServlet extends HttpServlet {
 				return;
 
 			}
-			else
-			{
-				error = "Unknown course";
-			}
-		}
+
 		
 		//req.setAttribute("course", course);
 		req.setAttribute("crn", crn);
