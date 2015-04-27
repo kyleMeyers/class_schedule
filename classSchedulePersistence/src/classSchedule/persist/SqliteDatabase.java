@@ -258,7 +258,7 @@ public class SqliteDatabase implements IDatabase {
 					stmt = conn.prepareStatement(
 							"select users.* " +			//the entire major tuple
 							"  from users, userMajors, majors " +
-							" where user.id = userMajors.userId " +
+							" where users.id = userMajors.userId " +
 							" and userMajors.majorId = majors.id " +
 							" and users.id = ?"
 					);
@@ -297,7 +297,7 @@ public class SqliteDatabase implements IDatabase {
 					stmt = conn.prepareStatement(
 							"select majors.* " +			//the entire major tuple
 							"  from majors, majorCourses, courses " +
-							" where major.id = majorCourses.majorId " +
+							" where majors.id = majorCourses.majorId " +
 							" and majorCourses.courseId = courses.id " +
 							" and majors.id = ?"
 					);
