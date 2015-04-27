@@ -40,6 +40,10 @@
     <servlet-name>ClassServlet</servlet-name>
     <url-pattern>/class</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>createAccountServlet</servlet-name>
+    <url-pattern>/createAccount</url-pattern>
+  </servlet-mapping>
   
   <!-- Listeners -->
   <listener>
