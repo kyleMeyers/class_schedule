@@ -52,6 +52,10 @@
 		<a href="./major">
 			<button>Click to add a new major</button>
 		</a>
+		
+		<form action="${pageContext.servletContext.contextPath}/class" method="post">
+			<input type="submit" name="submit" value="Display Courses"></input>
+		</form>
 	
 	</div>
 	
