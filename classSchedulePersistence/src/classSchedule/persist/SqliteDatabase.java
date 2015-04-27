@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
@@ -242,29 +243,39 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	//@Override
-	/*public List<Course> findMajorCourses(String m) throws SQLException{
+	
+	@Override
+	public List<Course> findMajorCourses(Major major) throws SQLException{
 		return executeTransaction(new Transaction<List<Course>>() {
 			@Override
 			public List<Course> execute(Connection conn) throws SQLException {
-				Major major = new Major();
-				
-				major.setName(m);
-				
 				PreparedStatement stmt = null;
-				ResultSet result = null;
-				
+				ResultSet resultSet = null;
+				List<Course> courses = new ArrayList<Course>();
 				try {
 					stmt = conn.prepareStatement(
-							"select courses.name " +
+							"select courses.* " +
 							"  from courses, majors " +
-							"  where courses."
+							"  where courses.crn = ? "
+					);
+					stmt.setString(1, major.getName());
+					Course result = null;
+					
+					resultSet = stmt.executeQuery();
+					while (resultSet.next()) {
+						result = new Course();
+						loadCourse(result, resultSet, 1);
+						courses.add(result);
+					}
+					
+					return courses;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
 				}
-				return null;
 			}
-			
 		});
-	}*/
+	}
 	
 	public Major findMajorByUser(User user) {
 		return executeTransaction(new Transaction<Major>() {

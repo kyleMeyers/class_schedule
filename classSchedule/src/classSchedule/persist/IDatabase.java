@@ -1,6 +1,9 @@
 package classSchedule.persist;
 
 
+import java.sql.SQLException;
+import java.util.List;
+
 import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
@@ -29,5 +32,7 @@ public interface IDatabase {
 	public Course findCoursebyTitleOrCrn(String courseName, String crn);
 
 	public Course findCourseByMajor(String major);
+
+	public List<Course> findMajorCourses(Major major) throws SQLException;
 
 }

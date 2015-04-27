@@ -1,6 +1,7 @@
 package classSchedule.persist;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -146,6 +147,11 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public Course findCourseByMajor(String major) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Course> findMajorCourses(Major major) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
