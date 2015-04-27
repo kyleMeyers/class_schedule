@@ -35,6 +35,6 @@ public interface IDatabase {
 	
 	public Major findMajorByUser(User use);
 
-	public List<Course> findMajorCourses(Major major) throws SQLException;
+	public List<Course> findCourseByMajor(Major major);
 
 }

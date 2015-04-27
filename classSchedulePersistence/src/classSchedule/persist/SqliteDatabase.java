@@ -243,6 +243,7 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+	@Override
 	public Major findMajorByUser(User user) {
 		return executeTransaction(new Transaction<Major>() {
 			@Override
@@ -279,6 +280,7 @@ public class SqliteDatabase implements IDatabase {
 		
 	}
 	
+	@Override
 	public List<Course> findCourseByMajor(Major major) {
 		return executeTransaction(new Transaction <List<Course>>() {
 			@Override
