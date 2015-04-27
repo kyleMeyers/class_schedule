@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
@@ -135,12 +136,12 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
-	public Course findCourseByMajor(String major)
+	public List<Course> findCourseByMajor(String major)
 	{
-		return executeTransaction(new Transaction<Course>() {
+		return executeTransaction(new Transaction<List<Course>>() {
 
 			@Override
-			public Course execute(Connection conn) throws SQLException {
+			public List<Course> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
 				
@@ -153,12 +154,13 @@ public class SqliteDatabase implements IDatabase {
 						);
 					stmt.setString(1, major);
 					
-					Course result = null;
+					List<Course> result = new ArrayList<Course>();
 					
 					resultSet = stmt.executeQuery();
 					if (resultSet.next()) { 
-						result = new Course();
-						loadCourse(result, resultSet, 1);
+						Course result2 = new Course();
+						//loadCourse(result, resultSet, 1);
+						result.add(loadCourse(result2, resultSet, 1));
 					}
 					
 					return result;			//returns an actual course or null if there is not one
@@ -317,10 +319,11 @@ public class SqliteDatabase implements IDatabase {
 		result.setLastName(resultSet.getString(i++));
 	}
 	
-	private void loadCourse(Course result, ResultSet resultSet, int i) throws SQLException{
+	private Course loadCourse(Course result, ResultSet resultSet, int i) throws SQLException{
 		result.setId(resultSet.getInt(i++));
 		result.setCRN(resultSet.getString(i++));
-		result.setName(resultSet.getString(i++));	
+		result.setName(resultSet.getString(i++));
+		return result;
 	}
 	
 	private void loadMajorCourses(IdRelation result, ResultSet resultSet, int i) throws SQLException{

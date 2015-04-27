@@ -44,12 +44,18 @@ public class ClassServlet extends HttpServlet {
 		else
 		{
 			ClassController controller = new ClassController();
-			Course courseTitle = controller.findCourseByMajor(crn);
+			List<Course> courseTitles = controller.findCourseByMajor(crn);
+			if(courseTitles.size() < 1)
+			{
+				System.out.println("I got nothing");
+			}
+			for(int i = 0; i < courseTitles.size(); i++)
+				System.out.println(courseTitles.get(i).getName());
 			
-			if(courseTitle != null)
+			if(courseTitles != null)
 			{
 				//Real course
-				req.getSession().setAttribute("course", courseTitle);
+				req.getSession().setAttribute("courseList", courseTitles);
 				
 				
 				// Redirect to ?? page

@@ -28,7 +28,7 @@
 		
 		<div id = "section">
 			<ul >
-				<c:forEach var="courselist" items="${allCourses}">
+				<c:forEach var="courselist" items="${courseList}">
 					<li>${courselist.name}</li>
 				</c:forEach>
 			</ul>

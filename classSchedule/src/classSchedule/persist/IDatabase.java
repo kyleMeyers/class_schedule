@@ -1,5 +1,6 @@
 package classSchedule.persist;
 
+import java.util.List;
 
 import classSchedule.model.Course;
 import classSchedule.model.Major;
@@ -28,7 +29,7 @@ public interface IDatabase {
 
 	public Course findCoursebyTitleOrCrn(String courseName, String crn);
 
-	public Course findCourseByMajor(String major);
+	public List<Course> findCourseByMajor(String major);
 
 
 }
