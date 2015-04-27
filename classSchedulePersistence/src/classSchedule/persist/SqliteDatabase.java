@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
@@ -34,7 +35,6 @@ public class SqliteDatabase implements IDatabase {
 	//TODO: Add an sql database entry for finding the user from the login information
 	@Override
 	public User findUser(String username, String password) {
-		// Trying to log in fails here! User table never created
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -66,7 +66,6 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
 	@Override
 	public Major findMajor(String major) {
 		return executeTransaction(new Transaction<Major>() {
@@ -98,8 +97,6 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
-
 	@Override
 	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
 		return executeTransaction(new Transaction<Course>() {
@@ -133,7 +130,7 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	
+	@Override
 	public Course findCourseByMajor(String major)
 	{
 		return executeTransaction(new Transaction<Course>() {
@@ -168,6 +165,7 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
+	
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
 		return executeTransaction(new Transaction<Professor>() {
@@ -203,7 +201,7 @@ public class SqliteDatabase implements IDatabase {
 	}
 	//TODO: use this method to actually insert a user into the database
 	@Override
-	public User newUser(String username, String password) {
+	public User newUser(String username, String password, String maj) {
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -211,17 +209,19 @@ public class SqliteDatabase implements IDatabase {
 				
 				user.setUsername(username);
 				user.setPassword(password);
+				user.setMajor(maj);
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into users (username, password) values (?, ?)",
+							"insert into users (username, password, major) values (?, ?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
+					stmt.setString(3, user.getMajor());
 					
 					//do update if inserting or deleting anything
 					//do executeQuery otherwise
@@ -279,12 +279,14 @@ public class SqliteDatabase implements IDatabase {
 		
 	}
 	
-	public Course findCourseByMajor(Major major) {
-		return executeTransaction(new Transaction<Course>() {
+	public List<Course> findCourseByMajor(Major major) {
+		return executeTransaction(new Transaction <List<Course>>() {
 			@Override
-			public Course execute(Connection conn) throws SQLException {
+			public List<Course> execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
+				List<Course> courses = new ArrayList<Course>();
+				
 				
 				try {
 					stmt = conn.prepareStatement(
@@ -301,11 +303,12 @@ public class SqliteDatabase implements IDatabase {
 					
 					resultSet = stmt.executeQuery();
 					if (resultSet.next()) { 
-						result = new Major();
-						loadMajor(result, resultSet, 1);
+						result = new Course();
+						loadCourse(result, resultSet, 1);
+						courses.add(result);
 					}
 					
-					return result;			//returns an actual major or null if there is not one
+					return courses;			//returns an actual major or null if there is not one
 				} finally {
 					DBUtil.closeQuietly(resultSet);
 					DBUtil.closeQuietly(stmt);
@@ -423,7 +426,8 @@ public class SqliteDatabase implements IDatabase {
 							"create table users (" +
 							"    id integer primary key," +
 							"    username varchar(25)," +
-							"    password varchar(50)" +
+							"    password varchar(50)," +
+							"	 maj varchar(40)"	+
 							")");
 					stmt1.executeUpdate();
 					
@@ -495,19 +499,16 @@ public class SqliteDatabase implements IDatabase {
 				List<Course> courseList;
 				List<Professor> professorList;
 				List<IdRelation> majorCourseList;
-				List<IdRelation> userMajorList;	
-
+				List<IdRelation> userMajorList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
 					userList = InitialData.getUsers();
 					majorList = InitialData.getMajors();
 					courseList = InitialData.getCourses();
-
 					professorList = InitialData.getProfessors();
 					majorCourseList = InitialData.getMajorCourses();
 					userMajorList = InitialData.getUserMajors();
-
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -520,11 +521,12 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertUserMajor = null;
 				
 				try {
-					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
+					insertUser = conn.prepareStatement("insert into users values (?, ?, ?, ?)");
 					for (User use : userList) {
 						insertUser.setInt(1, use.getId());
 						insertUser.setString(2, use.getUsername());
 						insertUser.setString(3, use.getPassword());
+						insertUser.setString(4, use.getMajor());
 						insertUser.addBatch();
 					}
 					insertUser.executeBatch();

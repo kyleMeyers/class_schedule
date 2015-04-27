@@ -32,7 +32,6 @@ public class MajorServlet extends HttpServlet {
 		//List <Major> allMajors= InitialData.getMajors();
 		//List <Course> allCourses;
 		
-		
 		if(major == null)
 		{
 			error = "Please enter a major";

@@ -24,13 +24,13 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		//List <Course> allCourses = InitialData.getCourses();
-		//req.getSession().setAttribute("allCourses", allCourses);
+		List <Course> allCourses = InitialData.getCourses();
+		req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		//Major major = (Major) req.getSession().getAttribute("maj");
+		Major major = (Major) req.getSession().getAttribute("maj");
 		//String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
