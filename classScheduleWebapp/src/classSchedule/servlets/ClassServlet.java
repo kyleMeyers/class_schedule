@@ -45,7 +45,6 @@ public class ClassServlet extends HttpServlet {
 		{
 			ClassController controller = new ClassController();
 			Course courseTitle = controller.findCourseByMajor(crn);
-			Course courseTwo = controller.findCourseByMajor(major.getName());
 			
 			if(courseTitle != null)
 			{
