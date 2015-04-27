@@ -28,5 +28,6 @@ public interface IDatabase {
 
 	public Course findCoursebyTitleOrCrn(String courseName, String crn);
 
-	// TODO: Fetch Courses of current Major
+	public Course findCourseByMajor(String major);
+
 }
