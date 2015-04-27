@@ -135,7 +135,40 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+	public Course findCourseByMajor(String major)
+	{
+		return executeTransaction(new Transaction<Course>() {
 
+			@Override
+			public Course execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try
+				{
+					stmt = conn.prepareStatement(
+							"select courses.* " +
+							" from courses " +
+							"where courses.crn =?"
+						);
+					stmt.setString(1, major);
+					
+					Course result = null;
+					
+					resultSet = stmt.executeQuery();
+					if (resultSet.next()) { 
+						result = new Course();
+						loadCourse(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual course or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
 		return executeTransaction(new Transaction<Professor>() {
@@ -169,6 +202,7 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
+	//TODO: use this method to actually insert a user into the database
 	@Override
 	public User newUser(String username, String password) {
 		return executeTransaction(new Transaction<User>() {
@@ -367,7 +401,7 @@ public class SqliteDatabase implements IDatabase {
 					stmt3 = conn.prepareStatement(
 							"create table courses (" +
 							"	id integer primary key," +
-							"	crn varchar(10)," +
+							"	crn varchar(20)," +
 							"	name varchar(40)" +
 							")");
 					stmt3.executeUpdate();
@@ -532,6 +566,8 @@ public class SqliteDatabase implements IDatabase {
 		
 		System.out.println("Success!");
 	}
+
+
 
 	
 

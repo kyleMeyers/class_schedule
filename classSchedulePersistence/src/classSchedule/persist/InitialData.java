@@ -64,7 +64,7 @@ public class InitialData {
 	//reads in the courses in the csv spreadsheet for the fakeDatabase
 	public static List<Course> getCourses() throws IOException{
 		List<Course> courseList = new ArrayList<Course>();
-		ReadCSV readCourses = new ReadCSV("classes.csv");
+		ReadCSV readCourses = new ReadCSV("courses.csv");
 
 		try {
 			while (true) {
