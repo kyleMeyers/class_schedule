@@ -45,9 +45,11 @@
 	
 	
 	<div id = "section">
-		<input type="submit" name="submit" value="Click to add a new major"></input>
+<!-- 		<input type="submit" name="submit" value="Click to add a new major"></input> -->
 		<br>
-		<a href="./major">Add a new major<button type = "button" name = "Click for new major"></button></a>
+		<a href="./major">
+			<button>Click to add a new major</button>
+		</a>
 	
 	</div>
 	
