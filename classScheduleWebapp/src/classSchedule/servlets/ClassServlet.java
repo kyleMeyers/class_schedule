@@ -24,8 +24,8 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		List <Course> allCourses = InitialData.getCourses();
-		req.getSession().setAttribute("allCourses", allCourses);
+		//List <Course> allCourses = InitialData.getCourses();
+		//req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 	
@@ -35,27 +35,24 @@ public class ClassServlet extends HttpServlet {
 		String crn = req.getParameter("crn");
 		String error = "";
 
-
 		ClassController controller = new ClassController();
-		Course courseTitle = controller.findCourseByMajor(crn);
+		//Course courseTitle = controller.findCourseByMajor(crn);
 
 		User person = (User) req.getSession().getAttribute("user");
 		Major current = controller.findMajorByUser(person);
 
 		List<Course> classes = controller.findCourseByMajor(current);
-		if(courseTitle != null)
+		if(classes != null)
 		{
 			//Real course
-			req.getSession().setAttribute("course", courseTitle);
+			req.getSession().setAttribute("allCourses", classes);
 
 
 			// Redirect to ?? page
 			//resp.sendRedirect(req.getContextPath() + "/class");
 
 			return;
-
 		}
-
 
 		//req.setAttribute("course", course);
 		req.setAttribute("crn", crn);
