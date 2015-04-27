@@ -26,11 +26,17 @@
 		
 		</div>
 		
+		<!-- If a major exists, displays the courses -->
+		<!-- Currently displays all courses, instead of major specific -->
 		<div id = "section">
-			<ul >
-				<c:forEach var="courselist" items="${allCourses}">
-					<li>${courselist.name}</li>
-				</c:forEach>
+			<ul>
+			<c:choose>
+				<c:when test="${maj.name != null }">
+					<c:forEach var="courselist" items="${allCourses}">
+						<li>${courselist.name}</li>
+					</c:forEach>
+				</c:when>
+			</c:choose>
 			</ul>
 		</div>
 	
