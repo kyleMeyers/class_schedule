@@ -24,19 +24,19 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		List <Course> allCourses = InitialData.getCourses();
-		req.getSession().setAttribute("allCourses", allCourses);
+		//List <Course> allCourses = InitialData.getCourses();
+		//req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		//Major major = (Major) req.getSession().getAttribute("maj");
-		String course = req.getParameter("course");
+		//String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
 		
 		
-		if(course == null)
+		if(crn == null)
 		{
 			error = "Please click a course";
 		}
@@ -44,7 +44,7 @@ public class ClassServlet extends HttpServlet {
 		else
 		{
 			ClassController controller = new ClassController();
-			Course courseTitle = controller.findCoursebyTitleOrCrn(course, crn);
+			Course courseTitle = controller.findCourseByMajor(crn);
 			
 			if(courseTitle != null)
 			{
@@ -64,7 +64,7 @@ public class ClassServlet extends HttpServlet {
 			}
 		}
 		
-		req.setAttribute("course", course);
+		//req.setAttribute("course", course);
 		req.setAttribute("crn", crn);
 		req.setAttribute("error", error);
 		
