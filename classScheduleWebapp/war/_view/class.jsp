@@ -26,11 +26,19 @@
 		
 		</div>
 		
+		<%-- If a major exists, displays the courses
+			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
-			<ul >
-				<c:forEach var="courselist" items="${courseList}">
-					<li>${courselist.name}</li>
-				</c:forEach>
+
+			<ul>
+			<c:choose>
+				<c:when test="${maj.name != null }">
+					<c:forEach var="courselist" items="${allCourses}">
+						<li>${courselist.name}</li>
+					</c:forEach>
+				</c:when>
+			</c:choose>
+
 			</ul>
 		</div>
 	
@@ -39,9 +47,11 @@
 	
 	
 	<div id = "section">
-		<input type="submit" name="submit" value="Click to add a new major"></input>
+<!-- 		<input type="submit" name="submit" value="Click to add a new major"></input> -->
 		<br>
-		<a href="./major">Add a new major</a>
+		<a href="./major">
+			<button>Click to add a new major</button>
+		</a>
 	
 	</div>
 	

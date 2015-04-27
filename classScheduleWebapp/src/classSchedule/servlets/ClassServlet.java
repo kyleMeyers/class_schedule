@@ -24,38 +24,35 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		//List <Course> allCourses = InitialData.getCourses();
-		//req.getSession().setAttribute("allCourses", allCourses);
+		List <Course> allCourses = InitialData.getCourses();
+		req.getSession().setAttribute("allCourses", allCourses);
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		//Major major = (Major) req.getSession().getAttribute("maj");
+		Major major = (Major) req.getSession().getAttribute("maj");
 		//String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";
 		
-		
-		if(crn == null)
-		{
-			error = "Please click a course";
-		}
-		
-		else
-		{
+
 			ClassController controller = new ClassController();
-			List<Course> courseTitles = controller.findCourseByMajor(crn);
-			if(courseTitles.size() < 1)
-			{
-				System.out.println("I got nothing");
-			}
-			for(int i = 0; i < courseTitles.size(); i++)
-				System.out.println(courseTitles.get(i).getName());
+
+			//Course courseTitle = controller.findCourseByMajor(crn);
+
 			
-			if(courseTitles != null)
+
+			User person = (User) req.getSession().getAttribute("user");
+			Major current = controller.findMajorByUser(person);
+			
+			
+			
+			List<Course> classes = controller.findCourseByMajor(current);
+			if(classes != null)
+
 			{
 				//Real course
-				req.getSession().setAttribute("courseList", courseTitles);
+				req.getSession().setAttribute("courseList", classes);
 				
 				
 				// Redirect to ?? page
@@ -64,11 +61,7 @@ public class ClassServlet extends HttpServlet {
 				return;
 
 			}
-			else
-			{
-				error = "Unknown course";
-			}
-		}
+
 		
 		//req.setAttribute("course", course);
 		req.setAttribute("crn", crn);
