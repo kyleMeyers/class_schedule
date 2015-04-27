@@ -30,8 +30,6 @@ public interface IDatabase {
 	public Major findMajor(String major);
 
 	public Course findCoursebyTitleOrCrn(String courseName, String crn);
-
-	public Course findCourseByMajor(String major);
 	
 	public Major findMajorByUser(User use);
 

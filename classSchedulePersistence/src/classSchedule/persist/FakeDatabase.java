@@ -146,17 +146,12 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	public Course findCourseByMajor(String major) {
+	public List<Course> findCourseByMajor(Major major) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public Major findMajorByUser(User use) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<Course> findCourseByMajor(Major major) {
 		// TODO Auto-generated method stub
 		return null;
 	}
