@@ -44,7 +44,7 @@ public class ClassServlet extends HttpServlet {
 
 			Course test = new Course();
 			test.setId(6);
-			test.setCRN("CS");
+			//test.setCRN("CS");
 			test.setName("Whoop di doo");
 			
 
@@ -54,6 +54,8 @@ public class ClassServlet extends HttpServlet {
 			List<Course> classes = controller.findCourseByMajor(major);
 			
 
+			classes.add(test);
+			classes.add(test);
 			classes.add(test);
 			if(classes != null)
 
