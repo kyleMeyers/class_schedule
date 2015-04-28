@@ -37,27 +37,16 @@ public class ClassServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		
 		//String course = req.getParameter("course");
-		String crn = req.getParameter("crn");
-		String error = "";
-
-
+		//String crn = req.getParameter("crn");
+		//String error = "";
 		
-
-		//Course courseTitle = controller.findCourseByMajor(crn);
-
-
-
 		//Course test = new Course();
 		//test.setId(6);
 		//test.setCRN("CS");
 		//test.setName("Whoop di doo");
 
-
 		//User person = (User) req.getSession().getAttribute("user");
 		//Major current = controller.findMajorByUser(person);
-		//System.out.println("" + test.getName());
-		
-
 
 		//classes.add(test);
 		//classes.add(test);
@@ -65,10 +54,6 @@ public class ClassServlet extends HttpServlet {
 		//if(classes != null)
 
 		//{
-
-			
-
-
 
 			// Redirect to ?? page
 			//resp.sendRedirect(req.getContextPath() + "/class");
