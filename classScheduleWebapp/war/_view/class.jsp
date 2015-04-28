@@ -27,7 +27,6 @@
 		</div>
 		
 		<%-- If a major exists, displays the courses
-		words
 			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
 			<ul>
