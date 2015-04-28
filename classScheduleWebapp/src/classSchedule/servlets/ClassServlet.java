@@ -48,8 +48,8 @@ public class ClassServlet extends HttpServlet {
 			test.setName("Whoop di doo");
 			
 
-			User person = (User) req.getSession().getAttribute("user");
-			Major current = controller.findMajorByUser(person);
+			//User person = (User) req.getSession().getAttribute("user");
+			//Major current = controller.findMajorByUser(person);
 			System.out.println("" + test.getName());
 			List<Course> classes = controller.findCourseByMajor(major);
 			
@@ -60,7 +60,6 @@ public class ClassServlet extends HttpServlet {
 			if(classes != null)
 
 			{
-				//Real course
 
 				req.getSession().setAttribute("allCourses", classes);
 

@@ -76,7 +76,7 @@ public class InitialData {
 				Course course = new Course();
 				course.setId(Integer.parseInt(i.next()));
 				//course.setCourseID(i.next());
-				course.setCRN(i.next());
+				//course.setCRN(i.next());
 				course.setName(i.next());
 				courseList.add(course);
 			}
