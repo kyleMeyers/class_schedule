@@ -396,8 +396,8 @@ public class SqliteDatabase implements IDatabase {
 	
 	private void loadCourse(Course result, ResultSet resultSet, int i) throws SQLException{
 		result.setId(resultSet.getInt(i++));
-		result.setCRN(resultSet.getString(i++));
-		result.setName(resultSet.getString(i++));	
+		//result.setCRN(resultSet.getString(i++));
+		result.setName(resultSet.getString(i++));
 	}
 	
 	private void loadMajorCourses(IdRelation result, ResultSet resultSet, int i) throws SQLException{
@@ -443,7 +443,7 @@ public class SqliteDatabase implements IDatabase {
 					stmt3 = conn.prepareStatement(
 							"create table courses (" +
 							"	id integer primary key," +
-							"	crn varchar(20)," +
+		
 							"	name varchar(40)" +
 							")");
 					stmt3.executeUpdate();
@@ -541,12 +541,12 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertMajor.executeBatch();
 					
-					insertCourse = conn.prepareStatement("insert into courses values (?, ?, ?)");
+					insertCourse = conn.prepareStatement("insert into courses values (?, ?)");
 					for(Course cour: courseList)
 					{
 						insertCourse.setInt(1, cour.getId());
-						insertCourse.setString(2, cour.getCRN());
-						insertCourse.setString(3, cour.getName());
+						//insertCourse.setString(2, cour.getCRN());
+						insertCourse.setString(2, cour.getName());
 						insertCourse.addBatch();
 					}
 					insertCourse.executeBatch();

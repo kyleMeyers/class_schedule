@@ -50,11 +50,12 @@ public class ClassServlet extends HttpServlet {
 		List<Course> classes = controller.findCourseByMajor(major);
 
 		classes.add(test);
+		classes.add(test);
+		classes.add(test);
 		if(classes != null)
 		{
 			//Real course
 			req.getSession().setAttribute("allCourses", classes);
-
 
 			// Redirect to ?? page
 			//resp.sendRedirect(req.getContextPath() + "/class");
