@@ -31,6 +31,7 @@ public class ClassServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		Major major = (Major) req.getSession().getAttribute("maj");
+		System.out.println(major.getName() + "**");
 		//String course = req.getParameter("course");
 		String crn = req.getParameter("crn");
 		String error = "";

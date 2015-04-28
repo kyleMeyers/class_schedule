@@ -9,6 +9,14 @@ import classSchedule.ClassController;
 import classSchedule.model.Major;
 import classSchedule.model.User;
 
+/**
+ * What are the junits supposed to test? Controllers contain very few methods,
+ * which require an instance of IDatabase. Is declaring a Controller enough?
+ * Are the tests here set up properly?
+ * 
+ * @author bcoover
+ *
+ */
 public class ClassControllerTest {
 	private User initUser, newUser;
 	private Major initMajor, newMajor;
