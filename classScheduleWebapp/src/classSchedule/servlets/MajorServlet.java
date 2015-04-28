@@ -46,7 +46,6 @@ public class MajorServlet extends HttpServlet {
 			{
 				//Real major
 				req.getSession().setAttribute("maj", maj);
-				req.getSession().setAttribute("crn", maj);
 				//req.getSession().setAttribute("allMajors", allMajors);
 				
 				

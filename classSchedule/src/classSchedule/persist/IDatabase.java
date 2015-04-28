@@ -1,6 +1,5 @@
 package classSchedule.persist;
 
-import java.util.List;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -35,6 +34,5 @@ public interface IDatabase {
 	public Major findMajorByUser(User use);
 
 	public List<Course> findCourseByMajor(Major major);
-
 
 }

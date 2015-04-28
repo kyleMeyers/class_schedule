@@ -9,7 +9,6 @@ import classSchedule.persist.DatabaseProvider;
 import classSchedule.persist.IDatabase;
 
 public class ClassController {
-
 	public List<Course> findCourseByMajor(Major major) {
 		IDatabase db = DatabaseProvider.getInstance();		//base courseName information and getting it from the database
 

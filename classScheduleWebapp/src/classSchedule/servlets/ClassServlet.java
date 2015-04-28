@@ -39,7 +39,7 @@ public class ClassServlet extends HttpServlet {
 		//String course = req.getParameter("course");
 		//String crn = req.getParameter("crn");
 		//String error = "";
-		
+
 		//Course test = new Course();
 		//test.setId(6);
 		//test.setCRN("CS");
@@ -52,7 +52,6 @@ public class ClassServlet extends HttpServlet {
 		//classes.add(test);
 		//classes.add(test);
 		//if(classes != null)
-
 		//{
 
 			// Redirect to ?? page

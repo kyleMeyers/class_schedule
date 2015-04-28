@@ -146,7 +146,6 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-
 	public List<Course> findCourseByMajor(Major major) {
 		// TODO Auto-generated method stub
 		return null;

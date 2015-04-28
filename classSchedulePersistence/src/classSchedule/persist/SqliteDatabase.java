@@ -130,15 +130,13 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-
 	/*@Override
 	public Course findCourseByMajor(String major)
-
 	{
-		return executeTransaction(new Transaction<List<Course>>() {
+		return executeTransaction(new Transaction<Course>() {
 
 			@Override
-			public List<Course> execute(Connection conn) throws SQLException {
+			public Course execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
 				
@@ -151,13 +149,12 @@ public class SqliteDatabase implements IDatabase {
 						);
 					stmt.setString(1, major);
 					
-					List<Course> result = new ArrayList<Course>();
+					Course result = null;
 					
 					resultSet = stmt.executeQuery();
 					if (resultSet.next()) { 
-						Course result2 = new Course();
-						//loadCourse(result, resultSet, 1);
-						result.add(loadCourse(result2, resultSet, 1));
+						result = new Course();
+						loadCourse(result, resultSet, 1);
 					}
 					
 					return result;			//returns an actual course or null if there is not one

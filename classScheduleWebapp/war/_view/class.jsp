@@ -34,7 +34,11 @@
 			<c:choose>
 				<c:when test="${maj.name != null }">
 					<c:forEach var="courselist" items="${allCourses}">
-						<li>${courselist.name}</li>
+						<%-- How can we specify which course to give description for? 
+						In this form, all courseList.name-s redirect to same page--%>
+						<a href="./courseDescription">
+							<li>${courselist.name}</li>
+						</a>
 					</c:forEach>
 				</c:when>
 			</c:choose>
