@@ -18,17 +18,18 @@
 		<h2>${maj.name} Course List</h2>	
 	
 	</div>
-	<form action="${pageContext.servletContext.contextPath}/class" method="post">
+	
 	<div>
 		<div id = "nav">
 		<p>Username: <br> ${user.username}</p>
 		<p>Major: <br> ${maj.name}</p>
 		
 		</div>
-	
+		
 		<%-- If a major exists, displays the courses
 			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
+
 			<ul>
 			<c:choose>
 				<c:when test="${maj.name != null }">
@@ -37,12 +38,12 @@
 					</c:forEach>
 				</c:when>
 			</c:choose>
+
 			</ul>
 		</div>
 	
 	</div>
 	
-	</form>
 	
 	
 	<div id = "section">
@@ -52,10 +53,12 @@
 			<button>Click to add a new major</button>
 		</a>
 		
-<%-- 		<form action="${pageContext.servletContext.contextPath}/class" method="post"> --%>
-<!-- 			<input type="submit" name="submit" value="Display Courses"></input> -->
-<!-- 		</form> -->
+		<form action="${pageContext.servletContext.contextPath}/class" method="post">
+			<input type="submit" name="submit" value="Display Courses"></input>
+		</form>
+	
 	</div>
+	
 	<div id = "footer">
 		<h6> I'm writing code</h6>
 	
