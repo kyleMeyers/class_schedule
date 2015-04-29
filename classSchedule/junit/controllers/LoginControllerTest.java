@@ -21,7 +21,7 @@ public class LoginControllerTest {
 	}
 	
 	@Test
-	public void testFindProfessor() {
+	public void testFindUser() {
 		
 		User found = new User();
 		found = control.findUser(user.getUsername(), user.getPassword());
