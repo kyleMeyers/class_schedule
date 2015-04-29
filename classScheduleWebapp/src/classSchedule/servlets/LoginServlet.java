@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import classSchedule.LoginController;
+import classSchedule.MajorController;
+import classSchedule.model.Major;
 import classSchedule.model.User;
 
 public class LoginServlet extends HttpServlet {
@@ -38,9 +40,15 @@ public class LoginServlet extends HttpServlet {
 				req.getSession().setAttribute("user", user);		//makes sure the user is logged in and the attribute 
 																	//can be accessed by any servlet now
 				
-				// Redirect to major page
-				resp.sendRedirect(req.getContextPath() + "/major");		//after a successful session on a servlet you should
-																		//redirect the page to another servlet. This case is schedule
+				MajorController majorController = new MajorController();
+				Major major = majorController.findMajorForUser(user);
+				if (major != null) {
+					// Redirect to class path
+					resp.sendRedirect(req.getContextPath() + "/class");
+				} else {
+					// Redirect to major page
+					resp.sendRedirect(req.getContextPath() + "/major");		//after a successful session on a servlet you should
+				}
 				return;
 			} else {
 				// Invalid username/password
