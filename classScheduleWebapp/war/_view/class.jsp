@@ -31,20 +31,25 @@
 		<div id = "section">
 
 			<ul>
+			
 			<c:choose>
 				<c:when test="${maj.name != null }">
+					<form>
 					<c:forEach var="courselist" items="${allCourses}">
 						<%-- How can we specify which course to give description for? 
 						In this form, all courseList.name-s redirect to same page--%>
-						<li>
-							<a href="./courseDescription">
-								${courselist.name}
-							</a>
-						</li>
+<!-- 						<li> -->
+<!-- 							<a href="./courseDescription"> -->
+<%-- 								${courselist.name} --%>
+<!-- 							</a> -->
+<!-- 						</li> -->
+						<input type="radio" name="coursetitle" value="${courselist.name}" checked>${courselist.name}
+						<br>
 					</c:forEach>
+					</form>
 				</c:when>
 			</c:choose>
-
+			
 			</ul>
 		</div>
 	
