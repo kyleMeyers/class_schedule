@@ -199,9 +199,35 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
+	@Override
+	public IdRelation storeMajorForUser(User user, Major major) {
+		return executeTransaction(new Transaction<IdRelation>() {
+			@Override
+			public IdRelation execute(Connection conn) throws SQLException {
+				IdRelation relate = new IdRelation();
+				
+				PreparedStatement stmt = null;
+				
+				//if new major then delete the tuple then add a completely new one
+				
+				try {
+					stmt = conn.prepareStatement("insert into userMajors values (?, ?)");
+					stmt.setInt(1, user.getId());
+					stmt.setInt(2, major.getId());
+					
+					stmt.executeUpdate();
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+				
+				return relate;
+			}
+		});
+	}
+	
 	//TODO: use this method to actually insert a user into the database
 	@Override
-	public User newUser(String username, String password, String maj) {
+	public User newUser(String username, String password) {
 		return executeTransaction(new Transaction<User>() {
 			@Override
 			public User execute(Connection conn) throws SQLException {
@@ -209,19 +235,19 @@ public class SqliteDatabase implements IDatabase {
 				
 				user.setUsername(username);
 				user.setPassword(password);
-				user.setMajor(maj);
+				
 				
 				PreparedStatement stmt = null;
 				ResultSet genKeys = null;
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into users (username, password, major) values (?, ?, ?)",
+							"insert into users (username, password) values (?, ?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 					);
 					stmt.setString(1, user.getUsername());
 					stmt.setString(2, user.getPassword());
-					stmt.setString(3, user.getMajor());
+					
 					
 					//do update if inserting or deleting anything
 					//do executeQuery otherwise
@@ -605,6 +631,7 @@ public class SqliteDatabase implements IDatabase {
 		
 		System.out.println("Success!");
 	}
+	
 
 
 

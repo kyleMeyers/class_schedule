@@ -24,11 +24,11 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		//List <Course> allCourses = InitialData.getCourses();
-		//req.getSession().setAttribute("allCourses", allCourses);
-		Major major = (Major) req.getSession().getAttribute("maj");
 		ClassController controller = new ClassController();
-		List<Course> classes = controller.findCourseByMajor(major);
+		User person = (User) req.getSession().getAttribute("user");
+		Major current = controller.findMajorByUser(person);
+		
+		List<Course> classes = controller.findCourseByMajor(current);
 		req.getSession().setAttribute("allCourses", classes);
 		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
@@ -45,8 +45,7 @@ public class ClassServlet extends HttpServlet {
 		//test.setCRN("CS");
 		//test.setName("Whoop di doo");
 
-		//User person = (User) req.getSession().getAttribute("user");
-		//Major current = controller.findMajorByUser(person);
+		
 
 		//classes.add(test);
 		//classes.add(test);
