@@ -22,6 +22,7 @@ public class ProfessorControllerTest {
 	
 	@Test
 	public void testFindProfessor() {
+		
 		Professor found = new Professor();
 		found = control.findProfessor(prof.getFirstName(), prof.getLastName());
 		assertEquals(prof.getFirstName(), found.getFirstName());
