@@ -26,49 +26,45 @@ public class ClassServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//List <Course> allCourses = InitialData.getCourses();
 		//req.getSession().setAttribute("allCourses", allCourses);
+		Major major = (Major) req.getSession().getAttribute("maj");
+		ClassController controller = new ClassController();
+		List<Course> classes = controller.findCourseByMajor(major);
+		req.getSession().setAttribute("allCourses", classes);
+		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		//Major major = (Major) req.getSession().getAttribute("maj");
-		//String course = req.getParameter("course");
-		String crn = req.getParameter("crn");
-		String error = "";
-		
-		
-		if(crn == null)
-		{
-			error = "Please click a course";
-		}
-		
-		else
-		{
-			ClassController controller = new ClassController();
-			Course courseTitle = controller.findCourseByMajor(crn);
-			
-			if(courseTitle != null)
-			{
-				//Real course
-				req.getSession().setAttribute("course", courseTitle);
-				
-				
-				// Redirect to ?? page
-				//resp.sendRedirect(req.getContextPath() + "/class");
-				
-				return;
 
-			}
-			else
-			{
-				error = "Unknown course";
-			}
-		}
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		
+		//String course = req.getParameter("course");
+		//String crn = req.getParameter("crn");
+		//String error = "";
+
+		//Course test = new Course();
+		//test.setId(6);
+		//test.setCRN("CS");
+		//test.setName("Whoop di doo");
+
+		//User person = (User) req.getSession().getAttribute("user");
+		//Major current = controller.findMajorByUser(person);
+
+		//classes.add(test);
+		//classes.add(test);
+		//classes.add(test);
+		//if(classes != null)
+		//{
+
+			// Redirect to ?? page
+			//resp.sendRedirect(req.getContextPath() + "/class");
+
+			return;
+
+		//}
 		//req.setAttribute("course", course);
-		req.setAttribute("crn", crn);
-		req.setAttribute("error", error);
-		
-		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
+		//req.setAttribute("crn", crn);
+		//req.setAttribute("error", error);
+
+		//req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 
 	}
 }

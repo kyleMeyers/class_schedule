@@ -1,6 +1,7 @@
 package classSchedule.persist;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,7 +133,7 @@ public class FakeDatabase implements IDatabase {
 	
 	// Adds a new user to the userList (if not yet in the list)
 	@Override
-	public User newUser(String username, String password) {
+	public User newUser(String username, String password, String major) {
 		User temp = new User();
 		temp.setUsername(username);
 		temp.setPassword(password);
@@ -145,8 +146,14 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	public Course findCourseByMajor(String major) {
+	public List<Course> findCourseByMajor(Major major) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Major findMajorByUser(User use) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 }
+

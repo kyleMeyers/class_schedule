@@ -12,11 +12,11 @@ public class MajorController {
 		return db.findMajor(major);			//returns the database information
 	}
 	
-	public void newUser(String username, String password)
+	public void newUser(String username, String password, String major)
 	{
 		IDatabase db = DatabaseProvider.getInstance();
 		
-		db.newUser(username, password);
+		db.newUser(username, password, major);
 		return;
 	}
 
