@@ -130,41 +130,6 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
-	/*@Override
-	public Course findCourseByMajor(String major)
-	{
-		return executeTransaction(new Transaction<Course>() {
-
-			@Override
-			public Course execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
-				
-				try
-				{
-					stmt = conn.prepareStatement(
-							"select courses.* " +
-							" from courses " +
-							"where courses.crn =?"
-						);
-					stmt.setString(1, major);
-					
-					Course result = null;
-					
-					resultSet = stmt.executeQuery();
-					if (resultSet.next()) { 
-						result = new Course();
-						loadCourse(result, resultSet, 1);
-					}
-					
-					return result;			//returns an actual course or null if there is not one
-				} finally {
-					DBUtil.closeQuietly(resultSet);
-					DBUtil.closeQuietly(stmt);
-				}
-			}
-		});
-	}*/
 	
 	@Override
 	public Professor findProfessor(String firstname, String lastname) {
@@ -279,7 +244,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select users.* " +			//the entire major tuple
+							"select majors.* " +			//the entire major tuple
 							"  from users, userMajors, majors " +
 							" where users.id = userMajors.userId " +
 							" and userMajors.majorId = majors.id " +
@@ -470,7 +435,7 @@ public class SqliteDatabase implements IDatabase {
 							"create table courses (" +
 							"	id integer primary key," +
 		
-							"	name varchar(40)" +
+							"	name varchar(80)" +
 							")");
 					stmt3.executeUpdate();
 					

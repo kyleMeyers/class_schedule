@@ -42,8 +42,10 @@ public class LoginServlet extends HttpServlet {
 				
 				MajorController majorController = new MajorController();
 				Major major = majorController.findMajorForUser(user);
+				
 				if (major != null) {
 					// Redirect to class path
+					req.getSession().setAttribute("maj", major);
 					resp.sendRedirect(req.getContextPath() + "/class");
 				} else {
 					// Redirect to major page
