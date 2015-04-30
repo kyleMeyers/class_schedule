@@ -99,7 +99,7 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	@Override
-	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
+	public Course findCoursebyTitle(String courseName) {
 		return executeTransaction(new Transaction<Course>() {
 			@Override
 			public Course execute(Connection conn) throws SQLException {
@@ -110,10 +110,9 @@ public class SqliteDatabase implements IDatabase {
 					stmt = conn.prepareStatement(
 							"select courses.* " +			//the entire major tuple
 							"  from courses " +
-							" where courses.name = ? or courses.crn = ?"
+							" where courses.name = ?"
 					);
 					stmt.setString(1, courseName);
-					stmt.setString(2,crn);
 					
 					Course result = null;
 					
