@@ -20,10 +20,10 @@ public class DescriptionServlet extends HttpServlet {
 				throws ServletException, IOException {
 			
 			DescriptionController controller = new DescriptionController();
-			//Course current = (Course) req.getSession().getAttribute("allCourses");
+			Course current = (Course) req.getSession().getAttribute("selectedCourse");
 			
-			//Description desc = controller.findDescriptionByCourse(current);
-			//req.getSession().setAttribute("description", desc);
+			Description desc = controller.findDescriptionByCourse(current);
+			req.getSession().setAttribute("description", desc);
 			
 			req.getRequestDispatcher("/_view/courseDescription.jsp").forward(req, resp);
 		}
