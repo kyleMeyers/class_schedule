@@ -190,7 +190,16 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public IdRelation storeMajorForUser(User user, Major major) {
-		// TODO Auto-generated method stub
+		IdRelation temp = new IdRelation();
+		temp.setId1(user.getId());
+		temp.setId2(major.getId());
+		
+		if (!userList.contains(temp))	
+		{
+			majorUsersList.add(temp);
+			return temp;
+		}
+		
 		return null;
 	}
 	@Override
@@ -215,5 +224,6 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
+
 }
 
