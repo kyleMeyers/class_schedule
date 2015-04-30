@@ -29,7 +29,7 @@
 		<%-- If a major exists, displays the courses
 			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
-
+			<form>
 			<ul>
 			<c:choose>
 				<c:when test="${maj.name != null }">
@@ -37,9 +37,14 @@
 						<%-- How can we specify which course to give description for? 
 						In this form, all courseList.name-s redirect to same page--%>
 						<li>
+<<<<<<< HEAD
 							<c:set var = "courseName" value = "${courseList.name}"/>
+=======
+						
+>>>>>>> refs/remotes/kyle/master
 							<a href="./courseDescription">
-								${courselist.name}
+									<input type = "radio" name ="courseItem" value ="${courselist.name}">${courselist.name }</input>
+									<br>
 							</a>
 							<p>${courseName} Anything here?</p>
 						</li>
@@ -49,6 +54,7 @@
 			</c:choose>
 
 			</ul>
+			</form>
 		</div>
 	
 	</div>

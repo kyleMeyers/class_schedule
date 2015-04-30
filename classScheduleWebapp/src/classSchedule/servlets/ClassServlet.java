@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import classSchedule.ClassController;
 import classSchedule.model.Course;
-
 import classSchedule.model.Major;
 
 
@@ -36,9 +35,14 @@ public class ClassServlet extends HttpServlet {
 		//TODO:if button hit to display courses then go to the courseDescription Servlet
 		//also set that course to a new attribute to be used in the description
 		
-	
+		Course current = new Course();
+		
+		Course get = (Course) req.getAttribute("courseItem");
+		
+		
+		
+		
 		//req.setAttribute("course", course);
-		//req.setAttribute("crn", crn);
 		//req.setAttribute("error", error);
 
 		//req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
