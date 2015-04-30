@@ -150,8 +150,9 @@ public class FakeDatabase implements IDatabase {
 		temp.setUsername(username);
 		temp.setPassword(password);
 		
-		if (!userList.contains(temp.getUsername()) && !userList.contains(temp.getPassword()))
+		if (!userList.contains(temp.getUsername()))		// Different Users may have same password
 		{
+			userList.add(temp);
 			return temp;
 		}
 		
