@@ -8,6 +8,8 @@ import org.junit.Test;
 import classSchedule.MajorController;
 import classSchedule.model.User;
 import classSchedule.model.Major;
+import classSchedule.persist.DatabaseProvider;
+import classSchedule.persist.FakeDatabase;
 
 public class MajorControllerTest {
 
@@ -17,6 +19,9 @@ public class MajorControllerTest {
 	
 	@Before
 	public void setUp() {
+		FakeDatabase db = new FakeDatabase();
+		DatabaseProvider.setInstance(db);
+		control = new MajorController();
 		user = new User();
 		user.setUsername("Schmedding");
 		user.setPassword("test4");
@@ -25,16 +30,19 @@ public class MajorControllerTest {
 	}
 	
 	@Test
-	public void testFindMajor() {
-		
+	public void testFindMajor() {		
 		Major found = new Major();
 		found = control.findMajor(major.getName());
 		assertEquals(major.getName(), found.getName());
+		
+		assertNull(control.findMajor("Underwater Basket Weaving"));
+		assertNotNull(control.findMajor(major.getName()));
 	}
 	@Test
 	public void testNewUser() {
-		fail("Not yet implemented");
-		//how
+		User newGuy = new User();
+		newGuy.setUsername("Billy");
+		newGuy.setPassword("trains");
 	}
 	
 	@Test
