@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import classSchedule.LoginController;
 import classSchedule.MajorController;
 import classSchedule.model.User;
 import classSchedule.model.Major;
@@ -40,9 +41,14 @@ public class MajorControllerTest {
 	}
 	@Test
 	public void testNewUser() {
+		LoginController addUser = new LoginController();
 		User newGuy = new User();
 		newGuy.setUsername("Billy");
 		newGuy.setPassword("trains");
+		
+		assertNull(addUser.findUser(newGuy.getUsername(), newGuy.getPassword()));
+		control.newUser(newGuy.getUsername(), newGuy.getPassword());
+		assertNotNull(addUser.findUser("Billy", "trains"));
 	}
 	
 	@Test
