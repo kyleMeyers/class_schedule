@@ -46,7 +46,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DescriptionServlet</servlet-name>
-    <url-pattern>/class</url-pattern>
+    <url-pattern>/courseDescription</url-pattern>
   </servlet-mapping>
   
   <!-- Listeners -->

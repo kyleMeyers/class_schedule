@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import classSchedule.DescriptionController;
+import classSchedule.model.Course;
+import classSchedule.model.Description;
+
 
 public class DescriptionServlet extends HttpServlet {
 		private static final long serialVersionUID = 1L;
@@ -14,6 +18,12 @@ public class DescriptionServlet extends HttpServlet {
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 				throws ServletException, IOException {
+			
+			DescriptionController controller = new DescriptionController();
+			Course current = (Course) req.getSession().getAttribute("allCourses");
+			
+			Description desc = controller.findDescriptionByCourse(current);
+			req.getSession().setAttribute("description", desc);
 			
 			req.getRequestDispatcher("/_view/courseDescription.jsp").forward(req, resp);
 		}
