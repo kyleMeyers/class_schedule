@@ -175,5 +175,27 @@ public class InitialData {
 			descUsers.close();
 		}
 	}
+	
+	public static List<IdRelation> getCourDesc() throws IOException{
+		List<IdRelation> courDescList = new ArrayList<IdRelation>();
+		ReadCSV readCourDescs = new ReadCSV("courDescript.csv");
+
+		try {
+			while (true) {
+				List<String> tuple = readCourDescs.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				IdRelation courDesc = new IdRelation();
+				courDesc.setId1(Integer.parseInt(i.next()));
+				courDesc.setId2(Integer.parseInt(i.next()));
+				courDescList.add(courDesc);
+			}
+			return courDescList;		
+		} finally {
+			readCourDescs.close();
+		}
+	}
 }
 
