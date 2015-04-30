@@ -30,7 +30,11 @@
 			
 			<p>${description}</p>
 			
-			<form action="${pageContext.servletContext.contextPath}/courseDescription"></form>
+			<form action="${pageContext.servletContext.contextPath}/courseDescription" method="post">
+				<input type = "submit" name = "completed" value="Completed"></input>
+				<br>
+				<input type = "submit" name = "todo" value = "TODO"></input>
+			</form>
 		
 		
 		</div>

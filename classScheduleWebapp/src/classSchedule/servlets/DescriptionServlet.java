@@ -35,6 +35,17 @@ public class DescriptionServlet extends HttpServlet {
 			//TODO: if button pressed to either add to done list or to do for scheduling list then make them go back to
 			//class.jsp to pick out another class
 			
+			
+			
+			if(req.getParameter("todo") != null)
+			{
+				System.out.println("The user pressed TODO");
+			}
+			
+			if(req.getParameter("completed") != null)
+			{
+				System.out.println("The user completed this course");
+			}
 			return;
 		}
 }
