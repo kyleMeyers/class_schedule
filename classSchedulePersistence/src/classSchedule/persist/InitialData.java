@@ -156,7 +156,7 @@ public class InitialData {
 	//reads the course descriptions in the descriptions.csv
 	public static List<Description> getDescriptions() throws IOException{
 		List<Description> descList = new ArrayList<Description>();
-		ReadCSV descUsers = new ReadCSV("description.csv");
+		ReadCSV descUsers = new ReadCSV("descriptions.csv");
 		
 		try {
 			while (true) {

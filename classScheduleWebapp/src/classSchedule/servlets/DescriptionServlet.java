@@ -22,9 +22,10 @@ public class DescriptionServlet extends HttpServlet {
 			DescriptionController controller = new DescriptionController();
 
 			Course current = (Course) req.getSession().getAttribute("selectedCourse");
-
+			System.out.println(""+current.getName());
 			
 			Description desc = controller.findDescriptionByCourse(current);
+			System.out.println(""+desc.getDescript());
 			req.getSession().setAttribute("description", desc);
 			
 			req.getRequestDispatcher("/_view/courseDescription.jsp").forward(req, resp);
