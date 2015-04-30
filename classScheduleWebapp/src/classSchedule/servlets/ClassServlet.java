@@ -20,9 +20,9 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		//gets the current user of the session and finds their major from unique indexes
 		ClassController controller = new ClassController();
-		//User person = (User) req.getSession().getAttribute("user");
-		//Major current = controller.findMajorByUser(person);
 		Major major = (Major) req.getSession().getAttribute("maj");
 		
 		List<Course> classes = controller.findCourseByMajor(major);
@@ -37,6 +37,8 @@ public class ClassServlet extends HttpServlet {
 		String coursetitle = req.getParameter("courseItem");
 		List<Course> classes = (List<Course>) req.getSession().getAttribute("allCourses");
 		
+		//goes through the entire course list for the provided major and sets the selected value to an attribute 
+		//this is so we have a value to use for the CourseDescriptionServlet
 		for(Course item: classes){
 			if (item.getName().equalsIgnoreCase(coursetitle))
 			{

@@ -108,7 +108,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select courses.* " +			//the entire major tuple
+							"select courses.* " +			//the entire courses tuple
 							"  from courses " +
 							" where courses.name = ?"
 					);
@@ -173,7 +173,7 @@ public class SqliteDatabase implements IDatabase {
 				
 				PreparedStatement stmt = null;
 				
-				//if new major then delete the tuple then add a completely new one
+				//TODO:if new major then delete the tuple then add a completely new one
 				
 				try {
 					stmt = conn.prepareStatement("insert into userMajors values (?, ?)");
@@ -283,12 +283,12 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select courses.* " +			//the entire major tuple
+							"select courses.* " +			//the entire course tuple
 							"  from majors, majorCourses, courses " +
 							" where majors.id = majorCourses.majorId " +
 							" and majorCourses.courseId = courses.id " +
 							" and majors.id = ?"
-					);// TODO Auto-generated method stub
+					);
 					stmt.setInt(1, major.getId());
 
 					
@@ -322,10 +322,12 @@ public class SqliteDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"select descriptions.* " +			//the entire major tuple
+							"select descriptions.* " +			//the entire desc tuple
 							"  from descriptions " +
 							" where descriptions.id = ?"
 					);
+					//we set the desc id to the course id because they are the same in the csv files
+					//if not we had a create unique id implemented for that case
 					stmt.setInt(1, cour.getId());
 
 					
@@ -432,18 +434,6 @@ public class SqliteDatabase implements IDatabase {
 		result.setDescript(resultSet.getString(i++));
 		
 	}
-	/*
-	private void loadMajorCourses(IdRelation result, ResultSet resultSet, int i) throws SQLException{
-		result.setId1(resultSet.getInt(i++));
-		result.setId2(resultSet.getInt(i++));
-		
-	}
-	
-	private void loadUserMajors(IdRelation result, ResultSet resultSet, int i) throws SQLException{
-		result.setId1(resultSet.getInt(i++));
-		result.setId2(resultSet.getInt(i++));
-		
-	}*/
 	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
@@ -479,7 +469,6 @@ public class SqliteDatabase implements IDatabase {
 					stmt3 = conn.prepareStatement(
 							"create table courses (" +
 							"	id integer primary key," +
-		
 							"	name varchar(80)" +
 							")");
 					stmt3.executeUpdate();
@@ -571,6 +560,7 @@ public class SqliteDatabase implements IDatabase {
 					userMajorList = InitialData.getUserMajors();
 					descList = InitialData.getDescriptions();
 					courDescList = InitialData.getCourDesc();
+					
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
