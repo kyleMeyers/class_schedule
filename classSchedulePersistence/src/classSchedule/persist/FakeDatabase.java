@@ -17,6 +17,9 @@ public class FakeDatabase implements IDatabase {
 	private List<Course> courseList;
 	private List<Professor> professorList;
 	private List<Major> majorList;
+	private List<Description> descList;
+	private List<IdRelation> majorUsersList;
+	private List<IdRelation> coursesMajorsList;
 
 
 	public FakeDatabase() {
@@ -24,6 +27,9 @@ public class FakeDatabase implements IDatabase {
 		courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
 		majorList = new ArrayList<>();
+		descList = new ArrayList<>();
+		majorUsersList = new ArrayList<>();
+		coursesMajorsList = new ArrayList<>();
 
 		readInitialData();
 
@@ -35,6 +41,10 @@ public class FakeDatabase implements IDatabase {
 			majorList.addAll(InitialData.getMajors());
 			courseList.addAll(InitialData.getCourses());
 			professorList.addAll(InitialData.getProfessors());
+			descList.addAll(InitialData.getDescriptions());
+			majorUsersList.addAll(InitialData.getUserMajors());
+			coursesMajorsList.addAll(InitialData.getMajorCourses());
+			
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -150,12 +160,29 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public List<Course> findCourseByMajor(Major major) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Course> result = new ArrayList<Course>();
+		
+		for(IdRelation courMaj : coursesMajorsList)
+		{
+			while(courMaj.getId1() == major.getId())
+			{
+				Course courseResult = findCourseById(courMaj.getId2());	// Gets current matching course from id in csv
+				result.add(courseResult);
+			}
+		}
+		return result;
 	}
 	@Override
 	public Major findMajorByUser(User use) {
-		// TODO Auto-generated method stub
+		for(IdRelation majUser : majorUsersList)
+		{
+			if(majUser.getId1() == use.getId())
+			{
+				Major majorResult = findMajorById(majUser.getId2());
+				return majorResult;
+			}
+		}
 		return null;
 	}
 	@Override
