@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import classSchedule.ProfessorController;
 import classSchedule.model.Professor;
+import classSchedule.persist.DatabaseProvider;
+import classSchedule.persist.FakeDatabase;
 
 public class ProfessorControllerTest {
 
@@ -15,6 +17,9 @@ public class ProfessorControllerTest {
 	
 	@Before
 	public void setUp() {
+		FakeDatabase db = new FakeDatabase();
+		DatabaseProvider.setInstance(db);
+		control = new ProfessorController();
 		prof = new Professor();
 		prof.setFirstName("David");
 		prof.setLastName("Hovemeyer");

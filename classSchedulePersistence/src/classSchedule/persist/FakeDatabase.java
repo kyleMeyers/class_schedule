@@ -144,14 +144,16 @@ public class FakeDatabase implements IDatabase {
 	}
 	
 	// Adds a new user to the userList (if not yet in the list)
+	//
 	@Override
 	public User newUser(String username, String password) {
 		User temp = new User();
 		temp.setUsername(username);
 		temp.setPassword(password);
 		
-		if (!userList.contains(temp.getUsername()) && !userList.contains(temp.getPassword()))
+		if (!userList.contains(temp.getUsername()))		// Different Users may have same password
 		{
+			userList.add(temp);
 			return temp;
 		}
 		
