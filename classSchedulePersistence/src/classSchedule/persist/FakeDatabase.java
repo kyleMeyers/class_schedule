@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
@@ -152,6 +153,11 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public Major findMajorByUser(User use) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public IdRelation storeMajorForUser(User user, Major major) {
 		// TODO Auto-generated method stub
 		return null;
 	}
