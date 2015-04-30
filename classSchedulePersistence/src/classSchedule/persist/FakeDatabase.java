@@ -174,7 +174,14 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public Major findMajorByUser(User use) {
-		// TODO Auto-generated method stub
+		for(IdRelation majUser : majorUsersList)
+		{
+			if(majUser.getId1() == use.getId())
+			{
+				Major majorResult = findMajorById(majUser.getId2());
+				return majorResult;
+			}
+		}
 		return null;
 	}
 	@Override
