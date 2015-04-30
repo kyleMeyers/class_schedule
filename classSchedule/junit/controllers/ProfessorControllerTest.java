@@ -11,7 +11,6 @@ import classSchedule.model.Professor;
 public class ProfessorControllerTest {
 
 	private Professor prof;
-	private Professor prof2;
 	private ProfessorController control;
 	
 	@Before
@@ -19,10 +18,6 @@ public class ProfessorControllerTest {
 		prof = new Professor();
 		prof.setFirstName("David");
 		prof.setLastName("Hovemeyer");
-		
-		prof2 = new Professor();
-		prof2.setFirstName("No");
-		prof2.setLastName("Name");
 	}
 	
 	@Test
@@ -32,10 +27,6 @@ public class ProfessorControllerTest {
 		found = control.findProfessor(prof.getFirstName(), prof.getLastName());
 		assertEquals(prof.getFirstName(), found.getFirstName());
 		assertEquals(prof.getLastName(), found.getLastName());
-		
-		found = control.findProfessor(prof2.getFirstName(), prof2.getLastName());
-		assertFalse(prof2.getFirstName()==found.getFirstName());
-		assertFalse(prof2.getLastName()==found.getLastName());
 	}
 
 }

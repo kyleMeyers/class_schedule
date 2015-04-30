@@ -30,9 +30,6 @@ public class MajorControllerTest {
 		Major found = new Major();
 		found = control.findMajor(major.getName());
 		assertEquals(major.getName(), found.getName());
-		
-		found = control.findMajor("Underwater Basket Weaving");
-		assertFalse(found.getName()=="Underwater Basket Weaving");
 	}
 	@Test
 	public void testNewUser() {
