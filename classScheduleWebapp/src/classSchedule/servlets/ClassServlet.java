@@ -34,7 +34,7 @@ public class ClassServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 
-		System.out.println("I got here");
+		//System.out.println("I got here");
 		
 		//TODO:if button hit to display courses then go to the courseDescription Servlet
 		//also set that course to a new attribute to be used in the description
@@ -56,8 +56,8 @@ public class ClassServlet extends HttpServlet {
 		
 		for(Course item: classes){
 			
-			System.out.println(item.getName());
-			System.out.println(coursetitle);
+			//System.out.println(item.getName());
+			//System.out.println(coursetitle);
 			if (item.getName().equalsIgnoreCase(coursetitle))
 			{
 				req.getSession().setAttribute("selectedCourse", item);

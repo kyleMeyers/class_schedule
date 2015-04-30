@@ -27,7 +27,9 @@
 		</div>
 		
 		<div id = "section">
-		
+			<h2>${selectedCourse.name}</h2>
+			
+			<p>${description}</p>
 		
 		
 		</div>
