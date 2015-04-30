@@ -49,7 +49,7 @@
 			</c:choose>
 			
 			</ul>
-			<input type="submit" name="submit" value="Display Courses"></input>
+			<input type="submit" name="submit" value="Select Course"></input>
 			
 			</form>
 		</div>
