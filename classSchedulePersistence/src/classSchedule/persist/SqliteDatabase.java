@@ -338,7 +338,7 @@ public class SqliteDatabase implements IDatabase {
 						loadDescription(result, resultSet, 1);
 					}
 					
-					return result;			//returns an actual courses or null if there is not one
+					return result;			//returns an actual desc or null if there is not one
 				} finally {
 					DBUtil.closeQuietly(resultSet);
 					DBUtil.closeQuietly(stmt);
@@ -558,6 +558,8 @@ public class SqliteDatabase implements IDatabase {
 				List<Professor> professorList;
 				List<IdRelation> majorCourseList;
 				List<IdRelation> userMajorList;
+				List<Description> descList;
+				List<IdRelation> courDescList;
 				
 				try {
 					//this gets the csvs for the initial data to the SQL
@@ -567,6 +569,8 @@ public class SqliteDatabase implements IDatabase {
 					professorList = InitialData.getProfessors();
 					majorCourseList = InitialData.getMajorCourses();
 					userMajorList = InitialData.getUserMajors();
+					descList = InitialData.getDescriptions();
+					courDescList = InitialData.getCourDesc();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -577,6 +581,8 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement insertProfessor = null;
 				PreparedStatement insertMajorCourse = null;
 				PreparedStatement insertUserMajor = null;
+				PreparedStatement insertDesc = null;
+				PreparedStatement insertCourDesc = null;
 				
 				try {
 					insertUser = conn.prepareStatement("insert into users values (?, ?, ?)");
@@ -601,7 +607,6 @@ public class SqliteDatabase implements IDatabase {
 					for(Course cour: courseList)
 					{
 						insertCourse.setInt(1, cour.getId());
-						//insertCourse.setString(2, cour.getCRN());
 						insertCourse.setString(2, cour.getName());
 						insertCourse.addBatch();
 					}
@@ -637,6 +642,24 @@ public class SqliteDatabase implements IDatabase {
 					}
 					insertUserMajor.executeBatch();
 					
+					insertDesc = conn.prepareStatement("insert into descriptions values (?,?)");
+					for(Description descs : descList)
+					{
+						insertDesc.setInt(1, descs.getId());
+						insertDesc.setString(2, descs.getDescript());
+						insertDesc.addBatch();
+					}
+					insertDesc.executeBatch();
+					
+					insertCourDesc = conn.prepareStatement("insert into courDescript values (?,?)");
+					for(IdRelation cd : courDescList)
+					{
+						insertCourDesc.setInt(1, cd.getId1());
+						insertCourDesc.setInt(2, cd.getId2());
+						insertCourDesc.addBatch();
+					}
+					insertCourDesc.executeBatch();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUser);
@@ -645,6 +668,8 @@ public class SqliteDatabase implements IDatabase {
 					DBUtil.closeQuietly(insertProfessor);
 					DBUtil.closeQuietly(insertMajorCourse);
 					DBUtil.closeQuietly(insertUserMajor);
+					DBUtil.closeQuietly(insertDesc);
+					DBUtil.closeQuietly(insertCourDesc);
 				}
 			}
 		});
