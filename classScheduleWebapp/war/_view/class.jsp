@@ -29,14 +29,22 @@
 		<%-- If a major exists, displays the courses
 			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
+
 			<ul>
 			<c:choose>
 				<c:when test="${maj.name != null }">
 					<c:forEach var="courselist" items="${allCourses}">
-						<li>${courselist.name}</li>
+						<%-- How can we specify which course to give description for? 
+						In this form, all courseList.name-s redirect to same page--%>
+						<li>
+							<a href="./courseDescription">
+								${courselist.name}
+							</a>
+						</li>
 					</c:forEach>
 				</c:when>
 			</c:choose>
+
 			</ul>
 		</div>
 	
@@ -50,6 +58,10 @@
 		<a href="./major">
 			<button>Click to add a new major</button>
 		</a>
+		
+		<form action="${pageContext.servletContext.contextPath}/class" method="post">
+			<input type="submit" name="submit" value="Display Courses"></input>
+		</form>
 	
 	</div>
 	

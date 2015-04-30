@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.Description;
 import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
@@ -30,7 +31,6 @@ public class InitialData {
 				user.setId(Integer.parseInt(i.next()));
 				user.setUsername(i.next());
 				user.setPassword(i.next());
-				user.setMajor(i.next());
 				userList.add(user);
 			}
 			return userList;
@@ -76,8 +76,6 @@ public class InitialData {
 				Iterator<String> i = tuple.iterator();
 				Course course = new Course();
 				course.setId(Integer.parseInt(i.next()));
-				//course.setCourseID(i.next());
-				course.setCRN(i.next());
 				course.setName(i.next());
 				courseList.add(course);
 			}
@@ -152,6 +150,29 @@ public class InitialData {
 			return profList;
 		} finally {
 			readProfs.close();
+		}
+	}
+	
+	//reads the course descriptions in the descriptions.csv
+	public static List<Description> getDescriptions() throws IOException{
+		List<Description> descList = new ArrayList<Description>();
+		ReadCSV descUsers = new ReadCSV("description.csv");
+		
+		try {
+			while (true) {
+				List<String> tuple = descUsers.next();
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Description descript = new Description();
+				descript.setId(Integer.parseInt(i.next()));
+				descript.setDescript(i.next());
+				descList.add(descript);
+			}
+			return descList;
+		} finally {
+			descUsers.close();
 		}
 	}
 }

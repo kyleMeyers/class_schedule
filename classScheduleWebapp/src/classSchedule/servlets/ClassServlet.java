@@ -7,15 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 import classSchedule.ClassController;
 import classSchedule.model.Course;
 
 import classSchedule.model.Major;
-import classSchedule.model.User;
-import classSchedule.persist.InitialData;
 
 
 public class ClassServlet extends HttpServlet {
@@ -24,41 +20,27 @@ public class ClassServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		//List <Course> allCourses = InitialData.getCourses();
-		//req.getSession().setAttribute("allCourses", allCourses);
-		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
-	}
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		Major major = (Major) req.getSession().getAttribute("maj");
-		//String course = req.getParameter("course");
-		String crn = req.getParameter("crn");
-		String error = "";
-
 		ClassController controller = new ClassController();
-		//Course courseTitle = controller.findCourseByMajor(crn);
-
-		User person = (User) req.getSession().getAttribute("user");
-		Major current = controller.findMajorByUser(person);
-
-		List<Course> classes = controller.findCourseByMajor(current);
-		if(classes != null)
-		{
-			//Real course
-			req.getSession().setAttribute("allCourses", classes);
-
-
-			// Redirect to ?? page
-			//resp.sendRedirect(req.getContextPath() + "/class");
-
-			return;
-		}
-
-		//req.setAttribute("course", course);
-		req.setAttribute("crn", crn);
-		req.setAttribute("error", error);
+		//User person = (User) req.getSession().getAttribute("user");
+		//Major current = controller.findMajorByUser(person);
+		Major major = (Major) req.getSession().getAttribute("maj");
+		
+		List<Course> classes = controller.findCourseByMajor(major);
+		req.getSession().setAttribute("allCourses", classes);
 		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
+	}
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
+		
+		//TODO:if button hit to display courses then go to the courseDescription Servlet
+		
+	
+		//req.setAttribute("course", course);
+		//req.setAttribute("crn", crn);
+		//req.setAttribute("error", error);
+
+		//req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 
 	}
 }

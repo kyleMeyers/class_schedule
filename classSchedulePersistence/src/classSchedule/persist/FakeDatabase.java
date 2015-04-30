@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.Description;
+import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
@@ -133,7 +135,7 @@ public class FakeDatabase implements IDatabase {
 	
 	// Adds a new user to the userList (if not yet in the list)
 	@Override
-	public User newUser(String username, String password, String major) {
+	public User newUser(String username, String password) {
 		User temp = new User();
 		temp.setUsername(username);
 		temp.setPassword(password);
@@ -152,6 +154,16 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public Major findMajorByUser(User use) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public IdRelation storeMajorForUser(User user, Major major) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Description findDescriptionByCourse(Course cour) {
 		// TODO Auto-generated method stub
 		return null;
 	}
