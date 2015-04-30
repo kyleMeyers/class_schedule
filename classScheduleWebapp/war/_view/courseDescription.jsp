@@ -14,8 +14,7 @@
 	
 	<div id = "container">
 	<div id = "header">
-		<h1>YCP Schedule Planner Prototype2</h1>
-		<h2>${allCourses}</h2>	
+		<h1>YCP Schedule Planner Prototype2</h1>	
 	
 	</div>
 	
@@ -30,6 +29,8 @@
 			<h2>${selectedCourse.name}</h2>
 			
 			<p>${description}</p>
+			
+			<form action="${pageContext.servletContext.contextPath}/courseDescription"></form>
 		
 		
 		</div>
