@@ -34,36 +34,15 @@ public class ClassServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 
-		System.out.println("I got here");
-		
-		//TODO:if button hit to display courses then go to the courseDescription Servlet
-		//also set that course to a new attribute to be used in the description
-		
-		//Course current = new Course();
-		
-		//Course get = (Course) req.getAttribute("courseItem");
-		
-		
-		
-		
-
-		//req.setAttribute("course", course);
-		//req.setAttribute("error", error);
-
-		//req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 		String coursetitle = req.getParameter("courseItem");
 		List<Course> classes = (List<Course>) req.getSession().getAttribute("allCourses");
 		
 		for(Course item: classes){
-			
-			System.out.println(item.getName());
-			System.out.println(coursetitle);
 			if (item.getName().equalsIgnoreCase(coursetitle))
 			{
 				req.getSession().setAttribute("selectedCourse", item);
 				resp.sendRedirect(req.getContextPath() + "/courseDescription");
 				
-				System.out.println("I found what I wanted");
 				return;
 			}
 		}

@@ -323,10 +323,8 @@ public class SqliteDatabase implements IDatabase {
 				try {
 					stmt = conn.prepareStatement(
 							"select descriptions.* " +			//the entire major tuple
-							"  from courses, courDescript, descriptions " +
-							" where courses.id = courDescript.courseId " +
-							" and courDescript.descriptId = descriptions.id " +
-							" and courses.id = ?"
+							"  from descriptions " +
+							" where descriptions.id = ?"
 					);
 					stmt.setInt(1, cour.getId());
 
