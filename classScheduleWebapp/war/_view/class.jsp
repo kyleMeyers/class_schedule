@@ -37,10 +37,13 @@
 						<%-- How can we specify which course to give description for? 
 						In this form, all courseList.name-s redirect to same page--%>
 						<li>
+							<c:set var = "courseName" value = "${courseList.name}"/>
 							<a href="./courseDescription">
 								${courselist.name}
 							</a>
+							<p>${courseName} Anything here?</p>
 						</li>
+						
 					</c:forEach>
 				</c:when>
 			</c:choose>

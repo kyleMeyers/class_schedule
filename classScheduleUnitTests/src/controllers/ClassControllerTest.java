@@ -8,15 +8,9 @@ import org.junit.Test;
 import classSchedule.ClassController;
 import classSchedule.model.Major;
 import classSchedule.model.User;
+import classSchedule.persist.DatabaseProvider;
+import classSchedule.persist.FakeDatabase;
 
-/**
- * What are the junits supposed to test? Controllers contain very few methods,
- * which require an instance of IDatabase. Is declaring a Controller enough?
- * Are the tests here set up properly?
- * 
- * @author bcoover
- *
- */
 public class ClassControllerTest {
 	private User initUser, newUser;
 	private Major initMajor, newMajor;
@@ -24,6 +18,10 @@ public class ClassControllerTest {
 	
 	@Before
 	public void setUp() {
+		FakeDatabase db = new FakeDatabase();
+		DatabaseProvider.setInstance(db);
+		control = new ClassController();
+		
 		initUser = new User();
 		newUser = new User();
 		initMajor = new Major();
