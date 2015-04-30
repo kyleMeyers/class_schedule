@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.Description;
 import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
@@ -37,5 +38,7 @@ public interface IDatabase {
 	public List<Course> findCourseByMajor(Major major);
 
 	public IdRelation storeMajorForUser(User user, Major major);
+
+	public Description findDescriptionByCourse(Course cour);
 
 }

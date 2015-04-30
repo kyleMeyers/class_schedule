@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.Description;
 import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
@@ -288,7 +289,7 @@ public class SqliteDatabase implements IDatabase {
 							" where majors.id = majorCourses.majorId " +
 							" and majorCourses.courseId = courses.id " +
 							" and majors.id = ?"
-					);
+					);// TODO Auto-generated method stub
 					stmt.setInt(1, major.getId());
 
 					
@@ -311,6 +312,45 @@ public class SqliteDatabase implements IDatabase {
 		});
 		
 	}
+	
+	@Override
+	public Description findDescriptionByCourse(Course cour) {
+		return executeTransaction(new Transaction <Description>() {
+			@Override
+			public Description execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select descriptions.* " +			//the entire major tuple
+							"  from courses, courDescript, descriptions " +
+							" where courses.id = courDescript.courseId " +
+							" and courDescript.descriptId = descriptions.id " +
+							" and courses.id = ?"
+					);
+					stmt.setInt(1, cour.getId());
+
+					
+					Description result = null;
+					
+					resultSet = stmt.executeQuery();
+					
+					if(resultSet.next()) { 
+						result = new Description();
+						loadDescription(result, resultSet, 1);
+					}
+					
+					return result;			//returns an actual courses or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
+	}
+	
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
@@ -387,10 +427,14 @@ public class SqliteDatabase implements IDatabase {
 	
 	private void loadCourse(Course result, ResultSet resultSet, int i) throws SQLException{
 		result.setId(resultSet.getInt(i++));
-		//result.setCRN(resultSet.getString(i++));
 		result.setName(resultSet.getString(i++));
 	}
 	
+	private void loadDescription(Description result, ResultSet resultSet, int i) throws SQLException{
+		result.setId(resultSet.getInt(i++));
+		result.setDescript(resultSet.getString(i++));
+		
+	}
 	private void loadMajorCourses(IdRelation result, ResultSet resultSet, int i) throws SQLException{
 		result.setId1(resultSet.getInt(i++));
 		result.setId2(resultSet.getInt(i++));
@@ -415,6 +459,9 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement stmt5a = null;
 				PreparedStatement stmt6 = null;
 				PreparedStatement stmt6a = null;
+				PreparedStatement stmt7 = null;
+				PreparedStatement stmt8 = null;
+				PreparedStatement stmt8a = null;
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
@@ -469,6 +516,23 @@ public class SqliteDatabase implements IDatabase {
 					stmt6a = conn.prepareStatement("create unique index user_major_idx on userMajors(userId, majorId)");
 					stmt6a.executeUpdate();
 					
+					stmt7 = conn.prepareStatement(
+							"create table descriptions(" +
+							"	id integer primary key, " +
+							"	descript varchar(400)" +
+							")");
+					stmt7.executeUpdate();
+					
+					stmt8 = conn.prepareStatement(
+							"create table courDescript(" +
+							"	courseId integer, " +
+							"	descriptId integer" +
+							")");
+					stmt8.executeUpdate();
+					
+					stmt8a = conn.prepareStatement("create unique index course_description_idx on courDescript(courseId, descriptId)");
+					stmt8a.executeUpdate();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
@@ -479,6 +543,9 @@ public class SqliteDatabase implements IDatabase {
 					DBUtil.closeQuietly(stmt5a);
 					DBUtil.closeQuietly(stmt6);
 					DBUtil.closeQuietly(stmt6a);
+					DBUtil.closeQuietly(stmt7);
+					DBUtil.closeQuietly(stmt8);
+					DBUtil.closeQuietly(stmt8a);
 				}
 			}
 		});

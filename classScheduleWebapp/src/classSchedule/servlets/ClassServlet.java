@@ -7,15 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 import classSchedule.ClassController;
 import classSchedule.model.Course;
 
 import classSchedule.model.Major;
-import classSchedule.model.User;
-import classSchedule.persist.InitialData;
 
 
 public class ClassServlet extends HttpServlet {
@@ -37,29 +33,9 @@ public class ClassServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		
-		//String course = req.getParameter("course");
-		//String crn = req.getParameter("crn");
-		//String error = "";
-
-		//Course test = new Course();
-		//test.setId(6);
-		//test.setCRN("CS");
-		//test.setName("Whoop di doo");
-
+		//TODO:if button hit to display courses then go to the courseDescription Servlet
 		
-
-		//classes.add(test);
-		//classes.add(test);
-		//classes.add(test);
-		//if(classes != null)
-		//{
-
-			// Redirect to ?? page
-			//resp.sendRedirect(req.getContextPath() + "/class");
-
-			return;
-
-		//}
+	
 		//req.setAttribute("course", course);
 		//req.setAttribute("crn", crn);
 		//req.setAttribute("error", error);

@@ -22,6 +22,10 @@
     <servlet-name>ClassServlet</servlet-name>
     <servlet-class>classSchedule.servlets.ClassServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>DescriptionServlet</servlet-name>
+    <servlet-class>classSchedule.servlets.DescriptionServlet</servlet-class>
+  </servlet>
   
   <!-- Servlet mappings -->
   <servlet-mapping>
@@ -38,6 +42,10 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ClassServlet</servlet-name>
+    <url-pattern>/class</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DescriptionServlet</servlet-name>
     <url-pattern>/class</url-pattern>
   </servlet-mapping>
   
