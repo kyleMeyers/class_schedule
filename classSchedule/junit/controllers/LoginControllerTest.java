@@ -27,6 +27,14 @@ public class LoginControllerTest {
 		found = control.findUser(user.getUsername(), user.getPassword());
 		assertEquals(user.getUsername(), found.getUsername());
 		assertEquals(user.getPassword(), found.getPassword());
+		
+		found = control.findUser(user.getUsername(), "test5");
+		assertFalse(user.getUsername()==found.getUsername());
+		assertFalse(found.getPassword()=="test5");
+		
+		found = control.findUser("Browning", user.getPassword());
+		assertFalse("Browning"==found.getUsername());
+		assertFalse(user.getPassword()==found.getPassword());
 	}
 
 }
