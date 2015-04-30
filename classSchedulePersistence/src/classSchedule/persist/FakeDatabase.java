@@ -1,11 +1,12 @@
 package classSchedule.persist;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import classSchedule.model.Course;
+import classSchedule.model.Description;
+import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
@@ -15,6 +16,10 @@ public class FakeDatabase implements IDatabase {
 	private List<Course> courseList;
 	private List<Professor> professorList;
 	private List<Major> majorList;
+	private List<Description> descList;
+	private List<IdRelation> majorUsersList;
+	private List<IdRelation> coursesMajorsList;
+	private List<IdRelation> descCoursesList;
 
 
 	public FakeDatabase() {
@@ -22,6 +27,10 @@ public class FakeDatabase implements IDatabase {
 		courseList = new ArrayList<>();
 		professorList = new ArrayList<>();
 		majorList = new ArrayList<>();
+		descList = new ArrayList<>();
+		majorUsersList = new ArrayList<>();
+		coursesMajorsList = new ArrayList<>();
+		descCoursesList = new ArrayList<>();
 
 		readInitialData();
 
@@ -33,6 +42,11 @@ public class FakeDatabase implements IDatabase {
 			majorList.addAll(InitialData.getMajors());
 			courseList.addAll(InitialData.getCourses());
 			professorList.addAll(InitialData.getProfessors());
+			descList.addAll(InitialData.getDescriptions());
+			majorUsersList.addAll(InitialData.getUserMajors());
+			coursesMajorsList.addAll(InitialData.getMajorCourses());
+			descCoursesList.addAll(InitialData.getCourDesc());
+			
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
 		}
@@ -108,10 +122,10 @@ public class FakeDatabase implements IDatabase {
 	
 	// Returns the single course specified (by Name)
 	@Override
-	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
+	public Course findCoursebyTitle(String courseName) {
 		for(Course cour : courseList)
 		{
-			if (cour.getName() == courseName || cour.getCRN() == crn)
+			if (cour.getName() == courseName)
 			{
 				Course courseResult = findCourseById(cour.getId());	// Gets current matching course from id in csv
 				return courseResult;
@@ -132,14 +146,16 @@ public class FakeDatabase implements IDatabase {
 	}
 	
 	// Adds a new user to the userList (if not yet in the list)
+	//
 	@Override
-	public User newUser(String username, String password, String major) {
+	public User newUser(String username, String password) {
 		User temp = new User();
 		temp.setUsername(username);
 		temp.setPassword(password);
 		
-		if (!userList.contains(temp.getUsername()) && !userList.contains(temp.getPassword()))
+		if (!userList.contains(temp.getUsername()))		// Different Users may have same password
 		{
+			userList.add(temp);
 			return temp;
 		}
 		
@@ -147,12 +163,56 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public List<Course> findCourseByMajor(Major major) {
+		
+		List<Course> result = new ArrayList<Course>();
+		
+		for(IdRelation courMaj : coursesMajorsList)
+		{
+			while(courMaj.getId1() == major.getId())
+			{
+				Course courseResult = findCourseById(courMaj.getId2());	// Gets current matching course from id in csv
+				result.add(courseResult);
+			}
+		}
+		return result;
+	}
+	@Override
+	public Major findMajorByUser(User use) {
+		for(IdRelation majUser : majorUsersList)
+		{
+			if(majUser.getId1() == use.getId())
+			{
+				Major majorResult = findMajorById(majUser.getId2());
+				return majorResult;
+			}
+		}
+		return null;
+	}
+	@Override
+	public IdRelation storeMajorForUser(User user, Major major) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public Major findMajorByUser(User use) {
-		// TODO Auto-generated method stub
+	public Description findDescriptionByCourse(Course cour) {
+		for(IdRelation courDesc : descCoursesList)
+		{
+			if(courDesc.getId1() == cour.getId())
+			{
+				Description descResult= findDescById(courDesc.getId2());
+				return descResult;
+			}
+		}
+		return null;
+	}
+	private Description findDescById(int id) {
+		for(Description desc: descList)
+		{
+			if(desc.getId() == id)
+			{
+				return desc;
+			}
+		}
 		return null;
 	}
 }

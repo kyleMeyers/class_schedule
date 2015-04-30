@@ -22,15 +22,15 @@ public class MajorServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
 		List <Major> allMajors= InitialData.getMajors();
 		req.getSession().setAttribute("allMajors", allMajors);
 		req.getRequestDispatcher("/_view/major.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		String major = req.getParameter("major");
+		String major = req.getParameter("maj");
 		String error = "";
-		//List <Major> allMajors= InitialData.getMajors();
-		//List <Course> allCourses;
+
 		
 		if(major == null)
 		{
@@ -46,8 +46,10 @@ public class MajorServlet extends HttpServlet {
 			{
 				//Real major
 				req.getSession().setAttribute("maj", maj);
-				//req.getSession().setAttribute("allMajors", allMajors);
 				
+				// Store the student's major in the database
+				User user = (User) req.getSession().getAttribute("user");
+				controller.storeMajorForUser(user, maj);
 				
 				// Redirect to schedule page
 				resp.sendRedirect(req.getContextPath() + "/class");
@@ -60,7 +62,7 @@ public class MajorServlet extends HttpServlet {
 			}
 		}
 		
-		req.setAttribute("major", major);
+		req.setAttribute("maj", major);
 		req.setAttribute("error", error);
 		
 		req.getRequestDispatcher("/_view/major.jsp").forward(req, resp);

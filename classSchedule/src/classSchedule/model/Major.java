@@ -3,7 +3,7 @@ package classSchedule.model;
 public class Major {
 	
 	private int id;
-	private String MajorID;
+	//private String MajorID;
 	private String name;
 	//private List<Course> requirements;
 	
@@ -35,12 +35,12 @@ public class Major {
 		this.id = id;
 	}
 
-	public String getMajorID() {
-		return MajorID;
-	}
+	//public String getMajorID() {
+	//	return MajorID;
+	//}
 
-	public void setMajorID(String majorID) {
-		MajorID = majorID;
-	}
+	//public void setMajorID(String majorID) {
+	//	MajorID = majorID;
+	//}
 
 }

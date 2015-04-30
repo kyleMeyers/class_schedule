@@ -29,28 +29,29 @@
 		<%-- If a major exists, displays the courses
 			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
-
+			<form action="${pageContext.servletContext.contextPath}/class" method="post">
 			<ul>
 			
 			<c:choose>
 				<c:when test="${maj.name != null }">
-					<form>
+					
 					<c:forEach var="courselist" items="${allCourses}">
-						<%-- How can we specify which course to give description for? 
-						In this form, all courseList.name-s redirect to same page--%>
-<!-- 						<li> -->
-<!-- 							<a href="./courseDescription"> -->
-<%-- 								${courselist.name} --%>
-<!-- 							</a> -->
-<!-- 						</li> -->
-						<input type="radio" name="coursetitle" value="${courselist.name}" checked>${courselist.name}
-						<br>
+
+						<%-- <input type="radio" name="coursetitle" value="${courselist.name}" checked>${courselist.name}
+						<br> --%>
+						<li>
+							<input type ="radio" name ="courseItem" value ="${courselist.name}">${courselist.name}
+							<br>
+						</li>
 					</c:forEach>
-					</form>
+					
 				</c:when>
 			</c:choose>
 			
 			</ul>
+			<input type="submit" name="submit" value="Display Courses"></input>
+			
+			</form>
 		</div>
 	
 	</div>
@@ -64,9 +65,7 @@
 			<button>Click to add a new major</button>
 		</a>
 		
-		<form action="${pageContext.servletContext.contextPath}/class" method="post">
-			<input type="submit" name="submit" value="Display Courses"></input>
-		</form>
+
 	
 	</div>
 	
