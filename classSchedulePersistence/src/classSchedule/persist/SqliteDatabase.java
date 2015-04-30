@@ -435,6 +435,7 @@ public class SqliteDatabase implements IDatabase {
 		result.setDescript(resultSet.getString(i++));
 		
 	}
+	/*
 	private void loadMajorCourses(IdRelation result, ResultSet resultSet, int i) throws SQLException{
 		result.setId1(resultSet.getInt(i++));
 		result.setId2(resultSet.getInt(i++));
@@ -445,7 +446,7 @@ public class SqliteDatabase implements IDatabase {
 		result.setId1(resultSet.getInt(i++));
 		result.setId2(resultSet.getInt(i++));
 		
-	}
+	}*/
 	
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
