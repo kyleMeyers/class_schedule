@@ -1,7 +1,6 @@
 package classSchedule.persist;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class FakeDatabase implements IDatabase {
 	private List<Description> descList;
 	private List<IdRelation> majorUsersList;
 	private List<IdRelation> coursesMajorsList;
+	private List<IdRelation> descCoursesList;
 
 
 	public FakeDatabase() {
@@ -30,6 +30,7 @@ public class FakeDatabase implements IDatabase {
 		descList = new ArrayList<>();
 		majorUsersList = new ArrayList<>();
 		coursesMajorsList = new ArrayList<>();
+		descCoursesList = new ArrayList<>();
 
 		readInitialData();
 
@@ -44,6 +45,7 @@ public class FakeDatabase implements IDatabase {
 			descList.addAll(InitialData.getDescriptions());
 			majorUsersList.addAll(InitialData.getUserMajors());
 			coursesMajorsList.addAll(InitialData.getMajorCourses());
+			descCoursesList.addAll(InitialData.getCourDesc());
 			
 		} catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
@@ -120,10 +122,10 @@ public class FakeDatabase implements IDatabase {
 	
 	// Returns the single course specified (by Name)
 	@Override
-	public Course findCoursebyTitleOrCrn(String courseName, String crn) {
+	public Course findCoursebyTitle(String courseName) {
 		for(Course cour : courseList)
 		{
-			if (cour.getName() == courseName || cour.getCRN() == crn)
+			if (cour.getName() == courseName)
 			{
 				Course courseResult = findCourseById(cour.getId());	// Gets current matching course from id in csv
 				return courseResult;
@@ -193,7 +195,24 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public Description findDescriptionByCourse(Course cour) {
-		// TODO Auto-generated method stub
+		for(IdRelation courDesc : descCoursesList)
+		{
+			if(courDesc.getId1() == cour.getId())
+			{
+				Description descResult= findDescById(courDesc.getId2());
+				return descResult;
+			}
+		}
+		return null;
+	}
+	private Description findDescById(int id) {
+		for(Description desc: descList)
+		{
+			if(desc.getId() == id)
+			{
+				return desc;
+			}
+		}
 		return null;
 	}
 }
