@@ -34,6 +34,7 @@ public class ClassServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
 		
 		//TODO:if button hit to display courses then go to the courseDescription Servlet
+		//also set that course to a new attribute to be used in the description
 		
 	
 		//req.setAttribute("course", course);
