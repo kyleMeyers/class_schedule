@@ -29,7 +29,7 @@ public class MajorServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/major.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		String major = req.getParameter("maj");
+		String major = req.getParameter("major");
 		String error = "";
 
 		
