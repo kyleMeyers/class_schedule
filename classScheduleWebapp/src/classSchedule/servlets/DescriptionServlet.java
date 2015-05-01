@@ -1,6 +1,8 @@
 package classSchedule.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,16 +39,26 @@ public class DescriptionServlet extends HttpServlet {
 			//TODO: if button pressed to either add to done list or to do for scheduling list then make them go back to
 			//class.jsp to pick out another class
 			
+			List<Course> done = new ArrayList<Course>();
+			List<Course> scheduled = new ArrayList<Course>();
 			
+			Course selected = (Course) req.getSession().getAttribute("selectedCourse");
 			
 			if(req.getParameter("todo") != null)
 			{
-				System.out.println("The user pressed TODO");
+				//System.out.println("The user pressed TODO");
+				done.add(selected);
+				req.getSession().setAttribute("doneList", done);
+				resp.sendRedirect(req.getContextPath() + "/class");
 			}
 			
 			if(req.getParameter("completed") != null)
 			{
-				System.out.println("The user completed this course");
+				//System.out.println("The user completed this course");
+				scheduled.add(selected);
+				req.getSession().setAttribute("todoList", scheduled);
+				resp.sendRedirect(req.getContextPath() + "/class");
+				
 			}
 			return;
 		}
