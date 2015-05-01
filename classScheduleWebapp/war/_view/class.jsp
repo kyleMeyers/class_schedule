@@ -5,6 +5,7 @@
 <html>
 
 	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<title>Major Course List</title>
 		<link rel="stylesheet" type = "text/css" href = "${pageContext.servletContext.contextPath}/CSS/Layout.css">
 	
@@ -98,7 +99,16 @@
 	
 	</body>
 
-
+	<script>
+		var navhieght = $("#nav").height();
+		var sechieght = $("#section").height();
+		
+		if(sechieght > navhieght)
+		{
+			$("#nav").height($("#section").height());
+		}
+	
+	</script>
 
 
 
