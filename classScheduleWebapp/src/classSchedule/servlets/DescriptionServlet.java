@@ -14,9 +14,12 @@ import classSchedule.model.Course;
 import classSchedule.model.Description;
 
 
+
 public class DescriptionServlet extends HttpServlet {
 		private static final long serialVersionUID = 1L;
-
+		private List<Course> done = new ArrayList<Course>();
+		private List<Course> scheduled = new ArrayList<Course>();
+		
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 				throws ServletException, IOException {
@@ -27,7 +30,7 @@ public class DescriptionServlet extends HttpServlet {
 			Course current = (Course) req.getSession().getAttribute("selectedCourse");
 			
 			Description desc = controller.findDescriptionByCourse(current);
-			System.out.println(""+desc.getDescript());
+			//System.out.println(""+desc.getDescript());
 			
 			req.getSession().setAttribute("descr", desc);
 			
@@ -39,24 +42,21 @@ public class DescriptionServlet extends HttpServlet {
 			//TODO: if button pressed to either add to done list or to do for scheduling list then make them go back to
 			//class.jsp to pick out another class
 			
-			List<Course> done = new ArrayList<Course>();
-			List<Course> scheduled = new ArrayList<Course>();
-			
 			Course selected = (Course) req.getSession().getAttribute("selectedCourse");
 			
 			if(req.getParameter("todo") != null)
 			{
 				//System.out.println("The user pressed TODO");
-				done.add(selected);
-				req.getSession().setAttribute("doneList", done);
+				scheduled.add(selected);
+				req.getSession().setAttribute("todoList", scheduled);
 				resp.sendRedirect(req.getContextPath() + "/class");
 			}
 			
 			if(req.getParameter("completed") != null)
 			{
 				//System.out.println("The user completed this course");
-				scheduled.add(selected);
-				req.getSession().setAttribute("todoList", scheduled);
+				done.add(selected);
+				req.getSession().setAttribute("doneList", done);
 				resp.sendRedirect(req.getContextPath() + "/class");
 				
 			}
