@@ -52,6 +52,17 @@
 			<input type="submit" name="submit" value="Select Course"></input>
 			
 			</form>
+			
+			<h3>Completed courses</h3>
+			
+			<ul>
+			<c:forEach var="compcourse" items = "${doneList}">
+				<li>
+					<p>${compcourse.name}</p>
+				</li>				
+			
+			</c:forEach>
+			</ul>
 		</div>
 	
 	</div>
@@ -59,13 +70,9 @@
 	
 	
 	<div id = "section">
-<!-- 		<input type="submit" name="submit" value="Click to add a new major"></input> -->
-		<br>
 		<a href="./major">
 			<button>Click to add a new major</button>
 		</a>
-		
-
 	
 	</div>
 	

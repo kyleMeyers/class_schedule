@@ -47,16 +47,16 @@ public class DescriptionServlet extends HttpServlet {
 			if(req.getParameter("todo") != null)
 			{
 				//System.out.println("The user pressed TODO");
-				done.add(selected);
-				req.getSession().setAttribute("doneList", done);
+				scheduled.add(selected);
+				req.getSession().setAttribute("todoList", scheduled);
 				resp.sendRedirect(req.getContextPath() + "/class");
 			}
 			
 			if(req.getParameter("completed") != null)
 			{
 				//System.out.println("The user completed this course");
-				scheduled.add(selected);
-				req.getSession().setAttribute("todoList", scheduled);
+				done.add(selected);
+				req.getSession().setAttribute("doneList", done);
 				resp.sendRedirect(req.getContextPath() + "/class");
 				
 			}
