@@ -14,8 +14,7 @@
 	
 	<div id = "container">
 	<div id = "header">
-		<h1>YCP Schedule Planner Prototype2</h1>
-		<h2>${allCourses.name}</h2>	
+		<h1>YCP Schedule Planner Prototype2</h1>	
 	
 	</div>
 	
@@ -27,7 +26,15 @@
 		</div>
 		
 		<div id = "section">
-		
+			<h2>${selectedCourse.name}</h2>
+			
+			<p>${descr.descript}</p>
+			
+			<form action="${pageContext.servletContext.contextPath}/courseDescription" method="post">
+				<input type = "submit" name = "completed" value="Completed"></input>
+				<br>
+				<input type = "submit" name = "todo" value = "TODO"></input>
+			</form>
 		
 		
 		</div>
@@ -41,7 +48,7 @@
 	
 	
 	<div id = "footer">
-		<h6> Please click the done button if you have finished the course or TODO to schedule one</h6>
+		<h6> Please click the Completed button if you have finished the course or TODO to schedule one</h6>
 	
 	</div>
 	
