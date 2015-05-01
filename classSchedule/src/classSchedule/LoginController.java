@@ -12,4 +12,10 @@ public class LoginController {
 		return db.findUser(username, password);				//returns the database information
 	}
 	
+	public User newUser(String username, String password) {
+		IDatabase db = DatabaseProvider.getInstance();		//base login information and getting it from the database
+		
+		return db.newUser(username, password);				//adds the database information
+	}
+	
 }

@@ -29,32 +29,52 @@
 		<%-- If a major exists, displays the courses
 			Currently displays all courses, instead of major specific --%>
 		<div id = "section">
-			<form>
+			<form action="${pageContext.servletContext.contextPath}/class" method="post">
 			<ul>
+			
 			<c:choose>
 				<c:when test="${maj.name != null }">
+					
 					<c:forEach var="courselist" items="${allCourses}">
-						<%-- How can we specify which course to give description for? 
-						In this form, all courseList.name-s redirect to same page--%>
+
+						<%-- <input type="radio" name="coursetitle" value="${courselist.name}" checked>${courselist.name}
+						<br> --%>
 						<li>
-<<<<<<< HEAD
-							<c:set var = "courseName" value = "${courseList.name}"/>
-=======
-						
->>>>>>> refs/remotes/kyle/master
-							<a href="./courseDescription">
-									<input type = "radio" name ="courseItem" value ="${courselist.name}">${courselist.name }</input>
-									<br>
-							</a>
-							<p>${courseName} Anything here?</p>
+							<input type ="radio" name ="courseItem" value ="${courselist.name}">${courselist.name}
+							<br>
 						</li>
 						
 					</c:forEach>
+					
 				</c:when>
 			</c:choose>
-
+			
 			</ul>
+			<input type="submit" name="submit" value="Select Course"></input>
+			
 			</form>
+			
+			<h3>Completed courses</h3>
+			
+			<ul>
+			<c:forEach var="compcourse" items = "${doneList}">
+				<li>
+					<p>${compcourse.name}</p>
+				</li>				
+			
+			</c:forEach>
+			</ul>
+			
+			<h3>Todo list</h3>
+			
+			<ul>
+			<c:forEach var="todocourse" items = "${todoList}">
+				<li>
+					<p>${todocourse.name}</p>
+				</li>				
+			
+			</c:forEach>
+			</ul>
 		</div>
 	
 	</div>
@@ -62,15 +82,9 @@
 	
 	
 	<div id = "section">
-<!-- 		<input type="submit" name="submit" value="Click to add a new major"></input> -->
-		<br>
 		<a href="./major">
 			<button>Click to add a new major</button>
 		</a>
-		
-		<form action="${pageContext.servletContext.contextPath}/class" method="post">
-			<input type="submit" name="submit" value="Display Courses"></input>
-		</form>
 	
 	</div>
 	

@@ -23,12 +23,13 @@ public class MajorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
+		//this is to display all the majors to choose from
 		List <Major> allMajors= InitialData.getMajors();
 		req.getSession().setAttribute("allMajors", allMajors);
 		req.getRequestDispatcher("/_view/major.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		String major = req.getParameter("maj");
+		String major = req.getParameter("major");
 		String error = "";
 
 		
