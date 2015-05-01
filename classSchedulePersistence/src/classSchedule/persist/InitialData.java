@@ -11,11 +11,11 @@ import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
-import classSchedule.model.Course;
 
 public class InitialData {
 	
-	//reads the users in the csv spreadsheet for the fakeDatabase
+	//reads the users in the csv spreadsheet for the fakeDatabase and SQLDatabase
+	//goes through each part of the tuple and uses setters to thoughs values to the respective Class in the list
 	public static List<User> getUsers() throws IOException{
 		List<User> userList = new ArrayList<User>();
 		ReadCSV readUsers = new ReadCSV("users.csv");

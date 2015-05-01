@@ -5,8 +5,6 @@ import java.util.Scanner;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import classSchedule.persist.DatabaseProvider;
-import classSchedule.persist.FakeDatabase;
 
 public class DatabaseInitListener implements ServletContextListener {
 

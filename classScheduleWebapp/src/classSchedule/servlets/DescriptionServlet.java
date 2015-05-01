@@ -19,13 +19,14 @@ public class DescriptionServlet extends HttpServlet {
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 				throws ServletException, IOException {
 			
+			//gets the current course selected from the web page and gets the description of the respective course
+			//then sets the attribute of the course for the jsps
 			DescriptionController controller = new DescriptionController();
-
 			Course current = (Course) req.getSession().getAttribute("selectedCourse");
-			System.out.println(""+current.getName());
 			
 			Description desc = controller.findDescriptionByCourse(current);
 			System.out.println(""+desc.getDescript());
+			
 			req.getSession().setAttribute("description", desc);
 			
 			req.getRequestDispatcher("/_view/courseDescription.jsp").forward(req, resp);
