@@ -48,7 +48,7 @@
 	
 	
 	<div id = "footer">
-		<h6> Please click the done button if you have finished the course or TODO to schedule one</h6>
+		<h6> Please click the Completed button if you have finished the course or TODO to schedule one</h6>
 	
 	</div>
 	
