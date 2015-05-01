@@ -37,7 +37,6 @@ public class LoginServlet extends HttpServlet {
 			
 			//User before = (User) req.getSession().getAttribute("user");
 			LoginController controller = new LoginController();		//make a new controller for each servlet
-
 			User user = controller.findUser(username, password);	//find the user from the input
 			
 			List<Course> todo = (List<Course>) req.getSession().getAttribute("todoList");
