@@ -63,6 +63,17 @@
 			
 			</c:forEach>
 			</ul>
+			
+			<h3>Todo list</h3>
+			
+			<ul>
+			<c:forEach var="todocourse" items = "${todoList}">
+				<li>
+					<p>${todocourse.name}</p>
+				</li>				
+			
+			</c:forEach>
+			</ul>
 		</div>
 	
 	</div>
