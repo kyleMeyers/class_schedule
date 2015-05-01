@@ -164,6 +164,11 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
+	
+	/**
+	 * Deletion statement added with assistance from D. Hovermeyer. If User has a Major, delete it
+	 * prior to adding a new one. If no major exists yet, essentially does nothing.
+	 */
 	@Override
 	public IdRelation storeMajorForUser(User user, Major major) {
 		return executeTransaction(new Transaction<IdRelation>() {
@@ -171,17 +176,23 @@ public class SqliteDatabase implements IDatabase {
 			public IdRelation execute(Connection conn) throws SQLException {
 				IdRelation relate = new IdRelation();
 				
+				PreparedStatement delStmt = null;
 				PreparedStatement stmt = null;
 				
-				//TODO:if new major then delete the tuple then add a completely new one
 				
 				try {
+					// if new major then delete the tuple then add a completely new one
+					delStmt = conn.prepareStatement("delete from userMajors where userId = ?");
+					delStmt.setInt(1, user.getId());
+					delStmt.executeUpdate();
+					
 					stmt = conn.prepareStatement("insert into userMajors values (?, ?)");
 					stmt.setInt(1, user.getId());
 					stmt.setInt(2, major.getId());
 					
 					stmt.executeUpdate();
 				} finally {
+					DBUtil.closeQuietly(delStmt);
 					DBUtil.closeQuietly(stmt);
 				}
 				
