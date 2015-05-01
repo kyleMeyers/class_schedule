@@ -28,7 +28,7 @@
 		<div id = "section">
 			<h2>${selectedCourse.name}</h2>
 			
-			<p>${description}</p>
+			<p>${descr.descript}</p>
 			
 			<form action="${pageContext.servletContext.contextPath}/courseDescription" method="post">
 				<input type = "submit" name = "completed" value="Completed"></input>

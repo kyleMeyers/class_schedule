@@ -29,7 +29,7 @@ public class DescriptionServlet extends HttpServlet {
 			Description desc = controller.findDescriptionByCourse(current);
 			System.out.println(""+desc.getDescript());
 			
-			req.getSession().setAttribute("description", desc);
+			req.getSession().setAttribute("descr", desc);
 			
 			req.getRequestDispatcher("/_view/courseDescription.jsp").forward(req, resp);
 		}
