@@ -11,7 +11,6 @@ import classSchedule.model.IdRelation;
 import classSchedule.model.Major;
 import classSchedule.model.Professor;
 import classSchedule.model.User;
-import classSchedule.model.Course;
 
 public class InitialData {
 	

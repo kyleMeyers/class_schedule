@@ -1,9 +1,6 @@
 package classSchedule.persist;
 
-
-import java.sql.SQLException;
 import java.util.List;
-
 import classSchedule.model.Course;
 import classSchedule.model.Description;
 import classSchedule.model.IdRelation;
