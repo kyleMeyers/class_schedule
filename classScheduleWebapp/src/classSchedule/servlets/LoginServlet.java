@@ -30,37 +30,42 @@ public class LoginServlet extends HttpServlet {
 
 		String error = "";
 
-		List<Course> todo = (List<Course>) req.getSession().getAttribute("todoList");
-		if(todo!=null)
-		{
-			if(todo.size()>0)
-			{
-				for(int i=0; i<todo.size(); i++)
-				{
-					todo.remove(i);
-				}
-				req.getSession().setAttribute("todoList", todo);
-			}
-		}
-		List<Course> done = (List<Course>) req.getSession().getAttribute("doneList");
-		if(done!=null)
-		{
-			if(done.size()>0)
-			{
-				for(int i=0; i<done.size(); i++)
-				{
-					done.remove(i);
-				}
-				req.getSession().setAttribute("doneList", done);
-			}
-		}
 
 		if (username == null || password == null) {
 			error = "Please enter a username and password.";
 		} else {
+			
+			//User before = (User) req.getSession().getAttribute("user");
 			LoginController controller = new LoginController();		//make a new controller for each servlet
 
 			User user = controller.findUser(username, password);	//find the user from the input
+			
+			List<Course> todo = (List<Course>) req.getSession().getAttribute("todoList");
+			if(todo!=null)
+			{
+				if(todo.size()>0)
+				{
+					for(int i=0; i<todo.size(); i++)
+					{
+						todo.remove(i);
+					}
+					req.getSession().setAttribute("todoList", todo);
+				}
+			}
+			List<Course> done = (List<Course>) req.getSession().getAttribute("doneList");
+			if(done!=null)
+			{
+				if(done.size()>0)
+				{
+					for(int i=0; i<done.size(); i++)
+					{
+						done.remove(i);
+					}
+					req.getSession().setAttribute("doneList", done);
+				}
+			}
+			
+			
 			if (user != null) {										//checks to make sure it is a valid user
 				// Successful login!
 
@@ -80,9 +85,12 @@ public class LoginServlet extends HttpServlet {
 					resp.sendRedirect(req.getContextPath() + "/major");		//after a successful session on a servlet you should
 				}
 				return;
+				
 			} else {
-				// Invalid username/password
-				error = "Unknown username/password";
+				user = controller.newUser(username, password);
+				
+				req.getSession().setAttribute("user", user);
+				resp.sendRedirect(req.getContextPath() + "/major");	
 			}
 		}
 		//this can be all used in the html code
