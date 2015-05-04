@@ -178,7 +178,7 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public Major findMajorByUser(User use) {
-		for(IdRelation majUser : majorUsersList)
+		for (IdRelation majUser : majorUsersList)
 		{
 			if(majUser.getId1() == use.getId())
 			{
@@ -188,6 +188,7 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
+	// Doesn't delete old major! (SQLite Database version does though)
 	@Override
 	public IdRelation storeMajorForUser(User user, Major major) {
 		IdRelation temp = new IdRelation();
