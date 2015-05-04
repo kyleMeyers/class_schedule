@@ -61,7 +61,6 @@ public class MajorControllerTest {
 	@Test
 	public void testStoreMajorForUser() {
 		fail("Not yet implemented");
-		//how
 	}
 
 }
