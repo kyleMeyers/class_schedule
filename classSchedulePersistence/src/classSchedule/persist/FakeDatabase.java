@@ -162,13 +162,12 @@ public class FakeDatabase implements IDatabase {
 		return null;
 	}
 	@Override
-	public List<Course> findCourseByMajor(Major major) {
-		
+	public List<Course> findCourseByMajor(Major major) {		
 		List<Course> result = new ArrayList<Course>();
 		
 		for(IdRelation courMaj : coursesMajorsList)
 		{
-			while(courMaj.getId1() == major.getId())
+			if (courMaj.getId1() == major.getId())
 			{
 				Course courseResult = findCourseById(courMaj.getId2());	// Gets current matching course from id in csv
 				result.add(courseResult);
@@ -176,6 +175,7 @@ public class FakeDatabase implements IDatabase {
 		}
 		return result;
 	}
+	
 	@Override
 	public Major findMajorByUser(User use) {
 		for (IdRelation majUser : majorUsersList)
@@ -188,17 +188,19 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
-	// Doesn't delete old major! (SQLite Database version does though)
+	
 	@Override
 	public IdRelation storeMajorForUser(User user, Major major) {
 		IdRelation temp = new IdRelation();
 		temp.setId1(user.getId());
 		temp.setId2(major.getId());
 		
-		if (!userList.contains(temp))	
-		{
-			majorUsersList.add(temp);
-			return temp;
+		for (IdRelation relate : majorUsersList) {
+			if (relate.getId1() == user.getId())	
+			{
+				relate.setId2(major.getId());
+				return relate;
+			}
 		}
 		
 		return null;

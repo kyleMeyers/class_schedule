@@ -14,8 +14,8 @@ import classSchedule.persist.FakeDatabase;
 
 public class MajorControllerTest {
 
-	private User user;
-	private Major major;
+	private User isUser;
+	private Major newMajor;
 	private MajorController control;
 	
 	@Before
@@ -23,21 +23,14 @@ public class MajorControllerTest {
 		FakeDatabase db = new FakeDatabase();
 		DatabaseProvider.setInstance(db);
 		control = new MajorController();
-		user = new User();
-		user.setUsername("Schmedding");
-		user.setPassword("test4");
-		major = new Major();
-		major.setName("Computer Science");
+		isUser = db.findUser("Coover", "test3");
+		newMajor = db.findMajor("Music");
 	}
 	
 	@Test
-	public void testFindMajor() {		
-		Major found = new Major();
-		found = control.findMajor(major.getName());
-		assertEquals(major.getName(), found.getName());
-		
+	public void testFindMajor() {
 		assertNull(control.findMajor("Underwater Basket Weaving"));
-		assertNotNull(control.findMajor(major.getName()));
+		assertNotNull(control.findMajor(newMajor.getName()));
 	}
 	@Test
 	public void testNewUser() {
@@ -53,14 +46,13 @@ public class MajorControllerTest {
 	
 	@Test
 	public void testFindMajorForUser() {
-		Major found = new Major();
-		found = control.findMajorForUser(user);
-		assertEquals(major.getName(), found.getName());
+		assertNotNull(control.findMajorForUser(isUser));
 	}
 	
 	@Test
 	public void testStoreMajorForUser() {
-		fail("Not yet implemented");
+		control.storeMajorForUser(isUser, newMajor);
+		assertEquals(newMajor.getName(), control.findMajorForUser(isUser).getName());
 	}
 
 }

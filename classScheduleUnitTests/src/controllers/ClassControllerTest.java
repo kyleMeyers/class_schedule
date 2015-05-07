@@ -13,8 +13,8 @@ import classSchedule.persist.DatabaseProvider;
 import classSchedule.persist.FakeDatabase;
 
 public class ClassControllerTest {
-	private User initUser, newUser;
-	private Major initMajor, newMajor;
+	//private User initUser, newUser;
+	//private Major initMajor, newMajor;
 	private ClassController control;
 	
 	private User aUser;
@@ -25,7 +25,7 @@ public class ClassControllerTest {
 		DatabaseProvider.setInstance(db);
 		control = new ClassController();
 		
-		initUser = new User();
+		/*initUser = new User();
 		newUser = new User();
 		initMajor = new Major();
 		newMajor = new Major();
@@ -38,18 +38,15 @@ public class ClassControllerTest {
 		newMajor.setName("Fun");
 		newUser.setUsername("Bob");
 		newUser.setPassword("fail");
-		newUser.setMajor(newMajor.getName());
+		newUser.setMajor(newMajor.getName());*/
 		
 		aUser = db.findUser("Coover", "test3"); // part of the initial data
 	}
 	
 	@Test
 	public void testFindCourseByMajor() throws Exception {
-		Major tester = new Major();
-		Course exists = new Course();
-		tester.setName("Computer Science");
-		exists.setName("Ghosts in the Machine");
-		assertNotNull(control.findCourseByMajor(tester));
+		Major aMajor = control.findMajorByUser(aUser);
+		assertNotNull(control.findCourseByMajor(aMajor));
 	}
 	
 	@Test
