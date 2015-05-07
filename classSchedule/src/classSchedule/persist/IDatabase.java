@@ -32,4 +32,10 @@ public interface IDatabase {
 
 	public IdRelation storeCoursesForUsers(User user, Course course);
 
+	public List<Course> findCourseByUser(User user);
+
+	public IdRelation storeCoursesForUsersDone(User user, Course course);
+
+	public List<Course> findCourseByUserDone(User user);
+
 }

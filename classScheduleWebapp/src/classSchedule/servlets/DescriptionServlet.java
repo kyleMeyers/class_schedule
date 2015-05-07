@@ -54,8 +54,9 @@ public class DescriptionServlet extends HttpServlet {
 				//System.out.println("The user pressed TODO");
 				scheduled.add(selected);
 				req.getSession().setAttribute("todoList", scheduled);
-				resp.sendRedirect(req.getContextPath() + "/class");
 				controller.storeCoursesForUsers(user, course);
+				resp.sendRedirect(req.getContextPath() + "/class");
+				
 			}
 			
 			if(req.getParameter("completed") != null)
@@ -63,8 +64,9 @@ public class DescriptionServlet extends HttpServlet {
 				//System.out.println("The user completed this course");
 				done.add(selected);
 				req.getSession().setAttribute("doneList", done);
+				controller.storeCoursesForUsersDone(user, course);
 				resp.sendRedirect(req.getContextPath() + "/class");
-				controller.storeCoursesForUsers(user, course);
+				
 				
 			}
 			return;
