@@ -30,4 +30,6 @@ public interface IDatabase {
 
 	public Description findDescriptionByCourse(Course cour);
 
+	public IdRelation storeCoursesForUsers(User user, Course course);
+
 }

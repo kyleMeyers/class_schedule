@@ -225,6 +225,11 @@ public class FakeDatabase implements IDatabase {
 		}
 		return null;
 	}
+	@Override
+	public IdRelation storeCoursesForUsers(User user, Course course) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 
