@@ -16,7 +16,7 @@ import classSchedule.model.Major;
 
 public class ClassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -27,6 +27,8 @@ public class ClassServlet extends HttpServlet {
 		
 		List<Course> classes = controller.findCourseByMajor(major);
 		req.getSession().setAttribute("allCourses", classes);
+				
+		
 		
 		req.getRequestDispatcher("/_view/class.jsp").forward(req, resp);
 	}
