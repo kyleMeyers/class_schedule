@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import classSchedule.DescriptionController;
 import classSchedule.model.Course;
 import classSchedule.model.Description;
+import classSchedule.model.User;
 
 
 
@@ -44,12 +45,17 @@ public class DescriptionServlet extends HttpServlet {
 			
 			Course selected = (Course) req.getSession().getAttribute("selectedCourse");
 			
+			DescriptionController controller = new DescriptionController();
+			User user = (User) req.getSession().getAttribute("user");
+			Course course = (Course) req.getSession().getAttribute("selectedCourse");
+			
 			if(req.getParameter("todo") != null)
 			{
 				//System.out.println("The user pressed TODO");
 				scheduled.add(selected);
 				req.getSession().setAttribute("todoList", scheduled);
 				resp.sendRedirect(req.getContextPath() + "/class");
+				controller.storeCoursesForUsers(user, course);
 			}
 			
 			if(req.getParameter("completed") != null)
@@ -58,6 +64,7 @@ public class DescriptionServlet extends HttpServlet {
 				done.add(selected);
 				req.getSession().setAttribute("doneList", done);
 				resp.sendRedirect(req.getContextPath() + "/class");
+				controller.storeCoursesForUsers(user, course);
 				
 			}
 			return;
