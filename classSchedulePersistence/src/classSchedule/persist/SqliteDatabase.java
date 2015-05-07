@@ -166,7 +166,7 @@ public class SqliteDatabase implements IDatabase {
 	}
 	
 	/**
-	 * Deletion statement added with assistance from D. Hovermeyer. If User has a Major, delete it
+	 * Deletion statement added with assistance from D. Hovemeyer. If User has a Major, delete it
 	 * prior to adding a new one. If no major exists yet, essentially does nothing.
 	 */
 	@Override
@@ -193,6 +193,30 @@ public class SqliteDatabase implements IDatabase {
 					stmt.executeUpdate();
 				} finally {
 					DBUtil.closeQuietly(delStmt);
+					DBUtil.closeQuietly(stmt);
+				}
+				
+				return relate;
+			}
+		});
+	}
+	
+	@Override
+	public IdRelation storeCoursesForUsers(User user, Course course) {
+		return executeTransaction(new Transaction<IdRelation>() {
+			@Override
+			public IdRelation execute(Connection conn) throws SQLException {
+				IdRelation relate = new IdRelation();
+				
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement("insert into userCourses values (?, ?)");
+					stmt.setInt(1, user.getId());
+					stmt.setInt(2, course.getId());
+					
+					stmt.executeUpdate();
+				} finally {
 					DBUtil.closeQuietly(stmt);
 				}
 				
@@ -481,7 +505,7 @@ public class SqliteDatabase implements IDatabase {
 					stmt3 = conn.prepareStatement(
 							"create table courses (" +
 							"	id integer primary key," +
-							"	name varchar(80)" +
+							"	name varchar(80)," +
 							"	semester varchar(20)" +
 							")");
 					stmt3.executeUpdate();
@@ -690,6 +714,7 @@ public class SqliteDatabase implements IDatabase {
 		
 		System.out.println("Success!");
 	}
+
 	
 
 
