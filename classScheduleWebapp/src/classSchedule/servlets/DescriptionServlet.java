@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import classSchedule.DescriptionController;
 import classSchedule.model.Course;
 import classSchedule.model.Description;
+import classSchedule.model.User;
 
 
 
@@ -56,6 +57,10 @@ public class DescriptionServlet extends HttpServlet {
 			//class.jsp to pick out another class
 			
 			Course selected = (Course) req.getSession().getAttribute("selectedCourse");
+			
+			DescriptionController controller = new DescriptionController();
+			User user = (User) req.getSession().getAttribute("user");
+			Course course = (Course) req.getSession().getAttribute("selectedCourse");
 			
 			if(req.getParameter("todo") != null)
 			{
@@ -120,6 +125,7 @@ public class DescriptionServlet extends HttpServlet {
 				req.getSession().setAttribute("spring20list", spring20);
 				req.getSession().setAttribute("fall20list", fall20);
 				resp.sendRedirect(req.getContextPath() + "/class");
+				controller.storeCoursesForUsers(user, course);
 			}
 			
 			if(req.getParameter("completed") != null)
@@ -128,6 +134,7 @@ public class DescriptionServlet extends HttpServlet {
 				done.add(selected);
 				req.getSession().setAttribute("doneList", done);
 				resp.sendRedirect(req.getContextPath() + "/class");
+				controller.storeCoursesForUsers(user, course);
 				
 			}
 			return;
