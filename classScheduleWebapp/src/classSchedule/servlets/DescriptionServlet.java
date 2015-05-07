@@ -67,47 +67,48 @@ public class DescriptionServlet extends HttpServlet {
 				//System.out.println("The user pressed TODO");
 				scheduled.add(selected);
 				req.getSession().setAttribute("todoList", scheduled);
+
 				
 				switch(selected.getSemester())
 				{
-				case "fall14":
+				case "Fall 2014":
 					fall14.add(selected);
 					break;
-				case "spring15":
+				case "Spring 2015":
 					spring15.add(selected);
 					break;
-				case "fall15":
+				case "Fall 2015":
 					fall15.add(selected);
 					break;
-				case "spring16":
-					spring15.add(selected);
+				case "Spring 2016":
+					spring16.add(selected);
 					break;
-				case "fall16":
-					fall15.add(selected);
+				case "Fall 2016":
+					fall16.add(selected);
 					break;
-				case "spring17":
-					spring15.add(selected);
+				case "Spring 2017":
+					spring17.add(selected);
 					break;
-				case "fall17":
-					fall15.add(selected);
+				case "Fall 2017":
+					fall17.add(selected);
 					break;
-				case "spring18":
-					spring15.add(selected);
+				case "Spring 2018":
+					spring18.add(selected);
 					break;
-				case "fall18":
-					fall15.add(selected);
+				case "Fall 2018":
+					fall18.add(selected);
 					break;
-				case "spring19":
-					spring15.add(selected);
+				case "Spring 2019":
+					spring19.add(selected);
 					break;
-				case "fall19":
-					fall15.add(selected);
+				case "Fall 2019":
+					fall19.add(selected);
 					break;
-				case "spring20":
-					spring15.add(selected);
+				case "Spring 2020":
+					spring20.add(selected);
 					break;
-				case "fall20":
-					fall15.add(selected);
+				case "Fall 2020":
+					fall20.add(selected);
 					break;
 				}
 				
@@ -125,7 +126,10 @@ public class DescriptionServlet extends HttpServlet {
 				req.getSession().setAttribute("spring20list", spring20);
 				req.getSession().setAttribute("fall20list", fall20);
 				resp.sendRedirect(req.getContextPath() + "/class");
+
 				controller.storeCoursesForUsers(user, course);
+				resp.sendRedirect(req.getContextPath() + "/class");
+				
 			}
 			
 			if(req.getParameter("completed") != null)
@@ -133,8 +137,9 @@ public class DescriptionServlet extends HttpServlet {
 				//System.out.println("The user completed this course");
 				done.add(selected);
 				req.getSession().setAttribute("doneList", done);
+				controller.storeCoursesForUsersDone(user, course);
 				resp.sendRedirect(req.getContextPath() + "/class");
-				controller.storeCoursesForUsers(user, course);
+				
 				
 			}
 			return;
