@@ -229,22 +229,22 @@ public class FakeDatabase implements IDatabase {
 	}
 	@Override
 	public IdRelation storeCoursesForUsers(User user, Course course) {
-		// TODO: Sorry.
+		// Users have no courses yet
 		return null;
 	}
 	@Override
 	public List<Course> findCourseByUser(User user) {
-		// TODO Auto-generated method stub
+		// Again, users have no courses yet
 		return null;
 	}
 	@Override
 	public IdRelation storeCoursesForUsersDone(User user, Course course) {
-		// TODO Auto-generated method stub
+		// See above
 		return null;
 	}
 	@Override
 	public List<Course> findCourseByUserDone(User user) {
-		// TODO Auto-generated method stub
+		// ^^^^^^
 		return null;
 	}
 
