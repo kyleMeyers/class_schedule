@@ -224,6 +224,29 @@ public class SqliteDatabase implements IDatabase {
 			}
 		});
 	}
+	@Override
+	public IdRelation storeCoursesForUsersDone(User user, Course course) {
+		return executeTransaction(new Transaction<IdRelation>() {
+			@Override
+			public IdRelation execute(Connection conn) throws SQLException {
+				IdRelation relate = new IdRelation();
+				
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement("insert into userCoursesDone values (?, ?)");
+					stmt.setInt(1, user.getId());
+					stmt.setInt(2, course.getId());
+					
+					stmt.executeUpdate();
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+				
+				return relate;
+			}
+		});
+	}
 	
 	//TODO: use this method to actually insert a user into the database
 	@Override
@@ -269,6 +292,84 @@ public class SqliteDatabase implements IDatabase {
 		});
 	}
 	
+	public List<Course> findCourseByUser(User user) {
+		return executeTransaction(new Transaction <List<Course>>() {
+			@Override
+			public List<Course> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				List<Course> courses = new ArrayList<Course>();
+				
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select courses.* " +			//the entire course tuple
+							"  from users, userCourses, courses " +
+							" where users.id = userCourses.userId " +
+							" and userCourses.courseId = courses.id " +
+							" and users.id = ?"
+					);
+					stmt.setInt(1, user.getId());
+
+					
+					Course result = null;
+					
+					resultSet = stmt.executeQuery();
+					
+					while (resultSet.next()) { 
+						result = new Course();
+						loadCourse(result, resultSet, 1);
+						courses.add(result);
+					}
+					
+					return courses;			//returns an actual courses or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
+	}
+	public List<Course> findCourseByUserDone(User user) {
+		return executeTransaction(new Transaction <List<Course>>() {
+			@Override
+			public List<Course> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				List<Course> courses = new ArrayList<Course>();
+				
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select courses.* " +			//the entire course tuple
+							"  from users, userCoursesDone, courses " +
+							" where users.id = userCoursesDone.userDId " +
+							" and userCoursesDone.courseDId = courses.id " +
+							" and users.id = ?"
+					);
+					stmt.setInt(1, user.getId());
+
+					
+					Course result = null;
+					
+					resultSet = stmt.executeQuery();
+					
+					while (resultSet.next()) { 
+						result = new Course();
+						loadCourse(result, resultSet, 1);
+						courses.add(result);
+					}
+					
+					return courses;			//returns an actual courses or null if there is not one
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+		
+	}
 	@Override
 	public Major findMajorByUser(User user) {
 		return executeTransaction(new Transaction<Major>() {
@@ -486,6 +587,11 @@ public class SqliteDatabase implements IDatabase {
 				PreparedStatement stmt7 = null;
 				PreparedStatement stmt8 = null;
 				PreparedStatement stmt8a = null;
+				PreparedStatement stmt9 = null;
+				PreparedStatement stmt9a = null;
+				PreparedStatement stmt10 = null;
+				PreparedStatement stmt10a = null;
+				
 				try {
 					stmt1 = conn.prepareStatement(
 							"create table users (" +
@@ -557,6 +663,26 @@ public class SqliteDatabase implements IDatabase {
 					stmt8a = conn.prepareStatement("create unique index course_description_idx on courDescript(courseId, descriptId)");
 					stmt8a.executeUpdate();
 					
+					stmt9 = conn.prepareStatement(
+							"create table userCourses(" +
+							"	userId integer, "	+
+							"	courseId integer"	+
+							")");
+					stmt9.executeUpdate();
+					
+					stmt9a = conn.prepareStatement("create unique index user_course_idx on userCourses(userId, courseId)");
+					stmt9a.executeUpdate();
+					
+					stmt10 = conn.prepareStatement(
+							"create table userCoursesDone(" +
+							"	userDId integer, "	+
+							"	courseDId integer"	+
+							")");
+					stmt10.executeUpdate();
+					
+					stmt10a = conn.prepareStatement("create unique index userD_courseD_idx on userCoursesDone(userDId, courseDId)");
+					stmt10a.executeUpdate();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
@@ -570,6 +696,10 @@ public class SqliteDatabase implements IDatabase {
 					DBUtil.closeQuietly(stmt7);
 					DBUtil.closeQuietly(stmt8);
 					DBUtil.closeQuietly(stmt8a);
+					DBUtil.closeQuietly(stmt9);
+					DBUtil.closeQuietly(stmt9a);
+					DBUtil.closeQuietly(stmt10);
+					DBUtil.closeQuietly(stmt10a);
 				}
 			}
 		});

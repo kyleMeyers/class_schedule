@@ -9,18 +9,25 @@ import classSchedule.persist.DatabaseProvider;
 import classSchedule.persist.IDatabase;
 
 public class DescriptionController {
-	
+
 	public Description findDescriptionByCourse(Course cour)
 	{
 		IDatabase db = DatabaseProvider.getInstance();
-		
+
 		return db.findDescriptionByCourse(cour);
 	}
-	
+
 	public IdRelation storeCoursesForUsers(User user, Course course)
 	{
 		IDatabase db = DatabaseProvider.getInstance();
-		
+
 		return db.storeCoursesForUsers(user, course);
+	}
+
+	public IdRelation storeCoursesForUsersDone(User user, Course course) 
+	{
+		IDatabase db = DatabaseProvider.getInstance();
+
+		return db.storeCoursesForUsersDone(user, course);
 	}
 }
