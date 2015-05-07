@@ -76,6 +76,16 @@
 			
 			</c:forEach>
 			</ul>
+			
+			<c:if test = "${not empty fall15list}">
+				<h3>Fall 2015</h3>
+				<ul>
+					<c:forEach var="coursedisplay" items = "${fall15list}">
+				
+					</c:forEach>				
+				
+				</ul>
+			</c:if>
 		</div>
 	
 	</div>

@@ -20,19 +20,19 @@ public class DescriptionServlet extends HttpServlet {
 		private static final long serialVersionUID = 1L;
 		private List<Course> done = new ArrayList<Course>();
 		private List<Course> scheduled = new ArrayList<Course>();
-		private List<Course> fall14;
-		private List<Course> spring15;
-		private List<Course> fall15;
-		private List<Course> spring16;
-		private List<Course> fall16;
-		private List<Course> spring17;
-		private List<Course> fall17;
-		private List<Course> spring18;
-		private List<Course> fall18;
-		private List<Course> spring19;
-		private List<Course> fall19;
-		private List<Course> spring20;
-		private List<Course> fall20;
+		private List<Course> fall14 = new ArrayList<Course>();
+		private List<Course> spring15 = new ArrayList<Course>();
+		private List<Course> fall15 = new ArrayList<Course>();
+		private List<Course> spring16 = new ArrayList<Course>();
+		private List<Course> fall16= new ArrayList<Course>();
+		private List<Course> spring17 = new ArrayList<Course>();
+		private List<Course> fall17 = new ArrayList<Course>();
+		private List<Course> spring18 = new ArrayList<Course>();
+		private List<Course> fall18= new ArrayList<Course>();
+		private List<Course> spring19 = new ArrayList<Course>();
+		private List<Course> fall19 = new ArrayList<Course>();
+		private List<Course> spring20= new ArrayList<Course>();
+		private List<Course> fall20 = new ArrayList<Course>();
 		
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp)

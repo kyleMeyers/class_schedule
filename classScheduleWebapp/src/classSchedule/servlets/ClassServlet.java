@@ -27,6 +27,16 @@ public class ClassServlet extends HttpServlet {
 		
 		List<Course> classes = controller.findCourseByMajor(major);
 		req.getSession().setAttribute("allCourses", classes);
+		
+		List<Course> testlist = (List<Course>)req.getSession().getAttribute("fall15list");
+		
+		if(testlist != null)
+		{
+			if(testlist.size() > 0)
+				System.out.println("fall 2015");
+			else
+				System.out.println("nothing");
+		}
 				
 		
 		
