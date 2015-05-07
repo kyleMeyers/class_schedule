@@ -35,5 +35,18 @@ public class LoginControllerTest {
 		assertNull(control.findUser("no", "exists"));
 		assertNotNull(control.findUser(user.getUsername(), user.getPassword()));
 	}
+	
+	@Test
+	public void testNewUser() {
+		// This method also exists in MajorController. Intended?
+		LoginController addUser = new LoginController();
+		User newGuy = new User();
+		newGuy.setUsername("Billy");
+		newGuy.setPassword("trains");
+		
+		assertNull(addUser.findUser(newGuy.getUsername(), newGuy.getPassword()));
+		control.newUser(newGuy.getUsername(), newGuy.getPassword());
+		assertNotNull(addUser.findUser("Billy", "trains"));
+	}
 
 }

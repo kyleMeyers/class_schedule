@@ -44,6 +44,7 @@
 							<input type ="radio" name ="courseItem" value ="${courselist.name}">${courselist.name}
 							<br>
 						</li>
+						
 					</c:forEach>
 					
 				</c:when>

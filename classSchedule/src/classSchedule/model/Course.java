@@ -8,6 +8,7 @@ public class Course {
 	 */
 	private int id;
 	private String name;
+	private String semester;
 	
 	public Course()
 	{
@@ -33,5 +34,13 @@ public class Course {
 	{
 		this.name = name;
 	}
-
+	
+	public String getSemester()
+	{
+		return semester;
+	}
+	public void setSemester(String time)
+	{
+		this.semester = time;
+	}
 }

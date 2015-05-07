@@ -6,24 +6,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 import classSchedule.ClassController;
+import classSchedule.model.Course;
 import classSchedule.model.Major;
 import classSchedule.model.User;
+import classSchedule.persist.DatabaseProvider;
+import classSchedule.persist.FakeDatabase;
 
-/**
- * What are the junits supposed to test? Controllers contain very few methods,
- * which require an instance of IDatabase. Is declaring a Controller enough?
- * Are the tests here set up properly?
- * 
- * @author bcoover
- *
- */
 public class ClassControllerTest {
 	private User initUser, newUser;
 	private Major initMajor, newMajor;
 	private ClassController control;
 	
+	private User aUser;
+	
 	@Before
 	public void setUp() {
+		FakeDatabase db = new FakeDatabase();
+		DatabaseProvider.setInstance(db);
+		control = new ClassController();
+		
 		initUser = new User();
 		newUser = new User();
 		initMajor = new Major();
@@ -38,16 +39,24 @@ public class ClassControllerTest {
 		newUser.setUsername("Bob");
 		newUser.setPassword("fail");
 		newUser.setMajor(newMajor.getName());
+		
+		aUser = db.findUser("Coover", "test3"); // part of the initial data
 	}
 	
 	@Test
 	public void testFindCourseByMajor() throws Exception {
-		assertEquals(initMajor.getName(), control.findMajorByUser(initUser).getName());
+		Major tester = new Major();
+		Course exists = new Course();
+		tester.setName("Computer Science");
+		exists.setName("Ghosts in the Machine");
+		assertNotNull(control.findCourseByMajor(tester));
 	}
 	
 	@Test
 	public void testFindMajorByUser() throws Exception {
-		fail("Not yet implemented");
+		User not_a_user = new User();
+		assertNull(control.findMajorByUser(not_a_user));
+		assertNotNull(control.findMajorByUser(aUser));
 	}
 
 }

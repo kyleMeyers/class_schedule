@@ -28,7 +28,6 @@ public class MajorController {
 	}
 
 	public IdRelation storeMajorForUser(User user, Major major) {
-		// TODO Auto-generated method stub
 		//take the user and major id and insert a tuple with both of those in them
 		IDatabase db = DatabaseProvider.getInstance();
 		
