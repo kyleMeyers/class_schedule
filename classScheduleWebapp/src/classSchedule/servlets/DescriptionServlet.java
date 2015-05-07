@@ -62,6 +62,9 @@ public class DescriptionServlet extends HttpServlet {
 			User user = (User) req.getSession().getAttribute("user");
 			Course course = (Course) req.getSession().getAttribute("selectedCourse");
 			
+			
+			List<Course> scheduled = (List<Course>) req.getSession().getAttribute("todoList");
+			List<Course> done = (List<Course>) req.getSession().getAttribute("doneList");
 			if(req.getParameter("todo") != null)
 			{
 				//System.out.println("The user pressed TODO");
@@ -125,7 +128,7 @@ public class DescriptionServlet extends HttpServlet {
 				req.getSession().setAttribute("fall19list", fall19);
 				req.getSession().setAttribute("spring20list", spring20);
 				req.getSession().setAttribute("fall20list", fall20);
-				resp.sendRedirect(req.getContextPath() + "/class");
+				
 
 				controller.storeCoursesForUsers(user, course);
 				resp.sendRedirect(req.getContextPath() + "/class");
